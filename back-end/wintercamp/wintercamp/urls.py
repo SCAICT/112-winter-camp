@@ -19,7 +19,9 @@ from django.urls import path
 from DataProcess import views
 
 urlpatterns = [
+    path('', views.home, name='home'),
     path('admin/', admin.site.urls),
     path('register/',views.register),
-    path('login/',views.login)
+    path('login/',views.login),
+    path('consent/', views.consent, name='consent'),
 ]

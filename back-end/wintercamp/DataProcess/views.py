@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login
 # Create your views here.
 
 def home(request):
-    return HttpResponse("hello world")
+    return render(request, 'home.html')
 
 def register(request):
     form=RegisterForm()
@@ -20,13 +20,17 @@ def register(request):
     context={'form':form}
     return render(request,'../templates/register.html',context)
 
-
 def login(request):
     form = LoginForm()
     context = {
         'form': form
     }
     return render(request, '../templates/login.html', context)
+
+def consent(request):
+    return render(request, 'consent.html')
+
+    
 
 
 
