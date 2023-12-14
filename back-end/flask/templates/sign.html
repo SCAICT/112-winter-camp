@@ -1,0 +1,248 @@
+<!-- 
+    sign demo
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sign demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../static/tailwind.config.js"></script>
+</head>
+
+<body>
+    <!-- app -->
+    <form action="/" method="POST">
+        <!-- app -->
+        <div class="app max-w-mobile-sm h-min m-auto pt-5 py-3 pb-8">
+            <!-- 標題 -->
+            <div class="text-3xl font-bold mb-5">活動報名</div>
+            <!-- 問卷 -->
+            <div class="flex items-center mb-2 text-sm">
+                <div class="w-1/3">
+                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
+                        姓名
+                    </label>
+                </div>
+                <div class="w-2/3">
+                    <input
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                        id="" type="text" placeholder="姓名">
+                </div>
+            </div>
+
+            <div class="flex items-center mb-2 text-sm">
+                <div class="w-1/3">
+                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
+                        Email
+                    </label>
+                </div>
+                <div class="w-2/3">
+                    <input
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                        id="" type="email" placeholder="Email">
+                </div>
+            </div>
+
+            <div class="flex items-center mb-2 text-sm">
+                <div class="w-1/3">
+                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
+                        學校
+                    </label>
+                </div>
+                <div class="w-2/3">
+                    <input
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                        id="" type="text" placeholder="學校">
+                </div>
+            </div>
+
+            <div class="flex items-center mb-2 text-sm">
+                <div class="w-1/3">
+                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
+                        科別
+                    </label>
+                </div>
+                <div class="w-2/3">
+                    <input
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                        id="" type="text" placeholder="科別">
+                </div>
+            </div>
+            <div class="flex items-center mb-2 text-sm">
+                <div class="w-1/3">
+                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
+                        密碼
+                    </label>
+                </div>
+                <div class="w-2/3">
+                    <input
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                        id="" type="text" placeholder="密碼">
+                </div>
+            </div>
+            <div class="flex items-center mb-2 text-sm">
+                <div class="w-1/3">
+                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
+                        個人連絡電話
+                    </label>
+                </div>
+                <div class="w-2/3">
+                    <input
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                        id="" type="tel" placeholder="個人連絡電話">
+                </div>
+            </div>
+            <div class="flex items-center mb-2 text-sm">
+                <div class="w-1/3">
+                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
+                        生理性別
+                    </label>
+                </div>
+                <div class="w-2/3">
+                    <input
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                        id="" type="text" placeholder="生理性別">
+                </div>
+            </div>
+            <div class="flex items-center mb-2 text-sm">
+                <div class="w-1/3">
+                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
+                        身分證字號
+                    </label>
+                </div>
+                <div class="w-2/3">
+                    <input
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                        id="" type="text" placeholder="身分證字號">
+                </div>
+            </div>
+            <div class="flex items-center mb-2 text-sm">
+                <div class="w-1/3">
+                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
+                        出生年月日
+                    </label>
+                </div>
+                <div class="w-2/3">
+                    <input
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                        id="" type="date" placeholder="出生年月日">
+                </div>
+            </div>
+            <div class="flex items-center mb-2 text-sm">
+                <div class="w-1/3">
+                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
+                        緊急連絡人
+                    </label>
+                </div>
+                <div class="w-2/3">
+                    <input
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                        id="" type="text" placeholder="緊急連絡人">
+                </div>
+            </div>
+            <div class="flex items-center mb-2 text-sm">
+                <div class="w-1/3">
+                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
+                        緊急連絡人關係
+                    </label>
+                </div>
+                <div class="w-2/3">
+                    <input
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                        id="" type="tel" placeholder="緊急連絡人關係">
+                </div>
+            </div>
+            <div class="flex items-center mb-2 text-sm">
+                <div class="w-1/3">
+                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
+                        緊急連絡人電話
+                    </label>
+                </div>
+                <div class="w-2/3">
+                    <input
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                        id="" type="tel" placeholder="緊急連絡人電話">
+                </div>
+            </div>
+            <div class="flex items-center mb-2 text-sm">
+                <div class="w-1/3">
+                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
+                        衣服尺寸
+                    </label>
+                </div>
+                <div class="w-2/3">
+                    <input
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                        id="" type="tel" placeholder="衣服尺寸">
+                </div>
+            </div>
+            <div class="flex items-center mb-2 text-sm">
+                <div class="w-1/3">
+                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
+                        飲食
+                    </label>
+                </div>
+                <div class="w-2/3">
+                    <input
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                        id="" type="tel" placeholder="飲食">
+                </div>
+            </div>
+            <div class="flex items-center mb-2 text-sm">
+                <div class="w-1/3">
+                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
+                        特殊飲食習慣
+                    </label>
+                </div>
+                <div class="w-2/3">
+                    <input
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                        id="" type="tel" placeholder="特殊飲食習慣">
+                </div>
+            </div>
+            <div class="flex items-center mb-2 text-sm">
+                <div class="w-1/3">
+                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
+                        是否有特殊疾病
+                    </label>
+                </div>
+                <div class="w-2/3">
+                    <input
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                        id="" type="tel" placeholder="是否有特殊疾病">
+                </div>
+            </div>
+            <div class="flex items-center mb-2 text-sm">
+                <div class="w-1/3">
+                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
+                        是否參與住宿
+                    </label>
+                </div>
+                <div class="w-2/3">
+                    <input
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                        id="" type="tel" placeholder="是否參與住宿">
+                </div>
+            </div>
+            <div class="flex items-center mb-2 text-sm">
+                <div class="w-1/3">
+                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
+                        團報優惠碼
+                    </label>
+                </div>
+                <div class="w-2/3">
+                    <input
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                        id="" type="tel" placeholder="團報優惠碼">
+                </div>
+            </div>
+            <div class="text-center"><input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" value="登入" required></div>
+
+        </div>
+    </form>
+</body>
+
+</html>
