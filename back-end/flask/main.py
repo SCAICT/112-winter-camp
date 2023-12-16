@@ -1,6 +1,8 @@
 from flask import Flask,render_template,request,session,redirect
 from debug import debug
 from os import urandom
+from uuid import uuid4
+from datetime import timestamp,now
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = urandom(24)
@@ -66,6 +68,8 @@ def login():
 
 @app.route("/signUp",methods=["POST"])
 def signUp():
+    date = timestamp(now())
+    uuid = uuid4()
     data_values = request.form.getlist('data[]')
     male = request.form.getlist('data[male]')
     food = request.form.getlist('data[food]')   
