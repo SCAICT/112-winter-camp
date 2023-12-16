@@ -1,8 +1,7 @@
 <!-- 
     sign demo
 
-    todo:
-    1. 將表單上的name值寫上去
+    todo -> 連上資料庫並把資料打上去
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +16,7 @@
 
 <body>
     <!-- app -->
-    <form action="/signUp" method="POST">
+    <form action="/" method="POST">
         <!-- app -->
         <div class="app max-w-mobile-sm h-min m-auto pt-5 py-3 pb-8">
             <!-- 標題 -->
@@ -31,7 +30,6 @@
                 </div>
                 <div class="w-2/3">
                     <input
-                        name="data[]"
                         class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                         id="" type="text" placeholder="姓名">
                 </div>
@@ -45,7 +43,6 @@
                 </div>
                 <div class="w-2/3">
                     <input
-                        name="data[]"
                         class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                         id="" type="email" placeholder="Email">
                 </div>
@@ -59,7 +56,6 @@
                 </div>
                 <div class="w-2/3">
                     <input
-                        name="data[]"
                         class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                         id="" type="text" placeholder="學校">
                 </div>
@@ -73,7 +69,6 @@
                 </div>
                 <div class="w-2/3">
                     <input
-                    name="data[]"
                         class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                         id="" type="text" placeholder="科別">
                 </div>
@@ -86,7 +81,6 @@
                 </div>
                 <div class="w-2/3">
                     <input
-                    name="data[]"
                         class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                         id="" type="text" placeholder="密碼">
                 </div>
@@ -99,7 +93,6 @@
                 </div>
                 <div class="w-2/3">
                     <input
-                    name="data[]"
                         class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                         id="" type="tel" placeholder="個人連絡電話">
                 </div>
@@ -111,13 +104,13 @@
                     </label>
                 </div>
                 <div class="w-2/3 flex ">
-                        <div class="flex items-center ">
-                            <input checked  id="male-1" type="radio" value="男" name="data[male]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                            <label for="male-1" class="w-full py-4 ms-2 text-sm font-medium ">男</label>
-                        </div>
-                        <div class="flex items-center ps-4 ">
-                            <input id="male-2" type="radio" value="女" name="data[male]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500  focus:ring-2">
-                            <label for="male-2" class="w-full py-4 ms-2 text-sm font-medium ">女</label>
+                    <div class="flex items-center ">
+                        <input checked  id="male-1" type="radio" value="男" name="male" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                        <label for="male-1" class="w-full py-4 ms-2 text-sm font-medium ">男</label>
+                    </div>
+                    <div class="flex items-center ps-4 ">
+                        <input id="male-2" type="radio" value="女" name="male" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500  focus:ring-2">
+                        <label for="male-2" class="w-full py-4 ms-2 text-sm font-medium ">女</label>
                     </div>
                 </div>
             </div>
@@ -129,7 +122,6 @@
                 </div>
                 <div class="w-2/3">
                     <input
-                    name="data[]"
                         class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                         id="" type="text" placeholder="身分證字號">
                 </div>
@@ -142,7 +134,6 @@
                 </div>
                 <div class="w-2/3">
                     <input
-                    name="data[]"
                         class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                         id="" type="date" placeholder="出生年月日">
                 </div>
@@ -155,7 +146,6 @@
                 </div>
                 <div class="w-2/3">
                     <input
-                    name="data[]"
                         class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                         id="" type="text" placeholder="緊急連絡人">
                 </div>
@@ -168,7 +158,6 @@
                 </div>
                 <div class="w-2/3">
                     <input
-                    name="data[]"
                         class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                         id="" type="tel" placeholder="緊急連絡人關係">
                 </div>
@@ -181,7 +170,6 @@
                 </div>
                 <div class="w-2/3">
                     <input
-                    name="data[]"
                         class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                         id="" type="tel" placeholder="緊急連絡人電話">
                 </div>
@@ -196,7 +184,7 @@
                     <!-- <input
                         class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                         id="" type="tel" placeholder="衣服尺寸"> -->
-                    <select name="data[]" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500">
+                    <select name="size" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500">
                         <option default hidden>選擇衣服尺寸</option>
                         <option value="XS">XS</option>
                         <option value="S">S</option>
@@ -218,11 +206,11 @@
                         class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                         id="" type="tel" placeholder="飲食"> -->
                         <div class="flex items-center ">
-                            <input checked  id="" type="radio" value="葷" name="data[food]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                            <input checked  id="" type="radio" value="" name="food" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
                             <label for="" class="w-full py-4 ms-2 text-sm font-medium ">葷</label>
                         </div>
                         <div class="flex items-center ps-4 ">
-                            <input id="" type="radio" value="素" name="data[food]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500  focus:ring-2">
+                            <input id="" type="radio" value="" name="food" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500  focus:ring-2">
                             <label for="" class="w-full py-4 ms-2 text-sm font-medium ">素</label>
                         </div>
                 </div>
@@ -235,7 +223,6 @@
                 </div>
                 <div class="w-2/3">
                     <input
-                    name="data[]"
                         class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                         id="" type="tel" placeholder="特殊飲食習慣">
                 </div>
@@ -248,7 +235,6 @@
                 </div>
                 <div class="w-2/3">
                     <input
-                    name="data[]"
                         class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                         id="" type="tel" placeholder="是否有特殊疾病">
                 </div>
@@ -264,11 +250,11 @@
                         class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                         id="" type="tel" placeholder="是否參與住宿"> -->
                         <div class="flex items-center ">
-                            <input checked  id="" type="radio" value="是" name="data[live]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                            <input checked  id="" type="radio" value="" name="live" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
                             <label for="" class="w-full py-4 ms-2 text-sm font-medium ">是</label>
                         </div>
                         <div class="flex items-center ps-4 ">
-                            <input id="" type="radio" value="否" name="data[live]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500  focus:ring-2">
+                            <input id="" type="radio" value="" name="live" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500  focus:ring-2">
                             <label for="" class="w-full py-4 ms-2 text-sm font-medium ">否</label>
                         </div>
                 </div>
@@ -281,7 +267,6 @@
                 </div>
                 <div class="w-2/3">
                     <input
-                    name="data[]"
                         class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                         id="" type="tel" placeholder="團報優惠碼">
                 </div>
