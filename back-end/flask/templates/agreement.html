@@ -12,16 +12,8 @@
     
   </head>
 
-  <body>
-    <section id="text">
-        {% block content %}{% endblock %}
-        <ul>
-          <li>學員手機：{{phone}}</li>
-          <li>家長手機：{{emergencyPhone}}</li>
-        </ul>
-      </article>
-      <button onclick="sign()" id="agree">同意並簽名</button>
-    </section>
+  <body>   {% block content %}{% endblock %}
+   
     <section id="sign">
       <canvas id="drawingCanvas"></canvas>
       <div>
@@ -91,7 +83,7 @@
       function sendImage() {
         const imageData = canvas.toDataURL();
         console.log(imageData);
-        fetch("/sendSign", {
+        fetch("/{% block content %}sendSign{% endblock %}", {
           method: "POST",
           headers: {
             "Content-Type": "text/plain",

@@ -1,15 +1,36 @@
-{% extends 'agreement.html' %}
+<!-- @format -->
 
-{% block title %}家長通知書暨家長同意書{% endblock %}
+{% extends 'agreement.html' %} 
 
+{% block title %}家長通知書暨家長同意書{% endblock %} 
+{% block type %}sendSign{% endblock %}
 {% block content %}
-<form action="/login" method="POST">
-    <div class="app max-w-mobile-sm h-min m-auto flex flex-col px-5 py-3 justify-center gap-3">
-        <div class="text-3xl font-bold text-center">登入</div>
-        <div class="text-center text-sm">查詢繳費狀態及活動行前通知</div>
-        <div><input type="text" name="account" class="w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500" placeholder="Email/電話" required></div>
-        <div><input type="password" name="password" class="w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500" placeholder="密碼"></div>
-        <div class="text-center"><input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" value="登入" required></div>
-    </div>
-</form>
+<section id="text">
+    <header>
+        <h1>2024 年中部高中職電資社團聯合寒訓－「知資為資知」</h1>
+        <h2>場地維護切結書</h2>
+    </header>
+    <article>
+        <h3>介紹</h3>
+        <p>使用東海大學內的各項設施需遵循以下各項規則，請詳閱。</p>
+        <h3>規則</h3>
+        <ol>
+            <li>一、電腦教室內不可在裡面飲食，包含含糖飲料等。</li>
+            <li>二、電腦教室內僅可攜帶白開水。</li>
+            <li>
+                三、應妥善使用東海大學內各項設施，不可有破壞行為，如有損壞，應照
+                價賠償。
+            </li>
+            <li>四、以上各項如有違反，需要照價賠償主辦方費用，不得異議。</li>
+        </ol>
+        <h3>同意書</h3>
+        本人{{emergencyContact}}(家長)與{{name}}(學員)已詳細閱讀上述各項規則，並在活動過
+        程中遵守以上規則。若貴子弟有違反上述規定，概由本人自行負責相關費用。
+        <ul>
+            <li>學員手機：{{phone}}</li>
+            <li>家長手機：{{emergencyPhone}}</li>
+        </ul>
+    </article>
+    <button onclick="sign()" id="agree">同意並簽名</button>
+</section>
 {% endblock %}
