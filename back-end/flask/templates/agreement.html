@@ -1,0 +1,121 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>{% block title %}家長通知書暨家長同意書{% endblock %}</title>
+    
+  </head>
+
+  <body>
+    <section id="text">
+        {% block content %}{% endblock %}
+        <ul>
+          <li>學員手機：{{phone}}</li>
+          <li>家長手機：{{emergencyPhone}}</li>
+        </ul>
+      </article>
+      <button onclick="sign()" id="agree">同意並簽名</button>
+    </section>
+    <section id="sign">
+      <canvas id="drawingCanvas"></canvas>
+      <div>
+        <h1>家長同意書</h1>
+        <button onclick="undo()">重新簽名</button>
+        <button onclick="sendImage()">上傳</button>
+        <h2>知資為資知 - 2024中電會聯合寒訓</h2>
+      </div>
+    </section>
+
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const student = urlParams.get("student");
+      const canvas = document.getElementById("drawingCanvas");
+      const ctx = canvas.getContext("2d");
+      let drawing = false;
+      let lastX = 0;
+      let lastY = 0;
+      const sign = () => {
+        document.getElementById("text").style.display = "none";
+        document.getElementById("sign").style.display = "block";
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        canvas.addEventListener("mousedown", startDrawing);
+        canvas.addEventListener("touchstart", startDrawing);
+        canvas.addEventListener("mousemove", draw);
+        canvas.addEventListener("touchmove", draw);
+        canvas.addEventListener("mouseup", stopDrawing);
+        canvas.addEventListener("touchend", stopDrawing);
+        canvas.addEventListener("mouseout", stopDrawing);
+      };
+      function startDrawing(e) {
+        e.preventDefault();
+        drawing = true;
+        [lastX, lastY] = [
+          e.clientX || e.touches[0].clientX,
+          e.clientY || e.touches[0].clientY,
+        ];
+      }
+
+      function draw(e) {
+        if (!drawing) return;
+        e.preventDefault();
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(
+          e.clientX || e.touches[0].clientX,
+          e.clientY || e.touches[0].clientY
+        );
+        ctx.lineWidth = 5;
+        ctx.stroke();
+        [lastX, lastY] = [
+          e.clientX || e.touches[0].clientX,
+          e.clientY || e.touches[0].clientY,
+        ];
+      }
+
+      function stopDrawing() {
+        drawing = false;
+      }
+
+      function undo() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+
+      function sendImage() {
+        const imageData = canvas.toDataURL();
+        console.log(imageData);
+        fetch("/sendSign", {
+          method: "POST",
+          headers: {
+            "Content-Type": "text/plain",
+          },
+          body: imageData,
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.text();
+          })
+          .then((responseText) => {
+            console.log("Response text:", responseText);
+            window.location.href = "/lastStep";
+          })
+          .catch((error) => {
+            alert("Error:", error);
+          });
+      }
+      window.addEventListener("resize", function () {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+    </script>
+  </body>
+</html>

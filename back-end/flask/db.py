@@ -1,11 +1,12 @@
 import sqlite3
 from sqlite3 import Cursor,Connection
 from typing import Literal
+from uuid import UUID
 class DataBase:
     def __init__(self,db_path:str) -> None:
         self.db = db_path
     
-    def __call__(self,func:function):
+    def __call__(self,func):
         def wrapper(*args,**kwargs):
             """
             執行查詢動作
@@ -26,39 +27,86 @@ Client = DataBase("back-end/flask/database/account.db")
 
 # todo
 @Client
-def isUser(conn:Connection, cursor:Cursor,account:str) -> bool:
-    """
-    輸入帳號 查詢是否在資料庫裡面
-    """
-    return bool()
+def isUserMail(conn:Connection, cursor:Cursor,mail:str) -> bool: #用email查用戶是否存在
+    cursor.execute(f"SELECT * FROM DATA WHERE email = '{mail}'")
+    results = cursor.fetchall()
+    if bool(results) == True:
+        return bool(results),results[0][0]
+    else:
+        return bool(results),None
+
+
 
 @Client
-def userData(conn:Connection, cursor:Cursor,account:str) -> list:
-    """
-    輸入帳號 查詢此人輸入的資料
-    """
-    return list()
+def isUserPhone(conn:Connection, cursor:Cursor,phone:str) -> bool:
+    cursor.execute(f"SELECT * FROM DATA WHERE phone = '{phone}'")
+    # 获取查询结果
+    results = cursor.fetchall()
+    if bool(results) == True:
+        return bool(results),results[0][0]
+    else:
+        return bool(results),None
+
 
 @Client
-def updateUserData(conn:Connection, cursor:Cursor,account:str,newData:list) -> bool:
-    """
-    輸入帳號 上傳/更新 資料
-    """
-    return bool()
+def userData(conn:Connection, cursor:Cursor,UserID:str) -> list:
+    cursor.execute(f"SELECT * FROM DATA WHERE UserID = '{UserID}'")
+    results = cursor.fetchall()
+    return list(results)
 
 @Client
-def signConsent(conn:Connection, cursor:Cursor,account:str,consentID:Literal[0, 1]) -> bool:
-    """
-    輸入帳號 簽署文件 文件會有 0和1
-    """
-    return bool()
+def createUser(conn:Connection, cursor:Cursor,Data:list) -> bool:
+    if isUserMail(Data[2])[0] == True:
+        return False
+    if isUserPhone(Data[7])[0] == True:
+        return False
+
+    cursor.execute(f"INSERT INTO DATA VALUES {tuple(Data)}")
+    conn.commit()
+    return True
+
+
+# print(createUser(['123456','賴甲玉','a123456786@gmail.com','國立臺灣大學','資訊工程學系','資訊工程學系學會','123456','0912345658','男','A123456789','20000101','賴乙玉','父子','0912345678','S','葷','無','無','True','123456','1620000000','False']))
 
 @Client
-def userPay(conn:Connection, cursor:Cursor,account:str) -> bool:
+def deleteUserData(conn:Connection, cursor:Cursor,UserID:str) -> bool:
+    cursor.execute(f"DELETE FROM DATA WHERE UserID = '{UserID}'")
+    conn.commit()
+    return True
+
+@Client
+def updateUserData(conn:Connection, cursor:Cursor,UserID:str,Data:list) -> bool:
+    deleteUserData(UserID)
+    createUser(Data)
+    return True
+
+
+# print(updateUserData('123456',['123456','賴屏玉','a123456786@gmail.com','國立臺灣大大學','資訊工程學系','資訊工程學系學會','123456','0912345658','男','A123456789','20000101','賴乙玉','父子','0912345678','S','葷','無','無','True','123456','1620000000','False']))
+
+
+@Client
+def signConsent(conn:Connection, cursor:Cursor,userID:str,consentID:Literal[0, 1]) -> bool:
+    cursor.execute(f"UPDATE DATA SET consentID = {consentID} WHERE UserID = '{userID}'")
+    conn.commit()
+    return True
+
+
+@Client
+def getStudentData(conn:Connection, cursor:Cursor,userID:str) -> list:
     """
-    輸入帳號 表用戶已付錢
+    透過uuid get姓名、手機、家長姓名、家長手機
     """
-    return bool()
+    cursor.execute(f"SELECT name,phone,emergencyContact,emergencyPhone FROM DATA WHERE UserID = '{userID}'")
+    results = cursor.fetchall()
+    return list(results[0])
+
+
+@Client
+def userPay(conn:Connection, cursor:Cursor,userID:str) -> bool:
+    cursor.execute(f"UPDATE DATA SET isPaid = True WHERE UserID = '{userID}'")
+    conn.commit()
+    return True
+
 
 @Client
 def logStudent(conn:Connection, cursor:Cursor) -> None:
@@ -90,6 +138,8 @@ def logStudent(conn:Connection, cursor:Cursor) -> None:
         specialDisease = row[17] #疾病
         islive = row[18] #是否住宿
         coupon = row[19] #團報優惠碼
+        timestamp = row[20] #時間戳
+        isPaid = row[21] #是否付款
         print("=====================================")
         print("使用者ID: "+userID)
         print("姓名: "+name)
@@ -111,6 +161,8 @@ def logStudent(conn:Connection, cursor:Cursor) -> None:
         print("疾病: "+specialDisease)
         print("是否住宿: "+islive)
         print("團報優惠碼: "+coupon)
+        print("時間戳: "+str(timestamp))
+        print("是否付款: "+str(isPaid))
 
 
 @Admin
@@ -125,4 +177,4 @@ def logAdmin(conn:Connection, cursor:Cursor) -> None:
 
 
 # logAdmin()
-logStudent()
+# logStudent()
