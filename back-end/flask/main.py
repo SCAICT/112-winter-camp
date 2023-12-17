@@ -49,6 +49,10 @@ def lastStep():
 def consent():
     return render_template("consent.html")
 
+@app.route("/admin")
+def admin():
+    return render_template("admin/admin.html")
+
 
 # api
 @app.route("/login",methods=["POST"])
@@ -98,6 +102,10 @@ def sendSign():
         print('Error:', str(e))
         return 'Error occurred'
 
+# admin
+@app.route("/admin/login")
+def adminLogin():
+    return
 
 
 if __name__ == "__main__":
