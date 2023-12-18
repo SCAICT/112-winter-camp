@@ -1,6 +1,6 @@
 import sqlite3
 from sqlite3 import Cursor,Connection
-from typing import Literal
+from typing import Literal,Tuple,Optional
 from uuid import UUID
 class DataBase:
     def __init__(self,db_path:str) -> None:
@@ -35,10 +35,10 @@ def isUserMail(conn:Connection, cursor:Cursor,mail:str) -> bool: #用email查用
     else:
         return bool(results),None
 
-
+print(isUserMail(mail="j097023855212@gmail.com"))
 
 @Client
-def isUserPhone(conn:Connection, cursor:Cursor,phone:str) -> bool:
+def isUserPhone(conn:Connection, cursor:Cursor,phone:str) -> tuple:
     cursor.execute(f"SELECT * FROM DATA WHERE phone = '{phone}'")
     # 获取查询结果
     results = cursor.fetchall()

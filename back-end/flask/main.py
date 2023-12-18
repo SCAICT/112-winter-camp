@@ -4,8 +4,10 @@ from os import urandom
 from uuid import uuid4
 from datetime import datetime
 from random import choice
+from re import match
 
-from db import getStudentData
+from db import getStudentData,isUserMail,isUserPhone
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = urandom(24)
@@ -31,6 +33,10 @@ def generate_random_string(length=6):
     random_string = ''.join(choice(key) for _ in range(length))
     return random_string
 
+def is_email(input_str):
+    # 定義電子郵件地址的正規表達式
+    email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+    return match(email_pattern, input_str) is not None
 
 # 路由 Router
 @app.route("/")
@@ -82,6 +88,15 @@ def login():
     # 讀取資料
     account = request.form.get("account")
     password = request.form.get("password")
+
+    if is_email(account):
+        if isUserMail(mail=account):
+            print()
+    else:
+        try:
+            int(account)    
+        except:
+            return '<script>alert("輸入錯誤");window.location.href = "/";</script>'
 
     # todo 
     # get isAccount 
