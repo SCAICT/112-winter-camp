@@ -39,7 +39,7 @@ def is_email(input_str):
 def home():
     if checkLogin():
         debug.bg_yellow(session["userID"])
-        return redirect("/sign")
+        return redirect("/lastStep")
 
     return render_template("home.html")
 
@@ -101,13 +101,14 @@ def admin():
 
 
 # api
-
 @app.route("/login",methods=["POST"])
 def login():
     # 讀取資料
     account = request.form.get("account")
+    # todo 加密
     password = request.form.get("password")
 
+    debug.panel("log",account=account,password=password)
     # 判斷為 email || 電話
     if is_email(account):
         # check[0] -> status , check[1] -> userID
@@ -123,7 +124,7 @@ def login():
                 return '<script>alert("密碼錯誤");window.location.href = "/";</script>'
         # not user
         else:
-            return redirect("/sign")
+            return '<script>alert("查無此人");window.location.href = "/";</script>'
     else:
         # 數字防呆
         try:
@@ -145,7 +146,7 @@ def login():
                 return '<script>alert("密碼錯誤");window.location.href = "/";</script>'
         # not user
         else:
-            return redirect("/edit")
+            return '<script>alert("查無此人");window.location.href = "/";</script>'
 
     # 存入session  
     session["userID"] = check[1]  
@@ -205,11 +206,18 @@ def sendSign():
         print('Error:', str(e))
         return 'Error occurred'
 
-# admin
+@app.route("/getCoupon",methods=["POST"])
+def getCoupon():
+    """
+    核對團體優惠碼
+    """ 
+    return str(checkCoupon(request.data.decode("utf-8")))
+
+# admin 
 @app.route("/admin/login")
 def adminLogin():
     return
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True) 

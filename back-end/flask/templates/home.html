@@ -2,12 +2,12 @@
 
 {% extends 'base.html' %}
 
-{% block title %}登入/報名{% endblock %}
+{% block title %}登入{% endblock %}
 
 {% block content %}
 <form action="/login" method="POST">
     <div class="app max-w-mobile-sm h-min m-auto flex flex-col px-5 py-3 justify-center gap-3">
-        <div class="text-3xl font-bold text-center">登入/報名</div>
+        <div class="text-3xl font-bold text-center">登入</div>
         <div class="text-center text-sm">查詢繳費狀態及活動行前通知</div>
         <div><input type="text" name="account" class="w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500" placeholder="Email/電話" required></div>
         <div><input type="password" name="password" class="w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500" placeholder="密碼"></div>

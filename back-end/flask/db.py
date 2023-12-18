@@ -35,8 +35,6 @@ def isUserMail(conn:Connection, cursor:Cursor,mail:str) -> bool: #用email查用
     else:
         return bool(results),None
 
-print(isUserMail(mail="j097023855212@gmail.com"))
-
 @Client
 def isUserPhone(conn:Connection, cursor:Cursor,phone:str) -> tuple:
     cursor.execute(f"SELECT * FROM DATA WHERE phone = '{phone}'")
@@ -146,6 +144,12 @@ def userPay(conn:Connection, cursor:Cursor,userID:str) -> bool:
     conn.commit()
     return True
 
+@Client
+def checkCoupon(conn:Connection, cursor:Cursor,inputCoupon) -> bool:
+    cursor.execute(f"SELECT coupon FROM DATA")
+    results = cursor.fetchall()
+    coupons = [result[0] for result in results]
+    return inputCoupon in coupons
 
 @Client
 def logStudent(conn:Connection, cursor:Cursor) -> None:
@@ -202,7 +206,6 @@ def logStudent(conn:Connection, cursor:Cursor) -> None:
         print("團報優惠碼: "+coupon)
         print("時間戳: "+str(timestamp))
         print("是否付款: "+str(isPaid))
-
 
 @Admin
 def logAdmin(conn:Connection, cursor:Cursor) -> None:
