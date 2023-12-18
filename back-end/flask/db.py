@@ -40,22 +40,30 @@ print(isUserMail(mail="j097023855212@gmail.com"))
 @Client
 def isUserPhone(conn:Connection, cursor:Cursor,phone:str) -> tuple:
     cursor.execute(f"SELECT * FROM DATA WHERE phone = '{phone}'")
-    # 获取查询结果
     results = cursor.fetchall()
     if bool(results) == True:
         return bool(results),results[0][0]
     else:
         return bool(results),None
 
+@Client
+def isUserID(conn:Connection, cursor:Cursor,UserID:str) -> bool:
+    cursor.execute(f"SELECT * FROM DATA WHERE UserID = '{UserID}'")
+    results = cursor.fetchall()
+    if bool(results) == True:
+        return bool(results)
+    else:
+        return bool(results)
+    
 
 @Client
-def userData(conn:Connection, cursor:Cursor,UserID:str) -> list:
+def userData(conn:Connection, cursor:Cursor,UserID:str) -> list: #用userID查用戶資料
     cursor.execute(f"SELECT * FROM DATA WHERE UserID = '{UserID}'")
     results = cursor.fetchall()
     return list(results)
 
 @Client
-def createUser(conn:Connection, cursor:Cursor,Data:list) -> bool:
+def createUser(conn:Connection, cursor:Cursor,Data:list) -> bool: #創建用戶
     if isUserMail(Data[2])[0] == True:
         return False
     if isUserPhone(Data[7])[0] == True:
@@ -66,19 +74,31 @@ def createUser(conn:Connection, cursor:Cursor,Data:list) -> bool:
     return True
 
 
-# print(createUser(['123456','賴甲玉','a123456786@gmail.com','國立臺灣大學','資訊工程學系','資訊工程學系學會','123456','0912345658','男','A123456789','20000101','賴乙玉','父子','0912345678','S','葷','無','無','True','123456','1620000000','False']))
+# print(createUser(['123456','賴甲玉','a123456786@gmail.com','國立臺灣大學','資訊工程學系','資訊工程學系學會','123456','0912345658','男','A123456789','20000101','賴乙玉','父子','0912345678','S','葷','無','無','True','123456','1620000000','False','0101010101101010101']))
 
 @Client
 def deleteUserData(conn:Connection, cursor:Cursor,UserID:str) -> bool:
-    cursor.execute(f"DELETE FROM DATA WHERE UserID = '{UserID}'")
-    conn.commit()
-    return True
+    if isUserID(UserID) == False:
+        return False
+    else:
+        cursor.execute(f"DELETE FROM DATA WHERE UserID = '{UserID}'")
+        conn.commit()
+        return True
+    
+
 
 @Client
 def updateUserData(conn:Connection, cursor:Cursor,UserID:str,Data:list) -> bool:
-    deleteUserData(UserID)
-    createUser(Data)
-    return True
+    if deleteUserData(UserID):
+        if createUser(Data):
+            return True
+        else:
+            return False
+    else:
+        return False
+    
+
+
 
 
 # print(updateUserData('123456',['123456','賴屏玉','a123456786@gmail.com','國立臺灣大大學','資訊工程學系','資訊工程學系學會','123456','0912345658','男','A123456789','20000101','賴乙玉','父子','0912345678','S','葷','無','無','True','123456','1620000000','False']))
@@ -99,6 +119,15 @@ def getStudentData(conn:Connection, cursor:Cursor,userID:str) -> list:
     cursor.execute(f"SELECT name,phone,emergencyContact,emergencyPhone FROM DATA WHERE UserID = '{userID}'")
     results = cursor.fetchall()
     return list(results[0])
+
+@Client
+def isPasswordCorrect(conn:Connection , cursor:Cursor,userID:str,password:str) -> bool:
+    cursor.execute(f"SELECT password FROM DATA WHERE UserID = '{userID}'")
+    results = cursor.fetchall()
+    if results[0][0] == password:
+        return True
+    else:
+        return False
 
 
 @Client
