@@ -1,7 +1,7 @@
 import sqlite3
 from sqlite3 import Cursor,Connection
-from typing import Literal,Tuple,Optional
-from uuid import UUID
+from typing import Literal
+
 class DataBase:
     def __init__(self,db_path:str) -> None:
         self.db = db_path
@@ -111,10 +111,6 @@ def updateUserData(conn:Connection, cursor:Cursor,UserID:str,Data:list) -> bool:
     else:
         return False
     
-
-
-
-
 # print(updateUserData('123456',['123456','賴屏玉','a123456786@gmail.com','國立臺灣大大學','資訊工程學系','資訊工程學系學會','123456','0912345658','男','A123456789','20000101','賴乙玉','父子','0912345678','S','葷','無','無','True','123456','1620000000','False']))
 
 
