@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}還差最後一步{% endblock %}
+
+{% block content %}
+<div class="app max-w-mobile-sm h-min m-auto px-5 py-3">
+    <div class="text-sm"><a href="/edit">&lt; 編輯報名資訊</a></div>
+    <div class="mt-5 text-3xl font-bold">還差最後一步</div>
+    <div class="text-sm mb-5">尚未報名完成</div>
+    <!-- # coupon,isPaid,consentID,maintenance -->
+    <!-- 要到是否有繳費的資料 -->
+    <div class="mt-5 text-3xl font-bold">
+        {% if isPaid %} ✔️ {% else %} ❌ {% endif %}
+        繳費
+    </div>
+    <div class="mb-3">請將報名費轉帳至以下帳號，並記得備註學員姓名</div>
+    <div class="mb-3">轉帳完成請點擊驗證案紐，我們會盡快幫您確認。</div>
+    <div class="mb-3">(812) 288101565685</div>
+    {% if isPaid %}
+    <span class="bg-black/75 text-white font-bold py-2 px-4 rounded">已繳費</span>
+    {% else %}
+    <button id="finish-pay" class="bg-black hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">我已完成付款</button>
+    {% endif %}
+    <div class="mt-5 text-3xl font-bold">
+        <a href="/consent?studentID={{userID}}">
+            {% if consentID %} ✔️ {% else %} ❌ {% endif %}
+            家長同意書
+        </a>
+    </div>
+    <div class="mt-5 text-3xl font-bold">
+        <a href="/maintenance?studentID={{userID}}">
+            {% if maintenance %} ✔️ {% else %} ❌ {% endif %}
+            場地維護書
+        </a>
+    </div>
+
+    <div class="mt-5 text-3xl font-bold">團報優惠</div>
+    <div class="mb-3">{{coupon}}</div>
+    <div class="mb-3">請將報名費轉帳至以下帳號，並記得備註學員姓名</div>
+    <div class="mb-3">轉帳完成請點擊驗證案紐，我們會盡快幫您確認。</div>
+</div>
+<script>
+    document.getElementById("finish-pay").addEventListener("click", () => {
+        fetch("/finishPay", {
+            method: "POST",
+            headers: {
+                "Content-Type": "text/plain",
+            }
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.text();
+        })
+            .then(responseText => {
+                console.log("Response text:", responseText);
+            })
+            .catch(error => {
+                alert("Error:", error);
+            });
+    });
+</script>
+
+{% endblock %}

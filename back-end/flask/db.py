@@ -57,10 +57,24 @@ def isUserID(conn:Connection, cursor:Cursor,UserID:str) -> bool:
     
 
 @Client
-def userData(conn:Connection, cursor:Cursor,UserID:str) -> list: #用userID查用戶資料
+def getUserData(conn:Connection, cursor:Cursor,UserID:str) -> list: 
+    """
+    用userID查用戶資料
+    """
     cursor.execute(f"SELECT * FROM DATA WHERE UserID = '{UserID}'")
     results = cursor.fetchall()
     return list(results)
+
+@Client
+def getUserLastStep(conn:Connection, cursor:Cursor,UserID:str) -> list: 
+    """
+    用userID查詢lastStep所需資料
+    """
+    # coupon,isPaid,consentID,maintenance
+    cursor.execute(f"SELECT coupon,isPaid,consentID,maintenance FROM DATA WHERE UserID = '{UserID}'")
+    results = cursor.fetchall()
+    return list(results)
+
 
 @Client
 def createUser(conn:Connection, cursor:Cursor,Data:list) -> bool: #創建用戶

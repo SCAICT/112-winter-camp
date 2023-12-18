@@ -6,7 +6,7 @@ from datetime import datetime
 from random import choice
 from re import match
 
-from db import getStudentData,isUserMail,isUserPhone
+from db import *
 
 
 app = Flask(__name__)
@@ -17,15 +17,11 @@ def checkLogin() :
     確認登入狀態
     預防非用戶登入，確認是否為用戶
     """
-    try:
-        session["account"]
-        session["password"]
+    if 'userID' in session:
+        return True
+    return False
 
-        # todo 用判斷判定是否為用戶
-
-    except:
-        # 非用戶
-        return False
+def checkData():
     pass
 
 def generate_random_string(length=6):
@@ -41,24 +37,44 @@ def is_email(input_str):
 # 路由 Router
 @app.route("/")
 def home():
+    if checkLogin():
+        debug.bg_yellow(session["userID"])
+        return redirect("/sign")
+
     return render_template("home.html")
 
+# 登出
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect("/")
+
+# 創建資料
 @app.route("/sign")
 def sign():
     return render_template("sign.html")
 
+# 編輯資料
 @app.route("/edit")
 def edit():
     return render_template("edit.html")
 
+# 完成
 @app.route("/success")
 def success():
     return render_template("success.html")
 
+# 最後一步
 @app.route("/lastStep")
 def lastStep():
-    return render_template("lastStep.html")
+    if not(checkLogin()):
+        return redirect("/")
+    # coupon,isPaid,consentID,maintenance
+    result = getUserLastStep(UserID=session["userID"])[0]
+    debug.yellow(str(result))
+    return render_template("lastStep.html",coupon=result[0],isPaid=result[1],consent=result[2],maintenance=result[3],userID=session["userID"])
 
+# 家長同意書
 @app.route("/consent")
 def consent():
     student_id = request.args.get("studentID","")
@@ -68,6 +84,7 @@ def consent():
     data = getStudentData(student_id)
     return render_template("consent.html",name=data[0],phone=data[1],emergencyContact=data[2],emergencyPhone=data[3])
 
+# 場地切結書
 @app.route("/maintenance")
 def maintenance():
     student_id = request.args.get("studentID")
@@ -77,48 +94,77 @@ def maintenance():
     data = getStudentData(student_id)
     return render_template("maintenance.html",name=data[0],phone=data[1],emergencyContact=data[2],emergencyPhone=data[3])
 
+# 管理者頁面
 @app.route("/admin")
 def admin():
     return render_template("admin/admin.html")
 
 
 # api
+
 @app.route("/login",methods=["POST"])
 def login():
     # 讀取資料
     account = request.form.get("account")
     password = request.form.get("password")
 
+    # 判斷為 email || 電話
     if is_email(account):
-        if isUserMail(mail=account):
-            print()
+        # check[0] -> status , check[1] -> userID
+        check = isUserMail(mail=account) 
+        # is user
+        if check[0]:
+            # 回傳密碼正確與否
+            if (isPasswordCorrect(userID=check[1],password=password)):
+                pass
+            # 密碼錯誤
+            else:
+                session.clear()
+                return '<script>alert("密碼錯誤");window.location.href = "/";</script>'
+        # not user
+        else:
+            return redirect("/sign")
     else:
+        # 數字防呆
         try:
             int(account)    
         except:
+            session.clear()
+            # 不為email和phone
             return '<script>alert("輸入錯誤");window.location.href = "/";</script>'
+        
+        check = isUserPhone(phone=account) 
+        # is user
+        if check[0]:
+            # 回傳密碼正確與否
+            if (isPasswordCorrect(userID=check[1],password=password)):
+                pass
+            # 密碼錯誤
+            else:
+                session.clear()
+                return '<script>alert("密碼錯誤");window.location.href = "/";</script>'
+        # not user
+        else:
+            return redirect("/edit")
 
-    # todo 
-    # get isAccount 
-    # if YES:
-        # 存入session
-        # 跳轉網頁
-    # if NO:
-        # 上一頁 ==
-
-    # 存入session
-    session["account"] = account
-    session["password"] = password
+    # 存入session  
+    session["userID"] = check[1]  
 
     # todo del 
     debug.panel(title="/login",account=account,password = password)
 
-    return redirect("/sign")
+    return redirect("/lastStep")
+
+@app.route("/finishPay",methods=["POST"])
+def finishPay():
+    debug.yellow(session["userID"])
+    return str(userPay(userID=session["userID"]))
+
 
 @app.route("/signUp",methods=["POST"])
 def signUp():
     # userID
-    uuid = [uuid4()]
+    uuid = [str(uuid4())]
     # 時間戳
     timestamp = [datetime.timestamp(datetime.now())] 
     # 姓名 email school 科系 社團 password tel id birth 聯絡人 聯絡人關西 聯絡人電話  size 飲食習慣  特殊疾病  團報優惠碼
@@ -127,17 +173,21 @@ def signUp():
     food = request.form.getlist('data[food]')
     isLive = request.form.getlist('data[live]')
     coupon = [generate_random_string()]
-    # debug.blue(data_values)
-    for d in data_values:
-        debug.yellow(d)
-        
-    debug.yellow(str(male))
-    debug.yellow(str(food))
-
     #  todo     
     # 要船上去的資料
-    result = uuid + data_values[0:7] + male + data_values[7:13] + food + isLive + coupon + timestamp
+    result = uuid + data_values[0:7] + male + data_values[7:13] + food + data_values[13:15] + isLive + coupon + timestamp + [0,"",""]
+    debug.hr()
+    for i,d in enumerate(data_values):
+        debug.yellow(str(i),d)
+    debug.hr()
     
+    debug.hr()
+    for i,d in enumerate(result):
+        debug.blue(str(i))
+        debug.yellow(str(d))
+    debug.hr()
+    
+    print(createUser(Data=result))
     return redirect("/lastStep")
 
 @app.route("/sendSign",methods=["POST"])

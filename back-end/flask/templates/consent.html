@@ -1,10 +1,10 @@
 <!-- @format -->
-
-{% extends 'agreement.html' %} {% block title %}家長通知書暨家長同意書{%
-endblock %} {% block type %}sendSign{% endblock %} {% block content %}
+{% extends 'agreement.html' %} 
+{% block title %}家長通知書暨家長同意書{% endblock %} 
+{% block agreement1 %}
 <section id="text">
     <header>
-        {{name}} {{ phone}} {{emergencyContact}} {{emergencyPhone}}
+         <!-- {{ phone}} {{emergencyContact}} {{emergencyPhone}} -->
         <h1>2024 年中部高中職電資社團聯合寒訓－「知資為資知」</h1>
         <h2>家長通知書暨家長同意書</h2>
     </header>
@@ -34,7 +34,7 @@ endblock %} {% block type %}sendSign{% endblock %} {% block content %}
                 中部高中電資社團聯合會議寒訓籌辦團隊 敬上
             </p>
         </div>
-        本人同意<span id="name"></span>參加 2024 中部高中職電資社團聯
+        本人同意 {{name}} 參加 2024 中部高中職電資社團聯
         合寒訓「知資為資知」，並已詳閱以上資訊，貴子弟於活動期間內遵守一切規
         定，若因未遵守規定而發生意外，概由本人自行負責。
     </article>

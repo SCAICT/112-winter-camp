@@ -70,3 +70,7 @@ class debug:
             for key, value in kwargs.items():
                 print(debug.__yellow+key+":"+debug.__remove,value)
         debug.blue("\n****************************\n")
+
+    @staticmethod
+    def hr():
+        debug.blue("\n****************************\n")
