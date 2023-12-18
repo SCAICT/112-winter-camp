@@ -1,0 +1,378 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>知資為資知 - 2024中部電資聯合寒訓</title>
+        <style>
+            :root {
+                --main-color: #69c5d6;
+            }
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            body {
+                background: #000;
+                color: #fff;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont,
+                    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+                    "Helvetica Neue", sans-serif;
+                    overflow: hidden;
+            }
+            header {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                min-height: 100svh;
+                overflow: hidden;
+                text-align: center;
+                position: relative;
+            }
+            #canvas {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+            }
+            img {
+                max-width: 600px;
+                width: 100%;
+                max-height: 50vh;
+                animation: zoom 0.5s ease-in-out;
+            }
+            nav {
+                width: 100%;
+                /* background-color: #494949; */
+                height: 3rem;
+                position: fixed;
+                display: flex;
+                align-items: center;
+                padding: 3rem;
+            }
+            nav ul {
+                display: flex;
+                justify-content: flex-end;
+                flex: 1;
+                list-style: none;
+                gap: 2rem;
+            }
+            h1 {
+                font-size: 1.25rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+            nav a {
+                color: rgba(255, 255, 255, 0.5);
+                position: relative;
+                text-decoration: none;
+                font-weight: 500;
+                padding: 0 0.7em;
+            }
+            nav a:before {
+                position: absolute;
+                content: "";
+                -webkit-transition: all 0.35s ease;
+                transition: all 0.35s ease;
+                opacity: 0;
+                left: 15%;
+                right: 15%;
+                top: 0;
+                bottom: 0;
+                border-left: 3px solid #27ae60;
+                border-right: 3px solid #27ae60;
+            }
+            nav a:hover,
+            nav .current a {
+                color: #ffffff;
+            }
+            nav a:hover:before,
+            nav .current a:before {
+                opacity: 1;
+                left: 0;
+                right: 0;
+            }
+            header h1 {
+                margin-block:2rem 1rem;
+            }
+        
+            header a {
+                display: block;
+                color: #fff;
+                text-decoration: none;
+                padding: 1rem;
+                border: #fff solid 2px;
+                transition: transform 0.2s ease-out;
+            }
+            header a:hover {
+                transform: translateY(-0.25rem);
+            }
+            header a:active {
+                transform: translateY(-0.4rem);
+            }
+            @keyframes zoom {
+                0% {
+                    transform: scale(0);
+                }
+                100% {
+                    transform: scale(1);
+                }
+            }
+            main{
+                max-width: 600px;
+                margin: 0 auto;
+            }
+        </style>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.9.18/paper-full.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.14.1/TweenMax.min.js"></script>
+    </head>
+    <body>
+        <nav>
+            <h1>知資為資知 - 2024中電會聯合寒訓</h1>
+            <ul>
+                <li><a href="">登入查詢</a></li>
+                <li><a href="">立即報名</a></li>
+            </ul>
+        </nav>
+  
+            <header>
+                <img src="static/logo.svg" alt="" />
+                <h1>知資為資知 - 2024中電會聯合寒訓</h1>
+                <h2 id="countdown"></h2>
+                <a href="">立即報名</a>
+                <canvas resize="true" id="canvas"></canvas>
+            </header>
+            <main>
+            <section>
+                <h3>2024 全台最大聯合寒訓</h3>
+            </section>
+            <section></section>
+            <section></section>
+            <section></section>
+            <section></section>
+        </main>
+        <script>
+            // Set the countdown date
+            var countdownDate = new Date("2024-01-15");
+
+            // Update the countdown every second
+            var countdownTimer = setInterval(function () {
+                // Get the current date and time
+                var now = new Date().getTime();
+
+                // Calculate the time remaining
+                var timeRemaining = countdownDate - now;
+
+                // Calculate days, hours, minutes, and seconds
+                var days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                var hours = Math.floor(
+                    (timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+                );
+                var minutes = Math.floor(
+                    (timeRemaining % (1000 * 60 * 60)) / (1000 * 60)
+                );
+                var seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+                // Display the countdown in the #countdown element
+                document.getElementById("countdown").innerHTML =
+                    days +
+                    "d " +
+                    hours +
+                    "h " +
+                    minutes +
+                    "m " +
+                    seconds +
+                    "s ";
+
+                // If the countdown is finished, display a message
+                if (timeRemaining < 0) {
+                    clearInterval(countdownTimer);
+                    document.getElementById("countdown").innerHTML =
+                        "Countdown expired";
+                }
+            }, 1000);
+        </script>
+        <script type="text/paperscript" canvas="canvas">
+            function Hex(position, targetRadius, color) {
+                var subs = 3;
+
+                this.radius = targetRadius;
+                this.sides = randomIndex([4, 6, 8, 10, 12]);
+                this.targetHex = new Path.RegularPolygon(position, this.sides, targetRadius);
+                this.paths = [];
+
+                for (var i = 0; i < subs; i++) {
+                    var h = new Path.RegularPolygon(position, this.sides, 0);
+
+                    if (i === 0) {
+                        h.strokeColor = color;
+                    }
+                    else {
+                        h.strokeColor = new Color({
+                            hue:color.hue,
+                            saturation:color.saturation,
+                            lightness:randomRange(0.4, 0.6),
+                            alpha:1
+                        });
+                    }
+
+                    h.strokeWidth = 24;
+                    h.shadowBlur = 64;
+                    h.shadowColor = h.strokeColor;
+
+                    this.paths.push(h);
+                }
+
+                this.color = this.paths[subs - 1].strokeColor;
+
+                this.speed = 125;
+            }
+            Hex.prototype = {
+                animate:function() {
+                    var tl = new TimelineMax({
+                        onComplete:function() {
+                            this.paths.forEach(function(p) {
+                                p.remove();
+                            });
+                        },
+                        onCompleteScope:this
+                    });
+
+                    var duration = this.radius / this.speed,
+                        offset = 0,
+                        ease = Cubic.easeOut;
+
+                    this.paths.forEach(function(h) {
+                        var from, to;
+
+                        for (var i = 0; i < h.segments.length; i++) {
+                            from = h.segments[i].point;
+                            to = this.targetHex.segments[i].point;
+
+                            tl.to(from, duration, {x:to.x, y:to.y, ease:ease}, offset);
+                            tl.to(h, duration, {strokeWidth:0, ease:ease}, offset);
+                        }
+
+                        offset += 0.2;
+
+                    }, this);
+
+                    return tl;
+                }
+            };
+
+            function Line(start, angle, length, color) {
+                this.start = start;
+                this.end = new Point();
+
+                this.end.setAngle(angle);
+                this.end.setLength(length);
+                this.end += this.start;
+
+                this.path = new Path();
+                this.path.add(this.start, this.end);
+                this.color = this.path.strokeColor = color;
+                this.path.visible = false;
+                this.path.strokeWidth = 2;
+                this.path.strokeCap = 'round';
+                this.path.shadowBlur = 32;
+                this.path.shadowColor = this.color;
+
+                this.speed = 250;
+            }
+            Line.prototype = {
+                animate:function() {
+                    var tl = new TimelineMax({
+                        onStart:function() {
+                            this.path.visible = true;
+                        },
+                        onStartScope:this,
+                        onComplete:function() {
+                            this.path.remove();
+                        },
+                        onCompleteScope:this
+                    });
+
+                    var start = this.path.segments[0].point,
+                        end = this.path.segments[1].point;
+
+                    var duration = this.path.length / this.speed,
+                        ease = Cubic;
+
+                    tl.from(end, duration, {x:start.x, y:start.y, ease:ease.easeInOut});
+                    tl.to(start, duration * 0.75, {x:end.x, y:end.y, ease:ease.easeOut}, '-=0.5');
+
+                    return tl;
+                }
+            };
+
+            function createFirework() {
+                var tl = new TimelineMax();
+
+                var startPoint = new Point(view.size.width * Math.random(), view.size.height),
+                    angle = 270,
+                    length = view.size.height * 0.5,
+                    size = randomRange(64, 396),
+                    color = getRandomColor();
+
+                var trail = new Line(startPoint, angle, length, color),
+                    hex = new Hex(trail.end, size, color);
+
+                tl.add(trail.animate());
+                tl.add('trailDone');
+
+                tl.add(hex.animate(), 'trailDone');
+
+                for (var i = 0; i < hex.sides; i++) {
+
+                    var point = hex.targetHex.segments[i].point,
+                        localPoint = point - hex.targetHex.position;
+
+                    var spark = new Line(trail.end, localPoint.angle, size * 2, color);
+
+                    tl.add(spark.animate(), 'trailDone');
+                }
+
+                return tl;
+            }
+
+            ////////////
+            // UPDATE
+            ////////////
+
+            function onFrame(e) {
+                if (e.count % 60 === 0) {
+                    createFirework();
+                }
+            }
+
+            ////////////
+            // utils
+            ////////////
+
+            function getRandomColor() {
+                return new Color({
+                    hue:randomRange(0, 100),
+                    saturation:0.75,
+                    lightness:0.5
+                })
+            }
+
+            function randomIndex(arr) {
+                return arr[randomRange(0, arr.length, true)];
+            }
+
+            function randomRange(min, max, floor) {
+                var v = min + Math.random() * (max - min);
+                floor = floor || false;
+                return floor ? (v | 0) : v;
+            }
+        </script>
+    </body>
+</html>
