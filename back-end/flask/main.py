@@ -35,13 +35,17 @@ def is_email(input_str):
     return match(email_pattern, input_str) is not None
 
 # 路由 Router
-@app.route("/")
+@app.route("/login")
 def home():
     if checkLogin():
         debug.bg_yellow(session["userID"])
         return redirect("/lastStep")
 
     return render_template("home.html")
+
+@app.route("/")
+def index():
+    return render_template("/index.html")
 
 # 登出
 @app.route("/logout")
@@ -57,11 +61,15 @@ def sign():
 # 編輯資料
 @app.route("/edit")
 def edit():
+    if not(checkLogin()):
+        return redirect("/")
     return render_template("edit.html")
 
 # 完成
 @app.route("/success")
 def success():
+    if not(checkLogin()):
+        return redirect("/")
     return render_template("success.html")
 
 # 最後一步
@@ -69,14 +77,22 @@ def success():
 def lastStep():
     if not(checkLogin()):
         return redirect("/")
+    if getUserStatus(UserID=session["userID"]):
+        return redirect("/success")
+
     # coupon,isPaid,consentID,maintenance
     result = getUserLastStep(UserID=session["userID"])[0]
     debug.yellow(str(result))
-    return render_template("lastStep.html",coupon=result[0],isPaid=result[1],consent=result[2],maintenance=result[3],userID=session["userID"])
+    return render_template("lastStep.html",coupon=result[0],isPaid=result[1],consent=result[2],maintenance=result[3],adminCheck=result[4],userID=session["userID"])
 
 # 家長同意書
 @app.route("/consent")
 def consent():
+    if not(checkLogin()):
+        return redirect("/")
+    
+    session["agreement"] = 0
+
     student_id = request.args.get("studentID","")
     debug.bg_yellow(student_id)
     # 姓名、手機、家長姓名、家長手機
@@ -87,12 +103,21 @@ def consent():
 # 場地切結書
 @app.route("/maintenance")
 def maintenance():
+    if not(checkLogin()):
+        return redirect("/")
+    
+    session["agreement"] = 1
+
     student_id = request.args.get("studentID")
     debug.bg_yellow(student_id)
     # 姓名、手機、家長姓名、家長手機
     # name,phone,emergencyContact,emergencyPhone
     data = getStudentData(student_id)
     return render_template("maintenance.html",name=data[0],phone=data[1],emergencyContact=data[2],emergencyPhone=data[3])
+
+@app.route("/error")
+def error():
+    return render_template("error.html")
 
 # 管理者頁面
 @app.route("/admin")
@@ -173,10 +198,9 @@ def signUp():
     male = request.form.getlist('data[male]')
     food = request.form.getlist('data[food]')
     isLive = request.form.getlist('data[live]')
-    coupon = [generate_random_string()]
     #  todo     
     # 要船上去的資料
-    result = uuid + data_values[0:7] + male + data_values[7:13] + food + data_values[13:15] + isLive + coupon + timestamp + [0,"",""]
+    result = uuid + data_values[0:7] + male + data_values[7:13] + food + data_values[13:15] + isLive + [""] + timestamp + [0,"","","",""]
     debug.hr()
     for i,d in enumerate(data_values):
         debug.yellow(str(i),d)
@@ -189,22 +213,24 @@ def signUp():
     debug.hr()
     
     print(createUser(Data=result))
+
+    session["userID"] = str(uuid[0])
+
     return redirect("/lastStep")
 
 @app.route("/sendSign",methods=["POST"])
 def sendSign():
-    try:
         # 获取POST请求的原始数据
-        data = request.data.decode('utf-8')
-        print('Received data:', data)
+    data = request.data.decode('utf-8')
+    debug.panel("sign",str(signConsent(userID=session["userID"],consentID=session["agreement"],signData=data)))
+    return str(True)
 
-        # 在这里处理接收到的文本数据，可以根据需要进行其他操作
-
-        return redirect('/edit')
-
-    except Exception as e:
-        print('Error:', str(e))
-        return 'Error occurred'
+    # try:
+    #     pass
+    # except Exception as e:
+    #     debug.panel("error",str(e))
+    #     # print('Error:', str(e))
+    #     return 'Error occurred'
 
 @app.route("/getCoupon",methods=["POST"])
 def getCoupon():
@@ -220,4 +246,4 @@ def adminLogin():
 
 
 if __name__ == "__main__":
-    app.run(debug=True) 
+    app.run(debug=True,host="0.0.0.0") 

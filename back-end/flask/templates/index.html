@@ -2,203 +2,224 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>知資為資知 - 2024中部電資聯合寒訓</title>
-        <style>
-            :root {
-                --main-color: #69c5d6;
-            }
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
-            body {
-                background: #000;
-                color: #fff;
-                font-family: system-ui, -apple-system, BlinkMacSystemFont,
-                    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
-                    "Helvetica Neue", sans-serif;
-                    overflow: hidden;
-            }
-            header {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-                min-height: 100svh;
-                overflow: hidden;
-                text-align: center;
-                position: relative;
-            }
-            #canvas {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                z-index: -1;
-            }
-            img {
-                max-width: 600px;
-                width: 100%;
-                max-height: 50vh;
-                animation: zoom 0.5s ease-in-out;
-            }
-            nav {
-                width: 100%;
-                /* background-color: #494949; */
-                height: 3rem;
-                position: fixed;
-                display: flex;
-                align-items: center;
-                padding: 3rem;
-            }
-            nav ul {
-                display: flex;
-                justify-content: flex-end;
-                flex: 1;
-                list-style: none;
-                gap: 2rem;
-            }
-            h1 {
-                font-size: 1.25rem;
-            }
-            h2 {
-                font-size: 1.5rem;
-                margin-bottom: 1rem;
-            }
-            nav a {
-                color: rgba(255, 255, 255, 0.5);
-                position: relative;
-                text-decoration: none;
-                font-weight: 500;
-                padding: 0 0.7em;
-            }
-            nav a:before {
-                position: absolute;
-                content: "";
-                -webkit-transition: all 0.35s ease;
-                transition: all 0.35s ease;
-                opacity: 0;
-                left: 15%;
-                right: 15%;
-                top: 0;
-                bottom: 0;
-                border-left: 3px solid #27ae60;
-                border-right: 3px solid #27ae60;
-            }
-            nav a:hover,
-            nav .current a {
-                color: #ffffff;
-            }
-            nav a:hover:before,
-            nav .current a:before {
-                opacity: 1;
-                left: 0;
-                right: 0;
-            }
-            header h1 {
-                margin-block:2rem 1rem;
-            }
-        
-            header a {
-                display: block;
-                color: #fff;
-                text-decoration: none;
-                padding: 1rem;
-                border: #fff solid 2px;
-                transition: transform 0.2s ease-out;
-            }
-            header a:hover {
-                transform: translateY(-0.25rem);
-            }
-            header a:active {
-                transform: translateY(-0.4rem);
-            }
-            @keyframes zoom {
-                0% {
-                    transform: scale(0);
-                }
-                100% {
-                    transform: scale(1);
-                }
-            }
-            main{
-                max-width: 600px;
-                margin: 0 auto;
-            }
-        </style>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.9.18/paper-full.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.14.1/TweenMax.min.js"></script>
-    </head>
-    <body>
-        <nav>
-            <h1>知資為資知 - 2024中電會聯合寒訓</h1>
-            <ul>
-                <li><a href="">登入查詢</a></li>
-                <li><a href="">立即報名</a></li>
-            </ul>
-        </nav>
-  
-            <header>
-                <img src="static/logo.svg" alt="" />
-                <h1>知資為資知 - 2024中電會聯合寒訓</h1>
-                <h2 id="countdown"></h2>
-                <a href="">立即報名</a>
-                <canvas resize="true" id="canvas"></canvas>
-            </header>
-            <main>
-            <section>
-                <h3>2024 全台最大聯合寒訓</h3>
-            </section>
-            <section></section>
-            <section></section>
-            <section></section>
-            <section></section>
-        </main>
-        <script>
-            // Set the countdown date
-            var countdownDate = new Date("2024-01-15");
 
-            // Update the countdown every second
-            var countdownTimer = setInterval(function () {
-                // Get the current date and time
-                var now = new Date().getTime();
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>知資為資知 - 2024中部電資聯合寒訓</title>
+    <style>
+        :root {
+            --main-color: #69c5d6;
+        }
 
-                // Calculate the time remaining
-                var timeRemaining = countdownDate - now;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-                // Calculate days, hours, minutes, and seconds
-                var days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-                var hours = Math.floor(
-                    (timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-                );
-                var minutes = Math.floor(
-                    (timeRemaining % (1000 * 60 * 60)) / (1000 * 60)
-                );
-                var seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+        body {
+            background: #000;
+            color: #fff;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont,
+                "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+                "Helvetica Neue", sans-serif;
+            overflow: hidden;
+        }
 
-                // Display the countdown in the #countdown element
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100svh;
+            overflow: hidden;
+            text-align: center;
+            position: relative;
+        }
+
+        #canvas {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        img {
+            max-width: 600px;
+            width: 100%;
+            max-height: 50vh;
+            animation: zoom 0.5s ease-in-out;
+        }
+
+        nav {
+            width: 100%;
+            /* background-color: #494949; */
+            height: 3rem;
+            position: fixed;
+            display: flex;
+            align-items: center;
+            padding: 3rem;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: flex-end;
+            flex: 1;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        h1 {
+            font-size: 1.25rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        nav a {
+            color: rgba(255, 255, 255, 0.5);
+            position: relative;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0 0.7em;
+        }
+
+        nav a:before {
+            position: absolute;
+            content: "";
+            -webkit-transition: all 0.35s ease;
+            transition: all 0.35s ease;
+            opacity: 0;
+            left: 15%;
+            right: 15%;
+            top: 0;
+            bottom: 0;
+            border-left: 3px solid #27ae60;
+            border-right: 3px solid #27ae60;
+        }
+
+        nav a:hover,
+        nav .current a {
+            color: #ffffff;
+        }
+
+        nav a:hover:before,
+        nav .current a:before {
+            opacity: 1;
+            left: 0;
+            right: 0;
+        }
+
+        header h1 {
+            margin-block: 2rem 1rem;
+        }
+
+        header a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            padding: 1rem;
+            border: #fff solid 2px;
+            transition: transform 0.2s ease-out;
+        }
+
+        header a:hover {
+            transform: translateY(-0.25rem);
+        }
+
+        header a:active {
+            transform: translateY(-0.4rem);
+        }
+
+        @keyframes zoom {
+            0% {
+                transform: scale(0);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        main {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.9.18/paper-full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.14.1/TweenMax.min.js"></script>
+</head>
+
+<body>
+    <nav style="position:absolute;top: 0;left: 0;z-index: 10;">
+        <h1>知資為資知 - 2024中電會聯合寒訓</h1>
+        <ul>
+            <li><a href="/login">登入查詢</a></li>
+            <li><a href="/sign">立即報名</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <img src="static/logo.svg" alt="" />
+        <h1>知資為資知 - 2024中電會聯合寒訓</h1>
+        <h2 id="countdown"></h2>
+        <a href="/login">立即報名</a>
+        <canvas resize="true" id="canvas"></canvas>
+    </header>
+    <main>
+        <section>
+            <h3>2024 全台最大聯合寒訓</h3>
+        </section>
+        <section></section>
+        <section></section>
+        <section></section>
+        <section></section>
+    </main>
+    <script>
+        // Set the countdown date
+        var countdownDate = new Date("2024-01-15");
+
+        // Update the countdown every second
+        var countdownTimer = setInterval(function () {
+            // Get the current date and time
+            var now = new Date().getTime();
+
+            // Calculate the time remaining
+            var timeRemaining = countdownDate - now;
+
+            // Calculate days, hours, minutes, and seconds
+            var days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+            var hours = Math.floor(
+                (timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+            );
+            var minutes = Math.floor(
+                (timeRemaining % (1000 * 60 * 60)) / (1000 * 60)
+            );
+            var seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+            // Display the countdown in the #countdown element
+            document.getElementById("countdown").innerHTML =
+                days +
+                "d " +
+                hours +
+                "h " +
+                minutes +
+                "m " +
+                seconds +
+                "s ";
+
+            // If the countdown is finished, display a message
+            if (timeRemaining < 0) {
+                clearInterval(countdownTimer);
                 document.getElementById("countdown").innerHTML =
-                    days +
-                    "d " +
-                    hours +
-                    "h " +
-                    minutes +
-                    "m " +
-                    seconds +
-                    "s ";
-
-                // If the countdown is finished, display a message
-                if (timeRemaining < 0) {
-                    clearInterval(countdownTimer);
-                    document.getElementById("countdown").innerHTML =
-                        "Countdown expired";
-                }
-            }, 1000);
-        </script>
-        <script type="text/paperscript" canvas="canvas">
+                    "Countdown expired";
+            }
+        }, 1000);
+    </script>
+    <script type="text/paperscript" canvas="canvas">
             function Hex(position, targetRadius, color) {
                 var subs = 3;
 
@@ -374,5 +395,6 @@
                 return floor ? (v | 0) : v;
             }
         </script>
-    </body>
+</body>
+
 </html>

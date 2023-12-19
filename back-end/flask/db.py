@@ -1,6 +1,7 @@
 import sqlite3
 from sqlite3 import Cursor,Connection
 from typing import Literal
+from debug import debug
 
 class DataBase:
     def __init__(self,db_path:str) -> None:
@@ -69,10 +70,16 @@ def getUserLastStep(conn:Connection, cursor:Cursor,UserID:str) -> list:
     用userID查詢lastStep所需資料
     """
     # coupon,isPaid,consentID,maintenance
-    cursor.execute(f"SELECT coupon,isPaid,consentID,maintenance FROM DATA WHERE UserID = '{UserID}'")
+    cursor.execute(f"SELECT coupon,isPaid,consentID,maintenance,adminCheck FROM DATA WHERE UserID = '{UserID}'")
     results = cursor.fetchall()
     return list(results)
 
+@Client
+def getUserStatus(conn:Connection, cursor:Cursor,UserID:str) -> bool:
+    cursor.execute(f"SELECT adminCheck,maintenance,consentID,isPaid FROM DATA WHERE UserID = '{UserID}'")
+    results = cursor.fetchall()[0]
+    print(results)
+    return not("" in results)
 
 @Client
 def createUser(conn:Connection, cursor:Cursor,Data:list) -> bool: #創建用戶
@@ -113,8 +120,13 @@ def updateUserData(conn:Connection, cursor:Cursor,UserID:str,Data:list) -> bool:
 
 
 @Client
-def signConsent(conn:Connection, cursor:Cursor,userID:str,consentID:Literal[0, 1]) -> bool:
-    cursor.execute(f"UPDATE DATA SET consentID = {consentID} WHERE UserID = '{userID}'")
+def signConsent(conn:Connection, cursor:Cursor,userID:str,consentID:Literal[0, 1],signData:str) -> bool:
+    if consentID == 0:
+        cursor.execute("UPDATE DATA SET consentID = ? WHERE UserID = ?", (str(signData), str(userID)))
+    elif consentID == 1:
+        cursor.execute("UPDATE DATA SET maintenance = ? WHERE UserID = ?", (str(signData), str(userID)))
+    else:
+        return False
     conn.commit()
     return True
 

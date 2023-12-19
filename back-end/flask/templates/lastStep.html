@@ -15,11 +15,18 @@
     <div class="text-sm"><a href="/edit">&lt; 編輯報名資訊</a></div>
     <div class="mt-5 text-3xl font-bold">還差最後一步</div>
     <div class="text-sm mb-5">尚未報名完成</div>
-    <!-- # coupon,isPaid,consentID,maintenance -->
+    <!-- # coupon,isPaid,consentID,maintenance,adminCheck -->
     <!-- 要到是否有繳費的資料 -->
     <div class="mt-5 text-3xl font-bold">
-        {% if isPaid %} ✔️ {% else %} ❌ {% endif %}
-        繳費
+        {% if isPaid %}
+            {% if adminCheck %}
+                ✔️完成繳費
+            {% else %}
+                🟠管理者正在幫你確認
+            {% endif %}
+        {% else %}
+            ❌繳費
+        {% endif %}
     </div>
     <div class="mb-3">請將報名費轉帳至以下帳號，並記得備註學員姓名</div>
     <div class="mb-3">轉帳完成請點擊驗證案紐，我們會盡快幫您確認。</div>
@@ -31,7 +38,7 @@
     {% endif %}
     <div class="mt-5 text-3xl font-bold">
         <a href="/consent?studentID={{userID}}">
-            {% if consentID %} ✔️ {% else %} ❌ {% endif %}
+            {% if consent %} ✔️ {% else %} ❌ {% endif %}
             家長同意書
         </a>
     </div>
@@ -62,6 +69,7 @@
         })
             .then(responseText => {
                 console.log("Response text:", responseText);
+                window.location.href = "/lastStep";
             })
             .catch(error => {
                 alert("Error:", error);

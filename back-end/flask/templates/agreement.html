@@ -172,7 +172,7 @@
             function sendImage() {
                 const imageData = canvas.toDataURL();
                 console.log(imageData);
-                fetch("/{% block content %}sendSign{% endblock %}", {
+                fetch("/sendSign", {
                     method: "POST",
                     headers: {
                         "Content-Type": "text/plain",
