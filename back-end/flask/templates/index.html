@@ -62,6 +62,10 @@
                 list-style: none;
                 gap: 2rem;
             }
+            nav img{
+                height: 3rem;
+                margin-right: 1rem;
+            }
             h1 {
                 font-size: 1.25rem;
             }
@@ -200,7 +204,8 @@
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                background: url(../static/party.webp) no-repeat center center;
+                background-color: #000;
+                background: url(/static/party.webp) no-repeat center center;
             }
             #fixedAnd h3 {
                 width: 100%;
@@ -211,7 +216,7 @@
                 color: var(--main-color);
             }
             #location {
-                background: url(../static/東海.webp) no-repeat center center;
+                background: url(/static/東海.webp) no-repeat center center;
             }
             #location > div {
                 background: linear-gradient(#000, #00000050 20%, #00000050 90%);
@@ -284,7 +289,7 @@
                 margin-bottom: 1rem;
             }
             #biggest {
-                background: url(../static/group.webp) no-repeat center center;
+                background: url(/static/group.webp) no-repeat center center;
             }
             #biggest > div,
             #course > div {
@@ -294,7 +299,7 @@
                 opacity:0;
             }
             #course {
-                background: url(../static/course.webp) no-repeat center center;
+                background: url(/static/course.webp) no-repeat center center;
             }
 
             .slideIn {
@@ -310,33 +315,36 @@
                 opacity:1;
                 transition: opacity 2s;
             }
+            /* @media max-width(600px) {
+                
+            } */
         </style>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.9.18/paper-full.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.14.1/TweenMax.min.js"></script>
         <link
             rel="preload"
-            href="../static/party.webp"
+            href="/static/party.webp"
             as="image"
         />
         <link
             rel="preload"
-            href="../static/bbq.webp"
+            href="/static/bbq.webp"
             as="image"
         />
         <link
             rel="preload"
-            href="../static/game.webp"
+            href="/static/game.webp"
             as="image"
         />
         <link
             rel="preload"
-            href="../static/lab.webp"
+            href="/static/lab.webp"
             as="image"
         />
     </head>
     <body>
         <nav>
-            <h1>知資為資知 - 2024中電會聯合寒訓</h1>
+            <img src="/static/logo.svg" alt="" />
             <ul>
                 <li><a href="login">登入查詢</a></li>
                 <li><a href="sign">立即報名</a></li>
@@ -344,7 +352,7 @@
         </nav>
 
         <header>
-            <img src="../static/logo.svg" alt="" />
+            <img src="/static/logo.svg" alt="" />
             <h1>知資為資知 - 2024中電會聯合寒訓</h1>
             <h2 id="countdown"></h2>
             <a href="sign" class="signUp slideIn aos">立即報名</a>
@@ -355,7 +363,7 @@
                 <div>
                     <section class="center slideIn aos">
                         <div class="t2024">2024 中部</div>
-                        <h3>最大寒假電資營隊</h3>
+                        <h3>最大電資營隊</h3>
                         <p>
                             中部高中電資社團聯合會議（SCAICT）誠摯邀請各位學生踏上一場超炫的寒假營隊之旅！我們不僅讓你在歡笑聲中度過難忘時光，更將帶給你資訊領域的絕佳學習機會，激發對科技的無限熱情，開啟個人興趣的探索之旅。
                         </p>
@@ -473,7 +481,7 @@
                 </div>
             </div>
             <footer>
-                <img src="../static/scaict.svg" alt="" class="scaict-logo" />
+                <img src="/static/scaict.svg" alt="" class="scaict-logo" />
                 © 2023 中部高中電資社團聯合會議 All Rights Reserved<br />
                 若有任何問題歡迎聯絡我們<br />
                 <a href="https://www.facebook.com/scaict.tw/">Facebook</a> ·
@@ -534,16 +542,16 @@
                     fixedAnd.style.display = "flex";
                     if (andRect.top > -andRect.height / 4) {
                         also.innerHTML = "晚會";
-                        fixedAnd.style.background = "url(../static/party.webp) no-repeat center center";
+                        fixedAnd.style.background = "url(/static/party.webp) no-repeat center center";
                     } else if (andRect.top > -andRect.height / 2) {
                         also.innerHTML = "烤肉";
-                        fixedAnd.style.background = "url(../static/bbq.webp) no-repeat center center";
+                        fixedAnd.style.background = "url(/static/bbq.webp) no-repeat center center";
                     } else if (andRect.top > (-andRect.height / 4) * 3) {
                         also.innerHTML = "桌遊";
-                        fixedAnd.style.background = "url(../static/game.webp) no-repeat center center";
+                        fixedAnd.style.background = "url(/static/game.webp) no-repeat center center";
                     } else {
                         also.innerHTML = "LAB";
-                        fixedAnd.style.background = "url(../static/lab.webp) no-repeat center center";
+                        fixedAnd.style.background = "url(/static/lab.webp) no-repeat center center";
                     }
                 } else {
                     fixedAnd.style.display = "none";
