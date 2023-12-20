@@ -263,8 +263,8 @@ def admin():
 
 @app.route("/admin/manage")
 def adminLoginPage():
-    # if not(adminCheck()):
-    #     return redirect('/admin')
+    if not(adminCheck()):
+        return redirect('/admin')
     data = getAllStudent()
     modified_data = []  # 用于存储修改后的数据
     
