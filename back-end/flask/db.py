@@ -1,8 +1,7 @@
 import sqlite3
 from sqlite3 import Cursor,Connection
 from typing import Literal
-from debug import debug
-
+from uuid import UUID
 class DataBase:
     def __init__(self,db_path:str) -> None:
         self.db = db_path
@@ -28,17 +27,19 @@ Client = DataBase("back-end/flask/database/account.db")
 
 # todo
 @Client
-def isUserMail(conn:Connection, cursor:Cursor,mail:str) -> bool: #用email查用戶是否存在
-    cursor.execute(f"SELECT * FROM DATA WHERE email = '{mail}'")
+def isUserMail(conn: Connection, cursor: Cursor, mail: str) -> bool:
+    cursor.execute("SELECT * FROM DATA WHERE email = ?", (mail,))
     results = cursor.fetchall()
     if bool(results) == True:
-        return bool(results),results[0][0]
+        return bool(results), results[0][0]
     else:
-        return bool(results),None
+        return bool(results), None
+
+
 
 @Client
-def isUserPhone(conn:Connection, cursor:Cursor,phone:str) -> tuple:
-    cursor.execute(f"SELECT * FROM DATA WHERE phone = '{phone}'")
+def isUserPhone(conn:Connection, cursor:Cursor,phone:str) -> bool: #用電話查用戶是否存在
+    cursor.execute("SELECT * FROM DATA WHERE phone = ?",(phone,))
     results = cursor.fetchall()
     if bool(results) == True:
         return bool(results),results[0][0]
@@ -47,7 +48,7 @@ def isUserPhone(conn:Connection, cursor:Cursor,phone:str) -> tuple:
 
 @Client
 def isUserID(conn:Connection, cursor:Cursor,UserID:str) -> bool:
-    cursor.execute(f"SELECT * FROM DATA WHERE UserID = '{UserID}'")
+    cursor.execute(f"SELECT * FROM DATA WHERE UserID = ?",(UserID,))
     results = cursor.fetchall()
     if bool(results) == True:
         return bool(results)
@@ -56,11 +57,8 @@ def isUserID(conn:Connection, cursor:Cursor,UserID:str) -> bool:
     
 
 @Client
-def getUserData(conn:Connection, cursor:Cursor,UserID:str) -> list: 
-    """
-    用userID查用戶資料
-    """
-    cursor.execute(f"SELECT * FROM DATA WHERE UserID = '{UserID}'")
+def getUserData(conn:Connection, cursor:Cursor,UserID:str) -> list: #用userID查用戶資料
+    cursor.execute(f"SELECT * FROM DATA WHERE UserID = ?",(UserID,))
     results = cursor.fetchall()
     return list(results)
 
@@ -70,16 +68,21 @@ def getUserLastStep(conn:Connection, cursor:Cursor,UserID:str) -> list:
     用userID查詢lastStep所需資料
     """
     # coupon,isPaid,consentID,maintenance
-    cursor.execute(f"SELECT coupon,isPaid,consentID,maintenance,adminCheck FROM DATA WHERE UserID = '{UserID}'")
+    cursor.execute("SELECT coupon,isPaid,consentID,maintenance,adminCheck FROM DATA WHERE UserID = ?",(UserID,))
     results = cursor.fetchall()
     return list(results)
 
+print(getUserLastStep("7d736650-a4d9-45a9-a785-11a53b6d2270"))
+
 @Client
 def getUserStatus(conn:Connection, cursor:Cursor,UserID:str) -> bool:
-    cursor.execute(f"SELECT adminCheck,maintenance,consentID,isPaid FROM DATA WHERE UserID = '{UserID}'")
-    results = cursor.fetchall()[0]
-    print(results)
-    return not("" in results)
+    cursor.execute("SELECT adminCheck,maintenance,consentID,isPaid FROM DATA WHERE UserID = ?",(UserID,))
+    try:
+        results = cursor.fetchall()[0]
+    except:
+        return False
+    # print(results)
+    # return not("" in results)
 
 @Client
 def createUser(conn:Connection, cursor:Cursor,Data:list) -> bool: #創建用戶
@@ -100,10 +103,9 @@ def deleteUserData(conn:Connection, cursor:Cursor,UserID:str) -> bool:
     if isUserID(UserID) == False:
         return False
     else:
-        cursor.execute(f"DELETE FROM DATA WHERE UserID = '{UserID}'")
+        cursor.execute("DELETE FROM DATA WHERE UserID = ?",(UserID,))
         conn.commit()
         return True
-    
 
 
 @Client
@@ -116,17 +118,16 @@ def updateUserData(conn:Connection, cursor:Cursor,UserID:str,Data:list) -> bool:
     else:
         return False
     
+
+
+
+
 # print(updateUserData('123456',['123456','賴屏玉','a123456786@gmail.com','國立臺灣大大學','資訊工程學系','資訊工程學系學會','123456','0912345658','男','A123456789','20000101','賴乙玉','父子','0912345678','S','葷','無','無','True','123456','1620000000','False']))
 
 
 @Client
-def signConsent(conn:Connection, cursor:Cursor,userID:str,consentID:Literal[0, 1],signData:str) -> bool:
-    if consentID == 0:
-        cursor.execute("UPDATE DATA SET consentID = ? WHERE UserID = ?", (str(signData), str(userID)))
-    elif consentID == 1:
-        cursor.execute("UPDATE DATA SET maintenance = ? WHERE UserID = ?", (str(signData), str(userID)))
-    else:
-        return False
+def signConsent(conn:Connection, cursor:Cursor,userID:str,consentID:Literal[0, 1]) -> bool:
+    cursor.execute(f"UPDATE DATA SET consentID = {consentID} WHERE UserID = ?",(userID,))
     conn.commit()
     return True
 
@@ -136,13 +137,14 @@ def getStudentData(conn:Connection, cursor:Cursor,userID:str) -> list:
     """
     透過uuid get姓名、手機、家長姓名、家長手機
     """
-    cursor.execute(f"SELECT name,phone,emergencyContact,emergencyPhone FROM DATA WHERE UserID = '{userID}'")
+    cursor.execute(f"SELECT name,phone,emergencyContact,emergencyPhone FROM DATA WHERE UserID = ?",(userID,))
     results = cursor.fetchall()
+    
     return list(results[0])
 
 @Client
 def isPasswordCorrect(conn:Connection , cursor:Cursor,userID:str,password:str) -> bool:
-    cursor.execute(f"SELECT password FROM DATA WHERE UserID = '{userID}'")
+    cursor.execute(f"SELECT password FROM DATA WHERE UserID = ?",(userID,))
     results = cursor.fetchall()
     if results[0][0] == password:
         return True
@@ -161,16 +163,10 @@ def isAdminPasswordCorrect(conn:Connection , cursor:Cursor,account:str,password:
 
 @Client
 def userPay(conn:Connection, cursor:Cursor,userID:str) -> bool:
-    cursor.execute(f"UPDATE DATA SET isPaid = True WHERE UserID = '{userID}'")
+    cursor.execute(f"UPDATE DATA SET isPaid = True WHERE UserID = ?",(userID,))
     conn.commit()
     return True
 
-@Client
-def checkCoupon(conn:Connection, cursor:Cursor,inputCoupon) -> bool:
-    cursor.execute(f"SELECT coupon FROM DATA")
-    results = cursor.fetchall()
-    coupons = [result[0] for result in results]
-    return inputCoupon in coupons
 
 @Client
 def getAllStudent(conn:Connection, cursor:Cursor)->list:
@@ -233,6 +229,7 @@ def logStudent(conn:Connection, cursor:Cursor) -> None:
         print("團報優惠碼: "+coupon)
         print("時間戳: "+str(timestamp))
         print("是否付款: "+str(isPaid))
+
 
 @Admin
 def logAdmin(conn:Connection, cursor:Cursor) -> None:
