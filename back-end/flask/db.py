@@ -167,6 +167,12 @@ def userPay(conn:Connection, cursor:Cursor,userID:str) -> bool:
     conn.commit()
     return True
 
+@Client
+def checkCoupon(conn:Connection, cursor:Cursor,inputCoupon) -> bool:
+    cursor.execute(f"SELECT coupon FROM DATA")
+    results = cursor.fetchall()
+    coupons = [result[0] for result in results]
+    return inputCoupon in coupons
 
 @Client
 def getAllStudent(conn:Connection, cursor:Cursor)->list:

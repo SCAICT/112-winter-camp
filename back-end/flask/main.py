@@ -90,7 +90,7 @@ def consent():
     
     session["agreement"] = 0
 
-    student_id = request.args.get("studentID","")
+    student_id = session["userID"]
     debug.bg_yellow(student_id)
     # 姓名、手機、家長姓名、家長手機
     # name,phone,emergencyContact,emergencyPhone
@@ -104,8 +104,7 @@ def maintenance():
         return redirect("/")
     
     session["agreement"] = 1
-
-    student_id = request.args.get("studentID")
+    student_id = session["userID"]
     debug.bg_yellow(student_id)
     # 姓名、手機、家長姓名、家長手機
     # name,phone,emergencyContact,emergencyPhone
