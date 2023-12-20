@@ -202,21 +202,11 @@ def signUp():
     male = request.form.getlist('data[male]')
     food = request.form.getlist('data[food]')
     isLive = request.form.getlist('data[live]')
-    #  todo     
-    # 要船上去的資料
+    if checkUserExist(email=data_values[1],phone=data_values[6]):
+        return '<script>alert("帳號已存在");window.location.href = "/sign";</script>'
+    
     result = uuid + data_values[0:7] + male + data_values[7:13] + food + data_values[13:15] + isLive + [""] + timestamp + [0,"","","",""]
-    debug.hr()
-    for i,d in enumerate(data_values):
-        debug.yellow(str(i),d)
-    debug.hr()
-    
-    debug.hr()
-    for i,d in enumerate(result):
-        debug.blue(str(i))
-        debug.yellow(str(d))
-    debug.hr()
-    
-    print(createUser(Data=result))
+    createUser(Data=result)
 
     session["userID"] = str(uuid[0])
 

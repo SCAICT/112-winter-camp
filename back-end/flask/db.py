@@ -72,8 +72,6 @@ def getUserLastStep(conn:Connection, cursor:Cursor,UserID:str) -> list:
     results = cursor.fetchall()
     return list(results)
 
-print(getUserLastStep("7d736650-a4d9-45a9-a785-11a53b6d2270"))
-
 @Client
 def getUserStatus(conn:Connection, cursor:Cursor,UserID:str) -> bool:
     cursor.execute("SELECT adminCheck,maintenance,consentID,isPaid FROM DATA WHERE UserID = ?",(UserID,))
@@ -84,6 +82,14 @@ def getUserStatus(conn:Connection, cursor:Cursor,UserID:str) -> bool:
     # print(results)
     # return not("" in results)
 
+@Client
+def checkUserExist(conn:Connection, cursor:Cursor,email:str,phone:str) -> bool:
+    
+    cursor.execute(f"SELECT * FROM DATA WHERE email = ?",(email,))
+    status1 = cursor.fetchall()
+    cursor.execute(f"SELECT * FROM DATA WHERE phone = ?",(phone,))
+    status2 = cursor.fetchall()
+    return bool(len(status1)) or bool(len(status2))
 @Client
 def createUser(conn:Connection, cursor:Cursor,Data:list) -> bool: #創建用戶
     if isUserMail(Data[2])[0] == True:
