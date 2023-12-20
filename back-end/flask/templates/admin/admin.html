@@ -7,17 +7,44 @@
     <title>Admin manager</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../../static/tailwind.config.js"></script>
+    <script>
+        function timestamp_to_date(timestamp) {
+            // 创建一个新的Date对象，将时间戳作为参数传递
+            var date = new Date(timestamp);
+
+            // 使用Date对象的方法获取年、月、日等信息
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1; // 月份是从0开始的，所以要加1
+            var day = date.getDate();
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var seconds = date.getSeconds();
+
+            // 返回一个包含日期和时间信息的字符串
+            var formattedDate = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
+
+            return formattedDate;
+        }
+    </script>
 </head>
 
 <body>
     <div class="max-w-[1020px] px-5 py-3 m-auto">
-        <div class="text-3xl font-bold mb-3"># 管理頁面</div>
+        <div class="text-3xl font-bold mb-5"># 管理頁面</div>
         {% for d in data %}
-            <a href="" >
-                <div class="w-1/2 border-b">
+        <a href="">
+            <div class="w-1/2 border-b px-2 py-1 text-xl grid grid-flow-col justify-stretch">
+                <div class="mr-2">
                     {{d[1]}}
                 </div>
-            </a>
+                <div class="mr-2">
+                    {{d[3]}}
+                </div>
+                <div class="mr-2">
+                    {{ d[20]}}
+                </div>
+            </div>
+        </a>
         {% endfor %}
     </div>
     <!-- <table class="min-w-full bg-white border border-gray-300">

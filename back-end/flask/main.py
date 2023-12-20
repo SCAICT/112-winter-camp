@@ -9,6 +9,18 @@ from re import match
 from db import *
 
 
+from datetime import datetime
+
+def timestamp_to_date(timestamp):
+    # 将时间戳转换为datetime对象
+    dt_object = datetime.utcfromtimestamp(timestamp)
+
+    # 使用strftime方法格式化日期和时间
+    formatted_date = dt_object.strftime('%Y-%m-%d %H:%M:%S')
+
+    return formatted_date
+
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = urandom(24)
 
@@ -167,7 +179,7 @@ def login():
 
     # 存入session  
     session["userID"] = check[1]  
-
+    
     # todo del 
     debug.panel(title="/login",account=account,password = password)
 
@@ -183,7 +195,7 @@ def finishPay():
 def signUp():
     # userID
     uuid = [str(uuid4())]
-    # 時間戳
+    # 時間戳    
     timestamp = [datetime.timestamp(datetime.now())] 
     # 姓名 email school 科系 社團 password tel id birth 聯絡人 聯絡人關西 聯絡人電話  size 飲食習慣  特殊疾病  團報優惠碼
     data_values = request.form.getlist('data[]')
@@ -251,10 +263,23 @@ def admin():
 
 @app.route("/admin/manage")
 def adminLoginPage():
-    if not(adminCheck()):
-        return redirect('/admin')
-    return render_template("admin/admin.html",data=
-    getAllStudent())
+    # if not(adminCheck()):
+    #     return redirect('/admin')
+    data = getAllStudent()
+    modified_data = []  # 用于存储修改后的数据
+    
+    for item in data:
+        # 将元组转换为列表以便修改
+        item_list = list(item)
+        
+        # 修改元素，假设 'timestamp' 是元组的第一个元素
+        timestamp_index = 20
+        item_list[timestamp_index] = timestamp_to_date(float(item_list[timestamp_index]))
+        
+        # 将修改后的列表添加到新的数据集
+        modified_data.append(tuple(item_list))
+    
+    return render_template("admin/admin.html", data=modified_data)
 
 @app.route("/admin/login",methods=["POST"])
 def adminLogin():
