@@ -1,24 +1,62 @@
-<!-- 
-    login demo
--->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>管理者頁面</title>
+    <title>Admin manager</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="../static/tailwind.config.js"></script>
+    <script src="../../static/tailwind.config.js"></script>
 </head>
+
 <body>
-    <!-- app -->
-    <form action="/admin/login" method="POST">
-        <div class="app max-w-mobile-sm h-min m-auto flex flex-col px-5 py-3 justify-center gap-3">
-            <div class="text-3xl font-bold text-center">管理者登入</div>
-            <div><input type="text" name="account" class="w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500" placeholder="帳號" required></div>
-            <div><input type="password" name="password" class="w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500" placeholder="密碼"></div>
-            <div class="text-center"><input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" value="登入" required></div> 
-        </div>
-    </form>
+    <div class="max-w-[1020px] px-5 py-3 m-auto">
+        <div class="text-3xl font-bold mb-3"># 管理頁面</div>
+        {% for d in data %}
+            <a href="" >
+                <div class="w-1/2 border-b">
+                    {{d[1]}}
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+    <!-- <table class="min-w-full bg-white border border-gray-300">
+        <thead>
+            <th class="border-b max-w-xs truncate">UserID</th>
+            <th class="border-b">姓名</th>
+            <th class="border-b">Email</th>
+            <th class="border-b">學校</th>
+            <th class="border-b">科別</th>
+            <th class="border-b">社團</th>
+            <th class="border-b">密碼</th>
+            <th class="border-b">手機</th>
+            <th class="border-b">性別</th>
+            <th class="border-b">身分證字號</th>
+            <th class="border-b">生日</th>
+            <th class="border-b">緊急連絡人</th>
+            <th class="border-b">緊急連絡人關係</th>
+            <th class="border-b">緊急連絡人電話</th>
+            <th class="border-b">衣服大小</th>
+            <th class="border-b">飲食</th>
+            <th class="border-b">特殊飲食習慣</th>
+            <th class="border-b">住宿</th>
+            <th class="border-b">優惠代碼</th>
+            <th class="border-b">是否付錢</th>
+            <th class="border-b max-w-xs truncate">家長同意書簽章</th>
+            <th class="border-b max-w-xs truncate">最後修改日期</th>
+            <th class="border-b max-w-xs truncate">場地簽章</th>
+            <th class="border-b">確認</th>
+        </thead>
+        <tbody>
+            {% for d in data %}
+            <tr class="boder-b">
+                {% for v in d %}
+                <td>{{ v }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table> -->
 </body>
+
 </html>

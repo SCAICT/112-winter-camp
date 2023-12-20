@@ -21,9 +21,6 @@ def checkLogin() :
         return True
     return False
 
-def checkData():
-    pass
-
 def generate_random_string(length=6):
     key = "ABCDEFGHJKMNPQRSTUVWXYZ23456789"    
     random_string = ''.join(choice(key) for _ in range(length))
@@ -93,7 +90,7 @@ def consent():
     
     session["agreement"] = 0
 
-    student_id = request.args.get("studentID","")
+    student_id = session["userID"]
     debug.bg_yellow(student_id)
     # 姓名、手機、家長姓名、家長手機
     # name,phone,emergencyContact,emergencyPhone
@@ -107,8 +104,7 @@ def maintenance():
         return redirect("/")
     
     session["agreement"] = 1
-
-    student_id = request.args.get("studentID")
+    student_id = session["userID"]
     debug.bg_yellow(student_id)
     # 姓名、手機、家長姓名、家長手機
     # name,phone,emergencyContact,emergencyPhone
@@ -119,10 +115,6 @@ def maintenance():
 def error():
     return render_template("error.html")
 
-# 管理者頁面
-@app.route("/admin")
-def admin():
-    return render_template("admin/admin.html")
 
 
 # api
@@ -237,12 +229,45 @@ def getCoupon():
     """
     核對團體優惠碼
     """ 
-    return str(checkCoupon(request.data.decode("utf-8")))
+    data = request.data.decode("utf-8")
+    if data:
+        return str(checkCoupon(data))
+    else:
+        return str(False)
 
 # admin 
-@app.route("/admin/login")
+# 管理者頁面
+def adminCheck():
+    try:
+        session["admin"]
+        session["adminAccount"]
+        return True
+    except:
+        return False
+
+@app.route("/admin")
+def admin():
+    return render_template("admin/login.html")
+
+@app.route("/admin/manage")
+def adminLoginPage():
+    if not(adminCheck()):
+        return redirect('/admin')
+    return render_template("admin/admin.html",data=
+    getAllStudent())
+
+@app.route("/admin/login",methods=["POST"])
 def adminLogin():
-    return
+    account = request.form.get("account")
+    # todo 加密
+    password = request.form.get("password")
+
+    if (isAdminPasswordCorrect(account=account,password=password)):
+        session["admin"] = True
+        session["adminAccount"] = account
+        return redirect("/admin/manage")
+    else:
+        return "<script>alert('密碼錯誤');window.location.href='/admin';</script>"
 
 
 if __name__ == "__main__":
