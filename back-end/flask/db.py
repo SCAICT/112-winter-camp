@@ -148,6 +148,15 @@ def isPasswordCorrect(conn:Connection , cursor:Cursor,userID:str,password:str) -
         return True
     else:
         return False
+    
+@Admin
+def isAdminPasswordCorrect(conn:Connection , cursor:Cursor,account:str,password:str) -> bool:
+    cursor.execute(f"SELECT password FROM DATA WHERE account = '{account}'")
+    results = cursor.fetchall()
+    if results[0][0] == password:
+        return True
+    else:
+        return False
 
 
 @Client
@@ -162,6 +171,12 @@ def checkCoupon(conn:Connection, cursor:Cursor,inputCoupon) -> bool:
     results = cursor.fetchall()
     coupons = [result[0] for result in results]
     return inputCoupon in coupons
+
+@Client
+def getAllStudent(conn:Connection, cursor:Cursor)->list:
+    cursor.execute('SELECT * FROM DATA')
+    results = cursor.fetchall()
+    return results
 
 @Client
 def logStudent(conn:Connection, cursor:Cursor) -> None:
