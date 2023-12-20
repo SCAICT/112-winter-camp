@@ -1,326 +1,150 @@
-<!-- 
-    sign demo
--->
-<!DOCTYPE html>
-<html lang="en">
+<!-- @format -->
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>活動報名 | 知資為資知 - 2024中部電資聯合寒訓</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="../static/tailwind.config.js"></script>
-</head>
-
-<body>
-    <!-- app -->
+{% extends 'base.html' %} {% block title %}活動報名 | 知資為資知 -
+2024中部電資聯合寒訓{% endblock %} {% block content %}
+<nav>
+    <a href="/"> <img src="/static/logo.svg" alt="" /></a>
+    <ul>
+        <li>
+            <div class="current"><a href="">登入查詢</a></div>
+        </li>
+        <li><a href="sign">立即報名</a></li>
+    </ul>
+</nav>
+<main>
+    <h1>活動報名</h1>
+    <h2>請完整填寫資訊</h2>
     <form action="/signUp" method="POST">
-        <!-- app -->
-        <div class="app max-w-mobile-sm h-min m-auto pt-5 py-3 pb-8">
-            <!-- 標題 -->
-            <div class="text-3xl font-bold mb-5">活動報名</div>
-            <!-- 問卷 -->
-            <div class="flex items-center mb-2 text-sm">
-                <div class="w-1/3">
-                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
-                        姓名
-                    </label>
-                </div>
-                <div class="w-2/3">
-                    <input name="data[]"
-                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                        id="" type="text" placeholder="姓名">
-                </div>
-            </div>
-
-            <div class="flex items-center mb-2 text-sm">
-                <div class="w-1/3">
-                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
-                        Email
-                    </label>
-                </div>
-                <div class="w-2/3">
-                    <input name="data[]"
-                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                        id="" type="email" placeholder="Email">
-                </div>
-            </div>
-
-            <div class="flex items-center mb-2 text-sm">
-                <div class="w-1/3">
-                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
-                        學校
-                    </label>
-                </div>
-                <div class="w-2/3">
-                    <input name="data[]"
-                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                        id="" type="text" placeholder="學校">
-                </div>
-            </div>
-
-            <div class="flex items-center mb-2 text-sm">
-                <div class="w-1/3">
-                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
-                        科別
-                    </label>
-                </div>
-                <div class="w-2/3">
-                    <input name="data[]"
-                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                        id="" type="text" placeholder="科別">
-                </div>
-            </div>
-            <div class="flex items-center mb-2 text-sm">
-                <div class="w-1/3">
-                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
-                        社團
-                    </label>
-                </div>
-                <div class="w-2/3">
-                    <input name="data[]"
-                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                        id="" type="text" placeholder="社團">
-                </div>
-            </div>
-            <div class="flex items-center mb-2 text-sm">
-                <div class="w-1/3">
-                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
-                        密碼
-                    </label>
-                </div>
-                <div class="w-2/3">
-                    <input name="data[]"
-                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                        id="" type="text" placeholder="密碼">
-                </div>
-            </div>
-            <div class="flex items-center mb-2 text-sm">
-                <div class="w-1/3">
-                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
-                        個人連絡電話
-                    </label>
-                </div>
-                <div class="w-2/3">
-                    <input name="data[]"
-                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                        id="" type="tel" placeholder="個人連絡電話">
-                </div>
-            </div>
-            <div class="flex items-center mb-2 text-sm">
-                <div class="w-1/3">
-                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
-                        生理性別
-                    </label>
-                </div>
-                <div class="w-2/3 flex ">
-                    <div class="flex items-center ">
-                        <input checked id="male-1" type="radio" value="男" name="data[male]"
-                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                        <label for="male-1" class="w-full py-4 ms-2 text-sm font-medium ">男</label>
-                    </div>
-                    <div class="flex items-center ps-4 ">
-                        <input id="male-2" type="radio" value="女" name="data[male]"
-                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500  focus:ring-2">
-                        <label for="male-2" class="w-full py-4 ms-2 text-sm font-medium ">女</label>
-                    </div>
-                </div>
-            </div>
-            <div class="flex items-center mb-2 text-sm">
-                <div class="w-1/3">
-                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
-                        身分證字號
-                    </label>
-                </div>
-                <div class="w-2/3">
-                    <input name="data[]"
-                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                        id="" type="text" placeholder="身分證字號">
-                </div>
-            </div>
-            <div class="flex items-center mb-2 text-sm">
-                <div class="w-1/3">
-                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
-                        出生年月日
-                    </label>
-                </div>
-                <div class="w-2/3">
-                    <input name="data[]"
-                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                        id="" type="date" placeholder="出生年月日">
-                </div>
-            </div>
-            <div class="flex items-center mb-2 text-sm">
-                <div class="w-1/3">
-                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
-                        緊急連絡人
-                    </label>
-                </div>
-                <div class="w-2/3">
-                    <input name="data[]"
-                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                        id="" type="text" placeholder="緊急連絡人">
-                </div>
-            </div>
-            <div class="flex items-center mb-2 text-sm">
-                <div class="w-1/3">
-                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
-                        緊急連絡人關係
-                    </label>
-                </div>
-                <div class="w-2/3">
-                    <input name="data[]"
-                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                        id="" type="tel" placeholder="緊急連絡人關係">
-                </div>
-            </div>
-            <div class="flex items-center mb-2 text-sm">
-                <div class="w-1/3">
-                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
-                        緊急連絡人電話
-                    </label>
-                </div>
-                <div class="w-2/3">
-                    <input name="data[]"
-                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                        id="" type="tel" placeholder="緊急連絡人電話">
-                </div>
-            </div>
-            <div class="flex items-center mb-2 text-sm">
-                <div class="w-1/3">
-                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
-                        衣服尺寸
-                    </label>
-                </div>
-                <div class="w-2/3">
-                    <!-- <input
-                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                        id="" type="tel" placeholder="衣服尺寸"> -->
-                    <select name="data[]"
-                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500">
-                        <option default hidden>選擇衣服尺寸</option>
-                        <option value="XS">XS</option>
-                        <option value="S">S</option>
-                        <option value="M">M</option>
-                        <option value="L">L</option>
-                        <option value="XL">XL</option>
-                        <option value="XXL">XXL</option>
-                    </select>
-                </div>
-            </div>
-            <div class="flex items-center mb-2 text-sm">
-                <div class="w-1/3">
-                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
-                        飲食
-                    </label>
-                </div>
-                <div class="w-2/3 flex">
-                    <!-- <input
-                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                        id="" type="tel" placeholder="飲食"> -->
-                    <div class="flex items-center ">
-                        <input checked id="" type="radio" value="葷" name="data[food]"
-                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                        <label for="" class="w-full py-4 ms-2 text-sm font-medium ">葷</label>
-                    </div>
-                    <div class="flex items-center ps-4 ">
-                        <input id="" type="radio" value="素" name="data[food]"
-                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500  focus:ring-2">
-                        <label for="" class="w-full py-4 ms-2 text-sm font-medium ">素</label>
-                    </div>
-                </div>
-            </div>
-            <div class="flex items-center mb-2 text-sm">
-                <div class="w-1/3">
-                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
-                        特殊飲食習慣
-                    </label>
-                </div>
-                <div class="w-2/3">
-                    <input name="data[]"
-                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                        id="" type="text" placeholder="特殊飲食習慣">
-                </div>
-            </div>
-            <div class="flex items-center mb-2 text-sm">
-                <div class="w-1/3">
-                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
-                        是否有特殊疾病
-                    </label>
-                </div>
-                <div class="w-2/3">
-                    <input name="data[]"
-                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                        id="" type="text" placeholder="是否有特殊疾病">
-                </div>
-            </div>
-            <div class="flex items-center mb-2 text-sm">
-                <div class="w-1/3">
-                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
-                        是否參與住宿
-                    </label>
-                </div>
-                <div class="w-2/3 flex">
-                    <!-- <input
-                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                        id="" type="tel" placeholder="是否參與住宿"> -->
-                    <div class="flex items-center ">
-                        <input checked id="" type="radio" value="是" name="data[live]"
-                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                        <label for="" class="w-full py-4 ms-2 text-sm font-medium ">是</label>
-                    </div>
-                    <div class="flex items-center ps-4 ">
-                        <input id="" type="radio" value="否" name="data[live]"
-                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500  focus:ring-2">
-                        <label for="" class="w-full py-4 ms-2 text-sm font-medium ">否</label>
-                    </div>
-                </div>
-            </div>
-            <div class="flex items-center mb-5   text-sm">
-                <div class="w-1/3">
-                    <label class="block text-gray-500 font-bold mb-1 mb-0 px-1 " for="">
-                        團體優惠碼
-                    </label>
-                </div>
-                <div class="w-2/3">
-                    <input name="data[]"
-                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-1  text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                        id="coupon" type="text" placeholder="團體優惠碼">
-                    <div class="mt-3"><button type="button" id="checkCoupon" class="cursor-pointer bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">認證優惠代碼</button></div>
-                </div>
-            </div>
-            <div class="text-center"><input type="submit"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" value="登入">
-            </div>
+        <div class="user-box">
+            <input type="text" name="data[]" required="" />
+            <label>姓名</label>
         </div>
+        <div class="user-box">
+            <input type="email" name="password" required="" />
+            <label>Email</label>
+        </div>
+        <div class="user-box">
+            <input type="text" name="data[]" required="" />
+            <label>學校</label>
+        </div>
+        <div class="user-box">
+            <input type="text" name="data[]" required="" />
+            <label>科別</label>
+        </div>
+        <div class="user-box">
+            <input type="text" name="data[]" required="" />
+            <label>社團</label>
+        </div>
+        <div class="user-box">
+            <input type="text" name="data[]" required="" />
+            <label>密碼</label>
+        </div>
+        <div class="user-box">
+            <input type="tel" name="data[]" required="" />
+            <label>個人連絡電話</label>
+        </div>
+        <div class="radio-box">
+            <label for="">生理性別</label>
+            <input type="radio" value="男" name="data[male]" id="male" />
+            <label for="male">男</label>
+            <input type="radio" value="女" name="data[male]" id="female"/>
+            <label for="female">女</label>
+        </div>
+        <div class="user-box">
+            <input type="text" name="data[]" required="" />
+            <label>身分證字號</label>
+        </div>
+        <div class="radio-box">
+            <label>出生年月日</label>
+            <input type="date" name="data[]" required="" />
+        </div>
+        <div class="user-box">
+            <input type="text" name="data[]" required="" />
+            <label>緊急連絡人</label>
+        </div>
+        <div class="user-box">
+            <input type="text" name="data[]" required="" />
+            <label>緊急連絡人關係</label>
+        </div>
+        <div class="user-box">
+            <input type="tel" name="data[]" required="" />
+            <label>緊急連絡人電話</label>
+        </div>
+        <div class="radio-box">
+            <label for="">衣服尺寸</label>
+            <select name="data[]" required="">
+                <option default hidden>選擇衣服尺寸</option>
+                <option value="XS">XS</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="XXL">XXL</option>
+            </select>
+        </div>
+        <div class="radio-box">
+            <label for="">飲食</label>
+            <input type="radio" value="葷" name="data[food]" id="meat" />
+            <label for="meat">葷</label>
+            <input type="radio" value="素" name="data[food]" id="veg" />
+            <label for="veg">素</label>
+        </div>
+        <div class="user-box">
+            <input type="text" name="data[]" required="" />
+            <label>特殊飲食習慣 (如: 不吃香菜)</label>
+        </div>
+        <div class="user-box">
+            <input type="text" name="data[]" required="" />
+            <label>是否有特殊疾病</label>
+        </div>
+        <div class="radio-box">
+            <label for="">是否參與住宿</label>
+            <input type="radio" value="是" name="data[live]" checked />
+            <label for="live">是，強制</label>
+        </div>
+        <div class="user-box">
+            <input type="text" name="data[]" required="" />
+            <label>團體優惠碼</label>
+        </div>
+        
+        <a>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <input type="submit" value="送出">
+        </a>
     </form>
-    <script>
-        document.getElementById("checkCoupon").addEventListener("click", () => {
-            fetch("/getCoupon", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "text/plain",
-                },
-                body: document.getElementById("coupon").value
-            }).then(response => {
+</main>
+
+<script>
+    document.getElementById("checkCoupon").addEventListener("click", () => {
+        fetch("/getCoupon", {
+            method: "POST",
+            headers: {
+                "Content-Type": "text/plain",
+            },
+            body: document.getElementById("coupon").value,
+        })
+            .then(response => {
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
                 }
                 return response.text();
             })
-                .then(responseText => {
-                    if (responseText == "True") {
-                        document.getElementById("checkCoupon").innerHTML  = "✔️團報碼驗證可用"
-                    } else {
-                        document.getElementById("checkCoupon").innerHTML  = "❌團報碼驗證不可用"
-                    }
-                    console.log("Response text:", responseText);
-                })
-                .catch(error => {
-                    alert("Error:", error);
-                });
-        })
-    </script>
-</body>
-
-</html>
+            .then(responseText => {
+                if (responseText == "True") {
+                    document.getElementById("checkCoupon").innerHTML =
+                        "✔️團報碼驗證可用";
+                } else {
+                    document.getElementById("checkCoupon").innerHTML =
+                        "❌團報碼驗證不可用";
+                }
+                console.log("Response text:", responseText);
+            })
+            .catch(error => {
+                alert("Error:", error);
+            });
+    });
+</script>
+{% endblock %}

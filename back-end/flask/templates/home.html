@@ -4,7 +4,15 @@
 
 {% extends 'base.html' %} {% block title %}登入{% endblock %} {% block content
 %}
-
+<nav>
+    <a href="/"> <img src="/static/logo.svg" alt="" /></a>
+    <ul>
+        <li>
+            <div class="current"><a href="">登入查詢</a></div>
+        </li>
+        <li><a href="sign">立即報名</a></li>
+    </ul>
+</nav>
 <main>
     <h1>登入</h1>
     <h2>查詢繳費狀態及活動行前通知</h2>
@@ -17,12 +25,12 @@
             <input type="password" name="password" required="" />
             <label>密碼</label>
         </div>
-        <a href="#">
+        <a>
             <span></span>
             <span></span>
             <span></span>
             <span></span>
-            登入
+            <input type="submit" value="送出">
         </a>
     </form>
 </main>
