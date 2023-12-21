@@ -72,8 +72,6 @@ def getUserLastStep(conn:Connection, cursor:Cursor,UserID:str) -> list:
     results = cursor.fetchall()
     return list(results)
 
-print(getUserLastStep("7d736650-a4d9-45a9-a785-11a53b6d2270"))
-
 @Client
 def getUserStatus(conn:Connection, cursor:Cursor,UserID:str) -> bool:
     cursor.execute("SELECT adminCheck,maintenance,consentID,isPaid FROM DATA WHERE UserID = ?",(UserID,))
@@ -84,6 +82,14 @@ def getUserStatus(conn:Connection, cursor:Cursor,UserID:str) -> bool:
     # print(results)
     # return not("" in results)
 
+@Client
+def checkUserExist(conn:Connection, cursor:Cursor,email:str,phone:str) -> bool:
+    
+    cursor.execute(f"SELECT * FROM DATA WHERE email = ?",(email,))
+    status1 = cursor.fetchall()
+    cursor.execute(f"SELECT * FROM DATA WHERE phone = ?",(phone,))
+    status2 = cursor.fetchall()
+    return bool(len(status1)) or bool(len(status2))
 @Client
 def createUser(conn:Connection, cursor:Cursor,Data:list) -> bool: #創建用戶
     if isUserMail(Data[2])[0] == True:
@@ -126,10 +132,16 @@ def updateUserData(conn:Connection, cursor:Cursor,UserID:str,Data:list) -> bool:
 
 
 @Client
-def signConsent(conn:Connection, cursor:Cursor,userID:str,consentID:Literal[0, 1]) -> bool:
-    cursor.execute(f"UPDATE DATA SET consentID = {consentID} WHERE UserID = ?",(userID,))
+def signConsent(conn:Connection, cursor:Cursor,userID:str,consentID:Literal[0, 1],signData:str) -> bool:
+    if consentID == 0:
+        cursor.execute("UPDATE DATA SET consentID = ? WHERE UserID = ?", (str(signData), str(userID)))
+    elif consentID == 1:
+        cursor.execute("UPDATE DATA SET maintenance = ? WHERE UserID = ?", (str(signData), str(userID)))
+    else:
+        return False
     conn.commit()
     return True
+
 
 
 @Client
@@ -153,7 +165,7 @@ def isPasswordCorrect(conn:Connection , cursor:Cursor,userID:str,password:str) -
     
 @Admin
 def isAdminPasswordCorrect(conn:Connection , cursor:Cursor,account:str,password:str) -> bool:
-    cursor.execute(f"SELECT password FROM DATA WHERE account = '{account}'")
+    cursor.execute("SELECT password FROM DATA WHERE account = ?",(account,))
     results = cursor.fetchall()
     if results[0][0] == password:
         return True
@@ -163,13 +175,13 @@ def isAdminPasswordCorrect(conn:Connection , cursor:Cursor,account:str,password:
 
 @Client
 def userPay(conn:Connection, cursor:Cursor,userID:str) -> bool:
-    cursor.execute(f"UPDATE DATA SET isPaid = True WHERE UserID = ?",(userID,))
+    cursor.execute("UPDATE DATA SET isPaid = True WHERE UserID = ?",(userID,))
     conn.commit()
     return True
 
 @Client
 def checkCoupon(conn:Connection, cursor:Cursor,inputCoupon) -> bool:
-    cursor.execute(f"SELECT coupon FROM DATA")
+    cursor.execute("SELECT coupon FROM DATA")
     results = cursor.fetchall()
     coupons = [result[0] for result in results]
     return inputCoupon in coupons
