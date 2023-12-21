@@ -11,6 +11,7 @@ body {
     min-height: 100svh;
     display: flex;
     align-items: center;
+    flex-direction: column;
     padding-top: 3rem;
 }
 
@@ -252,4 +253,26 @@ nav .current a:before {
 }
 .shirt{
     width: 100%;
+}
+
+footer {
+    text-align: center;
+    color: #FFF;
+    padding: 2rem;
+    line-height: 1.5;
+    background-color: #262626;
+    width: 100%;
+}
+footer a {
+    text-decoration: none;
+    color: #fff;
+}
+footer a:hover {
+    text-decoration: underline;
+}
+.scaict-logo {
+    height: 2rem;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 1rem;
 }

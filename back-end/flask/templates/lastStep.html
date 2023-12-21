@@ -136,6 +136,27 @@
             .finished {
                 text-align: center;
             }
+            footer {
+                text-align: center;
+                color: #fff;
+                padding: 2rem;
+                line-height: 1.5;
+                background-color: #262626;
+                width: 100%;
+            }
+            footer a {
+                text-decoration: none;
+                color: #fff;
+            }
+            footer a:hover {
+                text-decoration: underline;
+            }
+            .scaict-logo {
+                height: 2rem;
+                display: block;
+                margin: 0 auto;
+                margin-bottom: 1rem;
+            }
         </style>
         <!-- Google tag (gtag.js) -->
         <script
@@ -195,14 +216,20 @@
                 以下是你的個人專屬優惠碼，你的朋友使用即可優惠 100
                 元。快邀請他們一起參加吧!
             </p>
-            <p>
-                !!專屬優惠碼將於繳費完成後生成!!
-            </p>
-            <div class="accout">
-                {{coupon}}
-            </div>
+            <p>!!專屬優惠碼將於繳費完成後生成!!</p>
+            <div class="accout">{{coupon}}</div>
         </main>
-
+        <footer>
+            <img src="/static/scaict.svg" alt="" class="scaict-logo" />
+            © 2023 中部高中電資社團聯合會議 All Rights Reserved<br />
+            若有任何問題歡迎聯絡我們<br />
+            <a href="https://www.facebook.com/scaict.tw/">Facebook</a> ·
+            <a href="https://www.instagram.com/scaict.2024_wintercamp/"
+                >Instagram</a
+            >
+            ·
+            <a href="https://scaict.org/">中電會官網</a>
+        </footer>
         <script>
             document
                 .getElementById("finish-pay")
