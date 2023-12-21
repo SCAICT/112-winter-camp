@@ -1,3 +1,5 @@
+<!-- @format -->
+
 <!-- 
     家長同意書SAMPLE
 -->
@@ -10,7 +12,53 @@
             name="viewport"
             content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
-        <title>{% block title %}家長通知書暨家長同意書{% endblock %}</title>
+        <title>
+            {% block title %}家長通知書暨家長同意書 | 知資為資知 -
+            2024中部電資聯合寒訓{% endblock %}
+        </title>
+        <meta
+            name="description"
+            content="中部高中電資社團聯合會議（SCAICT）誠摯邀請各位學生踏上一場超炫的寒假營隊之旅！我們不僅讓你在歡笑聲中度過難忘時光，更將帶給你資訊領域的絕佳學習機會，激發對科技的無限熱情，開啟個人興趣的探索之旅。"
+        />
+        <meta name="author" content="SCAICT" />
+        <meta
+            name="keywords"
+            content="中電會聯合寒訓, 中部電資社團聯合會議, 中電會, SCAICT"
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="知資為資知 - 2024中部電資聯合寒訓" />
+        <meta property="og:url" content="https://wc.scaict.org" />
+        <meta
+            property="og:site_name"
+            content="知資為資知 - 2024中部電資聯合寒訓"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/static/icon/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/static/icon/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/static/icon/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/static/icon/site.webmanifest" />
+        <link rel="shortcut icon" href="/static/icon/favicon.ico" />
+        <meta name="apple-mobile-web-app-title" content="知資為資知" />
+        <meta name="application-name" content="知資為資知" />
+        <meta name="msapplication-TileColor" content="#2d89ef" />
+        <meta
+            name="msapplication-config"
+            content="/static/icon/browserconfig.xml"
+        />
+        <meta name="theme-color" content="#69c5d6" />
         <style>
             * {
                 margin: 0;
@@ -92,16 +140,29 @@
                 margin: 0 auto;
                 margin-bottom: 3rem;
             }
-            ul{
+            ul {
                 list-style: none;
                 margin-left: 1em;
             }
         </style>
+        <!-- Google tag (gtag.js) -->
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-F4MZSTYBW8"
+        ></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", "G-F4MZSTYBW8");
+        </script>
     </head>
 
     <body>
-        {% block agreement1 %}{% endblock %}
-        {% block agreement2 %}{% endblock %}
+        {% block agreement1 %}{% endblock %} {% block agreement2 %}{% endblock
+        %}
 
         <section id="sign">
             <canvas id="drawingCanvas"></canvas>
