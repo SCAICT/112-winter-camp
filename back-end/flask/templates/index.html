@@ -278,6 +278,8 @@
             }
             .more-space {
                 visibility: hidden;
+                opacity: 0;
+                transition: opacity 0.3s ease;
             }
             #location {
                 background: url(/static/東海.webp) no-repeat center center;
@@ -669,6 +671,7 @@
                 if (andRect.top < 0 && andRect.top > -andRect.height) {
                     fixedAnd.style.display = "flex";
                     document.querySelector("main").style.visibility = "hidden";
+                    fixedAnd.style.opacity = 1;
                     var lineHeight = document
                         .querySelector(".more-box")
                         .getBoundingClientRect().height;
@@ -693,8 +696,11 @@
                             "url(/static/lab.webp) no-repeat center center";
                     }
                 } else {
-                    fixedAnd.style.display = "none";
+                    fixedAnd.style.opacity = 0;
                     document.querySelector("main").style.visibility = "visible";
+                    setTimeout(function () {
+                        fixedAnd.style.display = "none";
+                    }, 300);    
                     if (location.getBoundingClientRect().bottom > 0) {
                         var percent =
                             1 -
