@@ -8,11 +8,54 @@
     
 -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>還差最後一步 | 知資為資知 - 2024中部電資聯合寒訓</title>
+        <meta
+            name="description"
+            content="中部高中電資社團聯合會議（SCAICT）誠摯邀請各位學生踏上一場超炫的寒假營隊之旅！我們不僅讓你在歡笑聲中度過難忘時光，更將帶給你資訊領域的絕佳學習機會，激發對科技的無限熱情，開啟個人興趣的探索之旅。"
+        />
+        <meta name="author" content="SCAICT" />
+        <meta
+            name="keywords"
+            content="中電會聯合寒訓, 中部電資社團聯合會議, 中電會, SCAICT"
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="知資為資知 - 2024中部電資聯合寒訓" />
+        <meta property="og:url" content="https://wc.scaict.org" />
+        <meta
+            property="og:site_name"
+            content="知資為資知 - 2024中部電資聯合寒訓"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/static/icon/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/static/icon/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/static/icon/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/static/icon/site.webmanifest" />
+        <link rel="shortcut icon" href="/static/icon/favicon.ico" />
+        <meta name="apple-mobile-web-app-title" content="知資為資知" />
+        <meta name="application-name" content="知資為資知" />
+        <meta name="msapplication-TileColor" content="#2d89ef" />
+        <meta
+            name="msapplication-config"
+            content="/static/icon/browserconfig.xml"
+        />
+        <meta name="theme-color" content="#69c5d6" />
         <style>
             * {
                 margin: 0;
@@ -93,7 +136,41 @@
             .finished {
                 text-align: center;
             }
+            footer {
+                text-align: center;
+                color: #fff;
+                padding: 2rem;
+                line-height: 1.5;
+                background-color: #262626;
+                width: 100%;
+            }
+            footer a {
+                text-decoration: none;
+                color: #fff;
+            }
+            footer a:hover {
+                text-decoration: underline;
+            }
+            .scaict-logo {
+                height: 2rem;
+                display: block;
+                margin: 0 auto;
+                margin-bottom: 1rem;
+            }
         </style>
+        <!-- Google tag (gtag.js) -->
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-F4MZSTYBW8"
+        ></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", "G-F4MZSTYBW8");
+        </script>
     </head>
     <body>
         <main>
@@ -109,11 +186,13 @@
                 🟠管理者正在幫你確認 {% endif %} {% else %} ❌繳費 {% endif %}
             </h4>
             <p>
-                請將報名費 4300元轉帳至以下帳號，並於轉帳完成請點擊驗證案紐，我們會盡快幫您確認。( 請確認完成付款再點擊 )
-                <br>
-                若有優惠碼可減少 100 元。
+                請將報名費
+                4300元新台幣轉帳至以下帳號，並於轉帳完成請點擊驗證案紐，我們會盡快幫您確認。(
+                請確認完成付款再點擊 )
+                <br />
+                若有優惠碼可減少 100元 (4200元新台幣)。
             </p>
-            <div class="accout">(812) 288101565685</div>
+            <div class="accout">(013) 218700490870</div>
             <div class="finished">
                 {% if isPaid %} 已繳費 {% else %}
                 <button id="finish-pay">我已完成付款</button>
@@ -121,7 +200,7 @@
                 {% endif %}
             </div>
             <h3>家長同意書</h3>
-            <p>請家長協助做填寫</p>
+            <p>請家長協助做線上簽名</p>
             <div class="agreement">
                 <h4>
                     {% if consent %} ✔️ {% else %} ❌ {% endif %} 家長同意書
@@ -138,14 +217,20 @@
                 以下是你的個人專屬優惠碼，你的朋友使用即可優惠 100
                 元。快邀請他們一起參加吧!
             </p>
-            <p>
-                !!專屬優惠碼將於繳費完成後生成!!
-            </p>
-            <div class="accout">
-                {{coupon}}
-            </div>
+            <p>!!專屬優惠碼將於繳費完成後生成!!</p>
+            <div class="accout">{{coupon}}</div>
         </main>
-
+        <footer>
+            <img src="/static/scaict.svg" alt="" class="scaict-logo" />
+            © 2023 中部高中電資社團聯合會議 All Rights Reserved<br />
+            若有任何問題歡迎聯絡我們<br />
+            <a href="https://www.facebook.com/scaict.tw/">Facebook</a> ·
+            <a href="https://www.instagram.com/scaict.2024_wintercamp/"
+                >Instagram</a
+            >
+            ·
+            <a href="https://scaict.org/">中電會官網</a>
+        </footer>
         <script>
             document
                 .getElementById("finish-pay")
