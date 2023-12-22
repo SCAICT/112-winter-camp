@@ -62,6 +62,7 @@ def getUserData(conn:Connection, cursor:Cursor,UserID:str) -> list: #ç”¨userIDæŸ
     results = cursor.fetchall()
     return list(results)
 
+
 @Client
 def getUserLastStep(conn:Connection, cursor:Cursor,UserID:str) -> list: 
     """
@@ -77,10 +78,15 @@ def getUserStatus(conn:Connection, cursor:Cursor,UserID:str) -> bool:
     cursor.execute("SELECT adminCheck,maintenance,consentID,isPaid FROM DATA WHERE UserID = ?",(UserID,))
     try:
         results = cursor.fetchall()[0]
+        if "" in results or 0 in results:
+            return False
+        else:
+            return True
     except:
         return False
     # print(results)
     # return not("" in results)
+
 
 @Client
 def checkUserExist(conn:Connection, cursor:Cursor,email:str,phone:str) -> bool:
@@ -174,8 +180,27 @@ def isAdminPasswordCorrect(conn:Connection , cursor:Cursor,account:str,password:
 
 
 @Client
-def userPay(conn:Connection, cursor:Cursor,userID:str) -> bool:
+def userPay(conn:Connection, cursor:Cursor,userID:str,timestamp:str) -> bool:
     cursor.execute("UPDATE DATA SET isPaid = True WHERE UserID = ?",(userID,))
+    cursor.execute("UPDATE DATA SET updateTime = ? WHERE UserID = ?",(timestamp,userID,))
+    conn.commit()
+    return True
+
+
+@Client
+def checkUserPay(conn:Connection, cursor:Cursor,userID:str) -> bool:
+    cursor.execute("UPDATE DATA SET adminCheck = True WHERE UserID = ?",(userID,))
+    conn.commit()
+    return True
+
+@Client
+def setUserCoupon(conn:Connection, cursor:Cursor,userID:str,data:str) -> bool:
+    cursor.execute("SELECT coupon FROM DATA WHERE UserID = ?",(userID,))
+    result = cursor.fetchone()
+    if result[0] != "":
+        pass
+    else :
+        cursor.execute("UPDATE DATA SET coupon = ? WHERE UserID = ?",(data,userID,))
     conn.commit()
     return True
 
@@ -185,6 +210,16 @@ def checkCoupon(conn:Connection, cursor:Cursor,inputCoupon) -> bool:
     results = cursor.fetchall()
     coupons = [result[0] for result in results]
     return inputCoupon in coupons
+
+print(checkCoupon(inputCoupon="M9CUXT"))
+
+
+@Client
+def FinishGetCoupon(conn:Connection, cursor:Cursor,UserID:str) -> str:
+    cursor.execute("SELECT coupon FROM DATA WHERE UserID = ?",(UserID,))
+    result = cursor.fetchone()[0]
+    return result
+
 
 @Client
 def getAllStudent(conn:Connection, cursor:Cursor)->list:

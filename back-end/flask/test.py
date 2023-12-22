@@ -1,17 +1,22 @@
-import re
+import pytz
+from datetime import datetime
 
-def is_email(input_str):
-    # 定義電子郵件地址的正規表達式
-    email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
-    return re.match(email_pattern, input_str) is not None
-def is_phone_number(input_str):
-    # 定義電話號碼的正規表達式
-    phone_pattern = r'\b\d{4}[-.\s]?\d{3}[-.\s]?\d{3}\b'
-    
-    # 移除字串中的空格，只保留數字和可能的分隔符
-    cleaned_input = re.sub(r'[^\d.-]', '', input_str)
-    # 檢測是否符合正規表達式
-    return re.match(phone_pattern, cleaned_input) is not None
+# 假設有一個已有的時間戳 timestamp
+timestamp = 1609459200  # 這裡使用一個示例時間戳
 
-# 測試
-print(is_email("a0909.956502@hotmail.com"))
+# 將時間戳轉換為 datetime 對象，假設原本是在 UTC 時區
+dt_object_utc = datetime.utcfromtimestamp(timestamp)
+
+# 設定所需的目標時區，這裡是 'Asia/Taipei'
+desired_timezone = pytz.timezone('Asia/Taipei')
+
+# 使用目標時區設定 datetime 對象
+dt_object_with_desired_timezone = dt_object_utc.replace(tzinfo=pytz.utc).astimezone(desired_timezone)
+
+# 將調整後的 datetime 對象轉換回時間戳
+adjusted_timestamp = int(dt_object_with_desired_timezone.timestamp())
+
+# 打印結果
+print("原始時間戳:", timestamp)
+print("目標時區時間:", dt_object_with_desired_timezone)
+print("調整後的時間戳:", adjusted_timestamp)
