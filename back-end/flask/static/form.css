@@ -16,7 +16,8 @@ body {
 }
 
 main {
-    width: 400px;
+    max-width: 400px;
+    width: 100%;
     padding: 40px;
     /* background: rgba(4, 40, 85, 0.5); */
     margin: auto;
@@ -104,17 +105,16 @@ main a span:nth-child(1) {
     background: linear-gradient(90deg, transparent, #03e9f4);
     animation: btn-anim1 1s linear infinite;
 }
-input[type="submit"]{
-  
-  color:#FFF;
-  width:100%;
-  height:100%;
-  background: transparent;
-  border:none;
-  outline:transparent;
+input[type="submit"] {
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: transparent;
 }
-input[type="submit"]:hover{
-color: #FFF;
+input[type="submit"]:hover {
+    color: #fff;
 }
 @keyframes btn-anim1 {
     0% {
@@ -135,18 +135,18 @@ main a span:nth-child(2) {
     animation: btn-anim2 1s linear infinite;
     animation-delay: 0.25s;
 }
-.radio-box{
-  color:#FFF;
-  padding: 10px 0;
-  margin-bottom: 30px;
+.radio-box {
+    color: #fff;
+    padding: 10px 0;
+    margin-bottom: 30px;
 }
-.radio-box>label:first-child{
-  display: block;
-  margin-bottom: 10px;
+.radio-box > label:first-child {
+    display: block;
+    margin-bottom: 10px;
 }
-.radio-box>label{
-  display: inline-block;
-  margin-right: 10px;
+.radio-box > label {
+    display: inline-block;
+    margin-right: 10px;
 }
 
 @keyframes btn-anim2 {
@@ -208,7 +208,7 @@ nav {
     align-items: center;
     padding: 3rem;
     z-index: 10;
-    top:0;
+    top: 0;
 }
 nav ul {
     display: flex;
@@ -251,13 +251,13 @@ nav .current a:before {
     left: 0;
     right: 0;
 }
-.shirt{
+.shirt {
     width: 100%;
 }
 
 footer {
     text-align: center;
-    color: #FFF;
+    color: #fff;
     padding: 2rem;
     line-height: 1.5;
     background-color: #262626;
@@ -275,4 +275,16 @@ footer a:hover {
     display: block;
     margin: 0 auto;
     margin-bottom: 1rem;
+}
+
+@media (max-width: 600px) {
+    nav ul {
+        gap: 10px;
+        margin-left: 1rem;
+    }
+}
+@media (max-width: 400px) {
+    nav ul {
+        gap: 5px;
+    }
 }
