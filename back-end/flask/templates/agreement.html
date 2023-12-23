@@ -187,7 +187,6 @@
                 document.getElementById("sign").style.display = "block";
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
-
                 canvas.addEventListener("mousedown", startDrawing);
                 canvas.addEventListener("touchstart", startDrawing);
                 canvas.addEventListener("mousemove", draw);
@@ -195,6 +194,8 @@
                 canvas.addEventListener("mouseup", stopDrawing);
                 canvas.addEventListener("touchend", stopDrawing);
                 canvas.addEventListener("mouseout", stopDrawing);
+                ctx.fillStyle = "#fff";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
             };
             function startDrawing(e) {
                 e.preventDefault();
@@ -215,6 +216,8 @@
                     e.clientY || e.touches[0].clientY
                 );
                 ctx.lineWidth = 5;
+                ctx.lineCap = "round";
+                ctx.strokeStyle = "#000";
                 ctx.stroke();
                 [lastX, lastY] = [
                     e.clientX || e.touches[0].clientX,
@@ -228,10 +231,12 @@
 
             function undo() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = "#fff";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
             }
 
             function sendImage() {
-                const imageData = canvas.toDataURL();
+                const imageData = canvas.toDataURL("image/jpeg", 0.5);
                 console.log(imageData);
                 fetch("/sendSign", {
                     method: "POST",
