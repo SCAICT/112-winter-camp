@@ -138,6 +138,13 @@
                                 >
                                     查詢
                                 </button>
+                                <button
+                                    id="sendEmail"
+                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-full text-xs"
+                                    onclick="sendEmail('{{d[0]}}')"
+                                >
+                                    繳費成功 Email
+                                </button>
                             </td>
                         </tr>
                         {% endfor %}
@@ -261,74 +268,74 @@
                             .removeAttr("onclick")
                             .attr("onclick", `payCheck(\"${data[0]}\")`);
                         Modal.find(".modal-body").html(`
-                <div class="modal-grid grid grid-cols-2 gap-4 text-black dark:text-white">
-                    <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">報名時間:</span> <span class="font-bold">${
-                        data[20]
-                    }</span></div>
-                    <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">姓名:</span> <span class="font-bold">${
-                        data[1]
-                    }</span></div>
-                    <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">Email:</span> <span class="font-bold">${
-                        data[2]
-                    }</span></div>
-                    <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">學校:</span> <span class="font-bold">${
-                        data[3]
-                    }</span></div>
-                    <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">住家地址:</span> <span class="font-bold">${
-                        data[4]
-                    }</span></div>
-                    <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">社團:</span> <span class="font-bold">${
-                        data[5]
-                    }</span></div>
-                    <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">密碼:</span> <span class="font-bold">${
-                        data[6]
-                    }</span></div>
-                    <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">電話:</span> <span class="font-bold">${
-                        data[7]
-                    }</span></div>
-                    <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">性別:</span> <span class="font-bold">${
-                        data[8]
-                    }</span></div>
-                    <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">身分證字號:</span> <span class="font-bold">${
-                        data[9]
-                    }</span></div>
-                    <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">生日:</span> <span class="font-bold">${
-                        data[10]
-                    }</span></div>
-                    <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">聯絡人姓名:</span> <span class="font-bold">${
-                        data[11]
-                    }</span></div>
-                    <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">聯絡人關係:</span> <span class="font-bold">${
-                        data[12]
-                    }</span></div>
-                    <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">聯絡人電話:</span> <span class="font-bold">${
-                        data[13]
-                    }</span></div>
-                    <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">衣服尺寸:</span> <span class="font-bold">${
-                        data[14]
-                    }</span></div>
-                    <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">飲食:</span> <span class="font-bold">${
-                        data[15]
-                    }</span></div>
-                    <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">特殊飲食習慣:</span> <span class="font-bold">${
-                        data[16]
-                    }</span></div>
-                    <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">特殊疾病:</span> <span class="font-bold">${
-                        data[17]
-                    }</span></div>
-                    <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">團報優惠碼:</span> <span class="font-bold">${
-                        data[19]
-                    }</span></div>
-                    <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">繳費狀態:</span> <span class="font-bold">${
-                        data[21] == "1" ? "已繳費" : "尚未繳費"
-                    }</span></div>
-                    <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">繳費時間:</span> <span class="font-bold">${
-                        data[21] == "1" ? data[24] : "尚未繳費"
-                    }</span></div>
-                    <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400"></span></div>
-                    <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">家長同意書:</span></div>
-                    <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">場地切結書:</span></div>
-            `);
+                            <div class="modal-grid grid grid-cols-2 gap-4 text-black dark:text-white">
+                                <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">報名時間:</span> <span class="font-bold">${
+                                    data[20]
+                                }</span></div>
+                                <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">姓名:</span> <span class="font-bold">${
+                                    data[1]
+                                }</span></div>
+                                <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">Email:</span> <span class="font-bold">${
+                                    data[2]
+                                }</span></div>
+                                <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">學校:</span> <span class="font-bold">${
+                                    data[3]
+                                }</span></div>
+                                <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">住家地址:</span> <span class="font-bold">${
+                                    data[4]
+                                }</span></div>
+                                <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">社團:</span> <span class="font-bold">${
+                                    data[5]
+                                }</span></div>
+                                <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">密碼:</span> <span class="font-bold">${
+                                    data[6]
+                                }</span></div>
+                                <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">電話:</span> <span class="font-bold">${
+                                    data[7]
+                                }</span></div>
+                                <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">性別:</span> <span class="font-bold">${
+                                    data[8]
+                                }</span></div>
+                                <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">身分證字號:</span> <span class="font-bold">${
+                                    data[9]
+                                }</span></div>
+                                <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">生日:</span> <span class="font-bold">${
+                                    data[10]
+                                }</span></div>
+                                <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">聯絡人姓名:</span> <span class="font-bold">${
+                                    data[11]
+                                }</span></div>
+                                <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">聯絡人關係:</span> <span class="font-bold">${
+                                    data[12]
+                                }</span></div>
+                                <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">聯絡人電話:</span> <span class="font-bold">${
+                                    data[13]
+                                }</span></div>
+                                <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">衣服尺寸:</span> <span class="font-bold">${
+                                    data[14]
+                                }</span></div>
+                                <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">飲食:</span> <span class="font-bold">${
+                                    data[15]
+                                }</span></div>
+                                <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">特殊飲食習慣:</span> <span class="font-bold">${
+                                    data[16]
+                                }</span></div>
+                                <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">特殊疾病:</span> <span class="font-bold">${
+                                    data[17]
+                                }</span></div>
+                                <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">團報優惠碼:</span> <span class="font-bold">${
+                                    data[19]
+                                }</span></div>
+                                <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">繳費狀態:</span> <span class="font-bold">${
+                                    data[21] == "1" ? "已繳費" : "尚未繳費"
+                                }</span></div>
+                                <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">繳費時間:</span> <span class="font-bold">${
+                                    data[21] == "1" ? data[24] : "尚未繳費"
+                                }</span></div>
+                                <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400"></span></div>
+                                <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">家長同意書:</span></div>
+                                <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">場地切結書:</span></div>
+                        `);
                         if (data[21]) {
                             Modal.find(".paycheck-btn").prop("disabled", false);
                         } else {
@@ -360,6 +367,115 @@
                     })
                     .catch(error => {
                         alert("Error:", error);
+                    });
+            };
+
+            const sendEmail = userID => {
+                var sendEmailElement = document.getElementById("sendEmail");
+                sendEmailElement.disabled = true;
+                sendEmailElement.innerText = "資料獲取中...";
+                fetch("/admin/getStudentData", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "text/plain",
+                    },
+                    body: userID,
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("Network response was not ok");
+                        }
+                        return response.text();
+                    })
+                    .then(responseText => {
+                        data = JSON.parse(responseText);
+                        dataHTML = `<table>
+              <tbody>
+               <tr>
+                  <td>
+            報名時間:</td><td>
+            ${data[20]}</td></tr><tr><td>
+            姓名:</td><td>
+            ${data[1]}</td></tr><tr><td>
+            Email:</td><td>
+            ${data[2]}</td></tr><tr><td>
+            學校:</td><td>
+            ${data[3]}</td></tr><tr><td>
+            住家地址:</td><td>
+            ${data[4]}</td></tr><tr><td>
+            社團:</td><td>
+            ${data[5]}</td></tr><tr><td>
+            密碼:</td><td>
+            ${data[6]}</td></tr><tr><td>
+            電話:</td><td>
+            ${data[7]}</td></tr><tr><td>
+            性別:</td><td>
+            ${data[8]}</td></tr><tr><td>
+            身分證字號:</td><td>
+            ${data[9]}</td></tr><tr><td>
+            生日:</td><td>
+            ${data[10]}</td></tr><tr><td>
+            聯絡人姓名:</td><td>
+            ${data[11]}</td></tr><tr><td>
+            聯絡人關係:</td><td>
+            ${data[12]}</td></tr><tr><td>
+            聯絡人電話:</td><td>
+            ${data[13]}</td></tr><tr><td>
+            衣服尺寸:</td><td>
+            ${data[14]}</td></tr><tr><td>
+            飲食:</td><td>
+            ${data[15]}</td></tr><tr><td>
+            特殊飲食習慣:</td><td>
+            ${data[16]}</td></tr><tr><td>
+            特殊疾病:</td><td>
+            ${data[17]}</td></tr><tr><td>
+            團報優惠碼:</td><td>
+            ${data[19]}</td></tr><tr><td>
+            繳費狀態:</td><td>
+            ${data[21] == "1" ? "已繳費" : "尚未繳費"}
+            </td></tr><tr><td>
+            繳費時間:</td><td>
+            ${data[24]}</td></tr>
+              </tbody>
+            </table>`;
+                        sendEmailElement.innerText = "發送中...";
+                        console.log({
+                            mail: data[2],
+                            student: data[1],
+                            data: dataHTML,
+                        });
+
+                        fetch(
+                            "https://script.google.com/macros/s/AKfycbw_wzOe2mKrRWE54Id90tg6SQ0luU-JhRH0ji3qL99w4_OzigrVIWseMYzjUADFCwqs/exec?mail=" +
+                                data[2] +
+                                "&student=" +
+                                data[1] +
+                                "&data=" +
+                                encodeURI(dataHTML),
+                            {
+                                redirect: "follow",
+                                method: "GET",
+                                // body: JSON.stringify({
+                                //     mail: data[2],
+                                //     student: data[1],
+                                //     data: encodeURI(dataHTML),
+                                // }),
+                                headers: {
+                                    "Content-Type": "text/plain;charset=utf-8",
+                                },
+                                mode: "no-cors"
+                            }
+                        )
+                            .then(data => {
+                                console.log(data);
+                                sendEmailElement.disabled = false;
+                                sendEmailElement.innerText = "發送成功";
+                            })
+                            .catch(error => {
+                                console.error("Error:", error);
+                                sendEmailElement.disabled = false;
+                                sendEmailElement.innerText = "發送失敗";
+                            });
                     });
             };
         </script>

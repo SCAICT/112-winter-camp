@@ -161,10 +161,10 @@
                 text-decoration: none;
                 padding: 1rem;
                 border: #fff solid 2px;
-                transition: transform 0.2s ease-out;
+                transition: transform 0.2s ease-out !important;
                 width: fit-content;
             }
-            .signUp:hover {
+            .slideIn.ed:hover {
                 transform: translateY(-0.25rem);
             }
             .signUp:active {
@@ -399,10 +399,10 @@
                 opacity: 1;
                 transition: opacity 3s;
             }
-            .lines{
+            .lines {
                 position: relative;
             }
-            .lines::before{
+            .lines::before {
                 content: "";
                 position: absolute;
                 top: 2rem;
@@ -702,7 +702,7 @@
                     document.querySelector("main").style.visibility = "visible";
                     setTimeout(function () {
                         fixedAnd.style.display = "none";
-                    }, 300);    
+                    }, 300);
                     if (location.getBoundingClientRect().bottom > 0) {
                         var percent =
                             1 -
