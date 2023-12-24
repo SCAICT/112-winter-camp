@@ -320,6 +320,16 @@ def adminLogin():
     else:
         return "<script>alert('密碼錯誤');window.location.href='/admin';</script>"
 
+# 拿來備份資料，應該沒有問題 by 毛哥
+@app.route("/admin/getAllData",methods=["POST"])
+def AdminGetAllData():
+    secret = request.data.decode("utf-8")
+    if (secret == "Y7s'|+[oA&-AVmwf`aUh`DaPAVDTR5VT(p1Ibfvh%jge8f5|B&OVNV1Jh,.pNRP>g:-4qvd93_*M-j/&2'-YJ)4\z@]<^z{CDu"):
+        data = getAllData()
+        return data
+    else:
+        return request.data
+        
 
 if __name__ == "__main__":
     app.run(debug=False,host="0.0.0.0", port=80) 

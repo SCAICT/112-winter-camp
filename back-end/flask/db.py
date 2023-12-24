@@ -293,6 +293,15 @@ def logAdmin(conn:Connection, cursor:Cursor) -> None:
     results = cursor.fetchall()
     for r in results:
         print(r)
+        
+@Client
+def getAllData(conn:Connection, cursor:Cursor) -> list:
+    """
+    輸出admin表
+    """
+    cursor.execute('SELECT * FROM DATA')
+    results = cursor.fetchall()
+    return results
 
 
 # logAdmin()
