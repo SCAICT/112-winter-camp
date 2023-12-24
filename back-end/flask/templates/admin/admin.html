@@ -139,7 +139,7 @@
                                     查詢
                                 </button>
                                 <button
-                                    id="sendEmail"
+                                    id="sendEmail-{{d[0]}}"
                                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-full text-xs"
                                     onclick="sendEmail('{{d[0]}}')"
                                 >
@@ -371,7 +371,7 @@
             };
 
             const sendEmail = userID => {
-                var sendEmailElement = document.getElementById("sendEmail");
+                var sendEmailElement = document.getElementById("sendEmail-"+userID);
                 sendEmailElement.disabled = true;
                 sendEmailElement.innerText = "資料獲取中...";
                 fetch("/admin/getStudentData", {
