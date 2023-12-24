@@ -371,9 +371,7 @@
             };
 
             const sendEmail = userID => {
-                var sendEmailElement = document.getElementById(
-                    "sendEmail-" + userID
-                );
+                var sendEmailElement = document.getElementById("sendEmail-"+userID);
                 sendEmailElement.disabled = true;
                 sendEmailElement.innerText = "資料獲取中...";
                 fetch("/admin/getStudentData", {
@@ -446,14 +444,9 @@
                             student: data[1],
                             data: dataHTML,
                         });
-                        // 新增這段程式碼來創建警告框
-                        if (!confirm("你確定要發送至" +data[2] +"嗎？")) {
-                            sendEmailElement.innerText = "發送取消";
-                            sendEmailElement.disabled = false;
-                            return;
-                        }
+
                         fetch(
-                            "https://aaascript.google.com/macros/s/AKfycbw_wzOe2mKrRWE54Id90tg6SQ0luU-JhRH0ji3qL99w4_OzigrVIWseMYzjUADFCwqs/exec?mail=" +
+                            "https://script.google.com/macros/s/AKfycbw_wzOe2mKrRWE54Id90tg6SQ0luU-JhRH0ji3qL99w4_OzigrVIWseMYzjUADFCwqs/exec?mail=" +
                                 data[2] +
                                 "&student=" +
                                 data[1] +
@@ -470,7 +463,7 @@
                                 headers: {
                                     "Content-Type": "text/plain;charset=utf-8",
                                 },
-                                mode: "no-cors",
+                                mode: "no-cors"
                             }
                         )
                             .then(data => {
@@ -480,7 +473,6 @@
                             })
                             .catch(error => {
                                 console.error("Error:", error);
-                                alert("Error:", error);
                                 sendEmailElement.disabled = false;
                                 sendEmailElement.innerText = "發送失敗";
                             });
