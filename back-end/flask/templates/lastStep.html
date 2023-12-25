@@ -179,7 +179,7 @@
             <h2>尚未報名完成</h2>
             <!-- # coupon,isPaid,consentID,maintenance,adminCheck -->
             <!-- 要到是否有繳費的資料 -->
-            <a href="/logout" style="font-size:0.8rem" >登出</a>
+            <a href="/logout" style="font-size: 0.8rem;text-align: center;">(登出)</a>
             <h3>繳費狀態</h3>
             <h4>
                 {% if isPaid %} {% if adminCheck %} ✔️完成繳費 {% else %}
@@ -235,6 +235,8 @@
             document
                 .getElementById("finish-pay")
                 .addEventListener("click", () => {
+                    if (!confirm("你確定有完成繳費嗎？我們會盡快幫您確認。"))
+                        return;
                     fetch("/finishPay", {
                         method: "POST",
                         headers: {

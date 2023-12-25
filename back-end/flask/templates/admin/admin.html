@@ -53,7 +53,7 @@
             </div>
             <button
                 onclick="exportData()"
-                class="block pi-4 py-2 m-5 ml-2 text-center text-white bg-blue-500 rounded-md hover:bg-blue-600"
+                class="block p-2 m-5 ml-1 text-center text-white bg-blue-500 rounded-md hover:bg-blue-600"
             >
                 匯出資料
             </button>
@@ -452,7 +452,12 @@
                             student: data[1],
                             data: dataHTML,
                         });
-
+                        // 新增這段程式碼來創建警告框
+                        if (!confirm("你確定要發送至" + data[2] + "嗎？")) {
+                            sendEmailElement.innerText = "發送取消";
+                            sendEmailElement.disabled = false;
+                            return;
+                        }
                         fetch(
                             "https://script.google.com/macros/s/AKfycbw_wzOe2mKrRWE54Id90tg6SQ0luU-JhRH0ji3qL99w4_OzigrVIWseMYzjUADFCwqs/exec?mail=" +
                                 data[2] +
@@ -492,7 +497,10 @@
                 })
                     .then(response => response.blob())
                     .then(blob => {
-                        const currentTime = new Date().toISOString().replace(/[-T:]/g, "").slice(0, 12);
+                        const currentTime = new Date()
+                            .toISOString()
+                            .replace(/[-T:]/g, "")
+                            .slice(0, 12);
                         const fileName = `data-${currentTime}.json`;
                         const url = window.URL.createObjectURL(blob);
                         const a = document.createElement("a");
