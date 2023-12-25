@@ -157,6 +157,12 @@
                 margin: 0 auto;
                 margin-bottom: 1rem;
             }
+            .logout {
+                text-align: center;
+            }
+            .logout a:hover {
+                text-decoration: underline;
+            }
         </style>
         <!-- Google tag (gtag.js) -->
         <script
@@ -179,7 +185,7 @@
             <h2>尚未報名完成</h2>
             <!-- # coupon,isPaid,consentID,maintenance,adminCheck -->
             <!-- 要到是否有繳費的資料 -->
-            <a href="/logout" style="font-size: 0.8rem;text-align: center;">(登出)</a>
+            <div class="logout"><a href="/logout">(登出)</a></div>
             <h3>繳費狀態</h3>
             <h4>
                 {% if isPaid %} {% if adminCheck %} ✔️完成繳費 {% else %}
