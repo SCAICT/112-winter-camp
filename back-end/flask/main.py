@@ -157,7 +157,6 @@ def error():
 
 # api
 
-
 @app.route("/login", methods=["POST"])
 def login():
     # 讀取資料
@@ -231,6 +230,23 @@ def finishPay():
 
 
 @app.route("/signUp", methods=["POST"])
+def updateDCStudentCount():
+    bot_token = 'MTE4ODk4NjA0Mjg1OTE0NzM1NQ.G4PPQu.5ItJp1GyNexrh7PmkF4Z8e2kfJEq1gx95GGjx4'
+    channel_id = '1188990914488700978'
+    new_title = '報名人數：' + str(len(getAllStudent()))
+    headers = {
+        'Authorization': f'Bot {bot_token}',
+        'User-Agent': 'DiscordBot (https://wc.scaict.org, 1.0.0)'
+    }
+    url = f'https://discord.com/api/v10/channels/{channel_id}'
+    response = requests.patch(url, headers=headers, json= {
+        'name': new_title,
+    })
+    if response.status_code == 200:
+        return "OK"
+    else:
+        return (f"Failed to change the title. Status code: {response.status_code}, Response: {response.text}")
+
 def signUp():
     # userID
     uuid = [str(uuid4())]
@@ -254,9 +270,8 @@ def signUp():
     createUser(Data=result)
 
     session["userID"] = str(uuid[0])
-
+    updateDCStudentCount()
     return redirect("/lastStep")
-
 
 @app.route("/sendSign", methods=["POST"])
 def sendSign():
@@ -378,6 +393,11 @@ def AdminGetAllData():
     data = getAllData()
     return data
 
+@app.route("/admin/updateDCStudentCount")
+def update():
+    if not (adminCheck()):
+        return redirect('/admin')
+    return updateDCStudentCount()
 
 if __name__ == "__main__":
     app.run(debug=False, host="0.0.0.0", port=80)

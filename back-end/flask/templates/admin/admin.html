@@ -53,9 +53,16 @@
             </div>
             <button
                 onclick="exportData()"
-                class="block p-2 m-5 ml-1 text-center text-white bg-blue-500 rounded-md hover:bg-blue-600"
+                class="inline-block p-2 m-5 ml-1 text-center text-white bg-blue-500 rounded-md hover:bg-blue-600"
             >
                 匯出資料
+            </button>
+            <button
+                onclick="updateDCStudentCount()"
+                id="updateDC"
+                class="inline-block p-2 m-5 ml-1 text-center text-white bg-blue-500 rounded-md hover:bg-blue-600"
+            >
+                手動更新 DC 學員人數
             </button>
             <div class="relative overflow-x-auto">
                 <table
@@ -512,6 +519,28 @@
                     .catch(error => {
                         console.error("Error:", error);
                     });
+            };
+            const updateDCStudentCount = () => {
+                var updateDC = document.getElementById("updateDC");
+                updateDC.disabled = true;
+                updateDC.innerText = "更新中...";
+                if (!confirm("你確定要更新 DC 學員人數嗎？(每次學員報名時會自動更新)")) {
+                            sendEmailElement.innerText = "發送取消";
+                            sendEmailElement.disabled = false;
+                            return;
+                        }
+                fetch("/admin/updateDCStudentCount", {
+                    method: "GET",
+                }).then(response => {
+                    updateDC.disabled = false;
+                    if (!response.ok) {
+                        updateDC.innerText = "更新失敗";
+                        throw new Error("Network response was not ok");
+                    }else{
+                        updateDC.innerText = "更新成功";
+                    }
+                    console.log(response);
+                });
             };
         </script>
     </body>
