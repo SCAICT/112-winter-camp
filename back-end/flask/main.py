@@ -242,10 +242,6 @@ def updateDCStudentCount():
     response = requests.patch(url, headers=headers, json= {
         'name': new_title,
     })
-    if response.status_code == 200:
-        return "OK"
-    else:
-        return (f"Failed to change the title. Status code: {response.status_code}, Response: {response.text}")
 
 def signUp():
     # userID
