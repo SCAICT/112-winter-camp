@@ -71,9 +71,7 @@ def home():
     if checkLogin():
         debug.bg_yellow(session["userID"])
         return redirect("/lastStep")
-
     return render_template("home.html")
-
 
 @app.route("/")
 def index():
