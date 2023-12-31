@@ -53,14 +53,20 @@
             </div>
             <button
                 onclick="exportData()"
-                class="inline-block p-2 m-5 ml-1 text-center text-white bg-blue-500 rounded-md hover:bg-blue-600"
+                class="inline-block p-2 m-5 mx-1 text-center text-white bg-blue-500 rounded-md hover:bg-blue-600"
             >
-                匯出資料
+                匯出資料 (JSON)
+            </button>
+            <button
+                onclick="exportDataAsCSV()"
+                class="inline-block p-2 m-5 mx-1 text-center text-white bg-blue-500 rounded-md hover:bg-blue-600"
+            >
+                匯出資料 (CSV)
             </button>
             <button
                 onclick="updateDCStudentCount()"
                 id="updateDC"
-                class="inline-block p-2 m-5 ml-1 text-center text-white bg-blue-500 rounded-md hover:bg-blue-600"
+                class="inline-block p-2 m-5 mx-1 text-center text-white bg-blue-500 rounded-md hover:bg-blue-600"
             >
                 手動更新 DC 學員人數
             </button>
@@ -336,6 +342,9 @@
                                 <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">特殊疾病:</span> <span class="font-bold">${
                                     data[17]
                                 }</span></div>
+                                <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">是否要住宿:</span> <span class="font-bold">${
+                                    data[18]
+                                }</span></div>
                                 <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">團報優惠碼:</span> <span class="font-bold">${
                                     data[19]
                                 }</span></div>
@@ -345,7 +354,6 @@
                                 <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">繳費時間:</span> <span class="font-bold">${
                                     data[21] == "1" ? data[24] : "尚未繳費"
                                 }</span></div>
-                                <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400"></span></div>
                                 <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">家長同意書:</span></div>
                                 <div class="flex sm:items-center flex-col sm:flex-row"><span class="w-full sm:w-1/3  text-sm text-gray-400">場地切結書:</span></div>
                         `);
@@ -524,11 +532,15 @@
                 var updateDC = document.getElementById("updateDC");
                 updateDC.disabled = true;
                 updateDC.innerText = "更新中...";
-                if (!confirm("你確定要更新 DC 學員人數嗎？(每次學員報名時會自動更新)")) {
-                            sendEmailElement.innerText = "發送取消";
-                            sendEmailElement.disabled = false;
-                            return;
-                        }
+                if (
+                    !confirm(
+                        "你確定要更新 DC 學員人數嗎？(每次學員報名時會自動更新)"
+                    )
+                ) {
+                    sendEmailElement.innerText = "發送取消";
+                    sendEmailElement.disabled = false;
+                    return;
+                }
                 fetch("/admin/updateDCStudentCount", {
                     method: "GET",
                 }).then(response => {
@@ -536,12 +548,52 @@
                     if (!response.ok) {
                         updateDC.innerText = "更新失敗";
                         throw new Error("Network response was not ok");
-                    }else{
+                    } else {
                         updateDC.innerText = "更新成功";
                     }
                     console.log(response);
                 });
             };
+            
+                const exportDataAsCSV = () => {
+                    fetch("/admin/getAllData", {
+                        method: "GET",
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            const currentTime = new Date()
+                                .toISOString()
+                                .replace(/[-T:]/g, "")
+                                .slice(0, 12);
+                            const fileName = `data-${currentTime}.csv`;
+                            const url =
+                                "data:text/csv;charset=utf-8,%EF%BB%BF UserID, name, email, school, department, club, password, phone, sex, ID, birthday, emergencyContact, emergencyRelation, emergencyPhone, shirtSize, eat, specialEat, specialDisease, islive, coupon, timestamp, isPaid, consentID, maintenance, updateTime, adminCheck%0A" + 
+                                data
+                                    .map(e =>
+                                        e
+                                            .map(e => {
+                                                if ((e+"").indexOf("base64") > -1) {
+                                                    return "已簽名";
+                                                } else if (/^[-+]?(\d+(\.\d*)?|\.\d+)([eE][-+]?\d+)?$/.test(e)) {
+                                                    const date = new Date(parseFloat(e));
+                                                    return ""+e.toLocaleString('zh-TW')+"";
+                                                } else {
+                                                    return `"${e ? e.replace(/"/g, '""') : ""}"`;
+                                                }
+                                            })
+                                            .join(",")
+                                    )
+                                    .join("%0A");
+                            const a = document.createElement("a");
+                            a.href = url;
+                            a.download = fileName;
+                            a.click();
+                        })
+                        .catch(error => {
+                            console.error("Error:", error);
+                        });
+                };
+            </script>
         </script>
     </body>
 </html>
