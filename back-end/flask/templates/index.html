@@ -474,7 +474,7 @@
             <img src="/static/logo.svg" alt="" />
             <h1>知資為資知 - 2024中電會聯合寒訓</h1>
             <h2 id="countdown"></h2>
-            <a href="sign" class="signUp slideIn aos">立即報名</a>
+            <a href="login" class="signUp slideIn aos">登入查詢</a>
             <canvas resize="true" id="canvas"></canvas>
         </header>
         <main>
@@ -630,25 +630,25 @@
             </h3>
         </div>
         <script>
-            var countdownDate = new Date("2024-01-15");
-            var countdownTimer = setInterval(function () {
-                var now = new Date().getTime();
-                var timeRemaining = countdownDate - now;
-                var days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-                var hours = Math.floor(
-                    (timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-                );
-                var minutes = Math.floor(
-                    (timeRemaining % (1000 * 60 * 60)) / (1000 * 60)
-                );
-                var seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-                document.getElementById("countdown").innerHTML =
-                    days + "天" + hours + "時" + minutes + "分" + seconds + "秒";
-                if (timeRemaining < 0) {
-                    clearInterval(countdownTimer);
-                    document.getElementById("countdown").display = "none";
-                }
-            }, 1000);
+            // var countdownDate = new Date("2024-01-15");
+            // var countdownTimer = setInterval(function () {
+            //     var now = new Date().getTime();
+            //     var timeRemaining = countdownDate - now;
+            //     var days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+            //     var hours = Math.floor(
+            //         (timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+            //     );
+            //     var minutes = Math.floor(
+            //         (timeRemaining % (1000 * 60 * 60)) / (1000 * 60)
+            //     );
+            //     var seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+            //     document.getElementById("countdown").innerHTML =
+            //         days + "天" + hours + "時" + minutes + "分" + seconds + "秒";
+            //     if (timeRemaining < 0) {
+            //         clearInterval(countdownTimer);
+            //         document.getElementById("countdown").display = "none";
+            //     }
+            // }, 1000);
             function isElementInViewport(el) {
                 const rect = el.getBoundingClientRect();
                 return rect.bottom < 0 || rect.top > window.innerHeight;

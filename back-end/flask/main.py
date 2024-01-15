@@ -242,32 +242,32 @@ def finishPay():
     return str(userPay(userID=session["userID"], timestamp=datetime.timestamp(datetime.now())+28800))
 
 
-@app.route("/signUp", methods=["POST"])
-def signUp():
-    # userID
-    uuid = [str(uuid4())]
-    # 時間戳
-    timestamp = [datetime.timestamp(datetime.now())+28800]
-    # 姓名 email school 科系 社團 password tel id birth 聯絡人 聯絡人關西 聯絡人電話  size 飲食習慣  特殊疾病  團報優惠碼
-    data_values = request.form.getlist('data[]')
-    male = request.form.getlist('data[male]')
-    food = request.form.getlist('data[food]')
-    isLive = request.form.getlist('data[live]')
-    if checkUserExist(email=data_values[1], phone=data_values[6]):
-        return '<script>alert("帳號已存在");window.location.href = "/sign";</script>'
+# @app.route("/signUp", methods=["POST"])
+# def signUp():
+#     # userID
+#     uuid = [str(uuid4())]
+#     # 時間戳
+#     timestamp = [datetime.timestamp(datetime.now())+28800]
+#     # 姓名 email school 科系 社團 password tel id birth 聯絡人 聯絡人關西 聯絡人電話  size 飲食習慣  特殊疾病  團報優惠碼
+#     data_values = request.form.getlist('data[]')
+#     male = request.form.getlist('data[male]')
+#     food = request.form.getlist('data[food]')
+#     isLive = request.form.getlist('data[live]')
+#     if checkUserExist(email=data_values[1], phone=data_values[6]):
+#         return '<script>alert("帳號已存在");window.location.href = "/sign";</script>'
 
-    if not (checkCoupon(inputCoupon=data_values[-1])):
-        print("not exist")
-        data_values[-1] = ""
+#     if not (checkCoupon(inputCoupon=data_values[-1])):
+#         print("not exist")
+#         data_values[-1] = ""
 
-    result = uuid + data_values[0:7] + male + data_values[7:13] + food + \
-        data_values[13:15] + isLive + [data_values[15]] + \
-        timestamp + [0, "", "", "", ""]
-    createUser(Data=result)
+#     result = uuid + data_values[0:7] + male + data_values[7:13] + food + \
+#         data_values[13:15] + isLive + [data_values[15]] + \
+#         timestamp + [0, "", "", "", ""]
+#     createUser(Data=result)
 
-    session["userID"] = str(uuid[0])
-    updateDCStudentCount()
-    return redirect("/lastStep")
+#     session["userID"] = str(uuid[0])
+#     updateDCStudentCount()
+#     return redirect("/lastStep")
 
 @app.route("/sendSign", methods=["POST"])
 def sendSign():
