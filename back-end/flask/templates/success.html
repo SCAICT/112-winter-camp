@@ -1,152 +1,268 @@
 <!-- @format -->
 
-<!DOCTYPE html>
-<html lang="zh-TW">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>報名成功 | 知資為資知 - 2024中部電資聯合寒訓</title>
-    <meta
-      name="description"
-      content="中部高中電資社團聯合會議（SCAICT）誠摯邀請各位學生踏上一場超炫的寒假營隊之旅！我們不僅讓你在歡笑聲中度過難忘時光，更將帶給你資訊領域的絕佳學習機會，激發對科技的無限熱情，開啟個人興趣的探索之旅。"
-    />
-    <meta name="author" content="SCAICT" />
-    <meta
-      name="keywords"
-      content="中電會聯合寒訓, 中部電資社團聯合會議, 中電會, SCAICT"
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="知資為資知 - 2024中部電資聯合寒訓" />
-    <meta property="og:url" content="https://wc.scaict.org" />
-    <meta property="og:site_name" content="知資為資知 - 2024中部電資聯合寒訓" />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/static/icon/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/static/icon/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/static/icon/favicon-16x16.png"
-    />
-    <link rel="manifest" href="/static/icon/site.webmanifest" />
-    <link rel="shortcut icon" href="/static/icon/favicon.ico" />
-    <meta name="apple-mobile-web-app-title" content="知資為資知" />
-    <meta name="application-name" content="知資為資知" />
-    <meta name="msapplication-TileColor" content="#2d89ef" />
-    <meta
-      name="msapplication-config"
-      content="/static/icon/browserconfig.xml"
-    />
-    <meta name="theme-color" content="#69c5d6" />
-    <style>
-      * {
-        box-sizing: border-box;
-        padding: 0;
-        margin: 0;
-      }
-      body {
-        background-color: #000000;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-          sans-serif;
-        color: #ffffff;
+{% extends 'base.html' %} {% block title %}活動報名 | 知資為資知 -
+2024中部電資聯合寒訓{% endblock %} {% block content %}
+<style>
+    :root {
+        --main-color: #69c5d6;
+    }
+    main {
+        color: #fff;
+        padding-top: 5rem;
+    }
+    a {
+        color: var(--main-color);
+        text-decoration: none;
+    }
+    p {
+        margin-block: 1rem;
+    }
+    main a:hover {
+        color: var(--main-color);
+        background: transparent;
+        text-decoration: underline;
+        box-shadow: none;
+    }
+    ul,ol {
+        line-height: 1.5;
+        margin-left: 2rem;
+    }
+    main {
+        max-width: 800px;
+    }
+    main h2 {
+        text-align: left;
+        font-size: 1.5rem;
+        margin-block: 1.5rem 0.8rem;
+    }
+    .remind {
+        border: solid 2px #ffc107;
+        padding: 16px;
+        margin-bottom: 20px;
+    }
+    h3 {
+        font-size: 1.5rem;
+        margin-block: 1rem 0.8rem;
+    }
+    h4 {
+        font-size: 1.2rem;
+    }
+    .group {
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
-        min-height: 100svh;
-        overflow: hidden;
-      }
-      main {
-        display: inline-block;
-        text-decoration: none;
-        color: #14fff1;
-        border: 8px solid #14fff1;
-        padding: 16px 64px;
-        border-radius: 16px;
-        text-shadow: 0 0 8px rgba(255, 255, 255, 0.3), 0 0 29px #14fff1;
-        box-shadow: inset 0 0 32px #14fff1, 0 0 32px #14fff1;
-        position: relative;
-        text-align: center;
-      }
-      main::before {
-        pointer-events: none;
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background-color: #14fff1;
-        left: 0;
-        top: 120%;
-        transform: perspective(64px) rotateX(40deg) scale(1, 0.35);
-        filter: blur(64px);
-        opacity: 0.7;
-      }
-      main::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #14fff1;
-        box-shadow: 0 0 128px 32px #14fff1;
-        z-index: -1;
-        opacity: 0;
-        transition: opacity 100ms linear;
-      }
-      h2 {
-        margin-block: 0.5rem;
-      }
-      a {
-        color: #fff;
-        display: inline-block;
-        text-decoration: none;
-        padding: 0.5rem;
-        transition: transform 0.2s ease-out;
-        margin: 0.5rem;
-        width: 8em;
-        text-align: center;
-        border: 2px solid #14fff1;
-        box-shadow: 0 0 10px #14fff1;
-      }
-      a:hover {
-        transform: translateY(-0.25rem);
-      }
-      a:active {
-        transform: translateY(-0.4rem);
-      }
-    </style>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-F4MZSTYBW8"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-F4MZSTYBW8");
-    </script>
-  </head>
+        flex-wrap: wrap;
+        gap: 1rem;
+        line-height: 1.5;
+    }
+    .group > div {
+        border: solid 2px #07deff;
+        padding: 16px;
+        margin-bottom: 20px;
+        width: 200px;
+        min-height: 200px;
+    }
+    .group > .boy {
+        border: solid 2px #0745ff;
+    }
 
-  <body>
-    <main>
-      <h1>報名成功</h1>
-      <h2>期待在活動看到你!</h2>
-      <h2>團體報名碼：{{coupon}}</h2>
-      <div><a href="/">回到首頁</a></div>
-      <div><a href="/logout">登出</a></div>
-    </main>
-  </body>
-</html>
+    .group > .girl {
+        border: solid 2px #ff07b8;
+    }
+</style>
+<nav>
+    <a href="/"> <img src="/static/logo.svg" alt="" /></a>
+    <ul>
+        <li>
+            <div class="current">
+                <a href="sign">行前通知</a>
+            </div>
+        </li>
+        <li>
+            <a href="../logout">登出</a>
+        </li>
+    </ul>
+</nav>
+<main>
+    <h1>行前通知</h1>
+    <div class="remind">
+        📢請<strong>務必</strong>加入<a href="https://discord.gg/tHp3zFRw"
+            >活動 Discord 群組</a
+        >，並修改個人顯示名稱為「第X組成員 -
+        XXX」。活動期間相關資訊將會即時公布於上面。
+    </div>
+    <h2>壹、活動基本資訊</h2>
+    <ul>
+        <li>活動時間:2024/1/24(三) ~ 2024/01/26(五)</li>
+        <li>
+            活動地點:
+            <a href="https://maps.app.goo.gl/us1ZHKJsnuXWFpcz6"
+                >東海大學 (台中市西屯區臺灣大道四段1727號)</a
+            >
+        </li>
+        <li>第一天集合地點:東海大學 (台中市西屯區臺灣大道四段1727號)</li>
+        <li>請於 9:00~9:30 至 東海大學科技大樓ST020 簽到</li>
+        <li>第三天解散地點:台中火車站 (臺中市中區建國路172號)</li>
+    </ul>
+    <h2>貳、活動分組名單</h2>
+    <p>均為電腦隨機分組。</p>
+    <!-- .group>(div>h3{第組}+h4{隊輔}+p+h4{隊員}+p)*6 -->
+    <h3>分組名單</h3>
+    <div class="group">
+        <div>
+            <h3>第一組</h3>
+            <h4>隊輔</h4>
+            <p>陳宥家、李晏丞</p>
+            <h4>隊員</h4>
+            <p>
+                李佩珊、羅彥貽、郭宜盈、曾妍毓、郭彧睿、吳秉諺、林家佑、
+                黃慶宸、陳鈞廷、洪鉦祐
+            </p>
+        </div>
+        <div>
+            <h3>第二組</h3>
+            <h4>隊輔</h4>
+            <p>陳奕其、曾冠霖</p>
+            <h4>隊員</h4>
+            <p>
+                楊風璠、楊蕙甄、邱子洛、張亦祥、林佾洲、曾柏勛、陳柏宇、
+                吳皓庭、邱昱勛、王睿育
+            </p>
+        </div>
+        <div>
+            <h3>第三組</h3>
+            <h4>隊輔</h4>
+            <p>涂紫婷、魏均翰</p>
+            <h4>隊員</h4>
+            <p>
+                林均樺、黃宣瑄、徐駿恩、蔡政輝、顏子嵂、孫子閎、楊政遠、
+                邱紹紘、陳胤沅、陳奕呈
+            </p>
+        </div>
+        <div>
+            <h3>第四組</h3>
+            <h4>隊輔</h4>
+            <p>王薇瑄、田欣然</p>
+            <h4>隊員</h4>
+            <p>
+                李湘怡、王加昀、蔡韋霖、陳奕安、陳茗程、林俊廷、林禾豐、
+                趙偉恆、王邑玄、陳定承
+            </p>
+        </div>
+        <div>
+            <h3>第五組</h3>
+            <h4>隊輔</h4>
+            <p>黃宥睿、黃粲閎</p>
+            <h4>隊員</h4>
+            <p>
+                謝依玲、陳郁婷、蔡承伯、蔡旻辰、張元楷、吳靖宇、魏均叡、
+                吳承軒、王資瀚
+            </p>
+        </div>
+        <div>
+            <h3>第六組</h3>
+            <h4>隊輔</h4>
+            <p>孫樺辰、余承緯</p>
+            <h4>隊員</h4>
+            <p>
+                廖珮婷、王昕蓉、陳映彤、邱德原、倪冠騏、廖冠捷、廖顯毅、 周佑叡
+            </p>
+        </div>
+    </div>
+    <h3>分房名單</h3>
+    <div class="group">
+        <div class="boy">
+            <h3>房號1</h3>
+            <p>林家佑、 郭彧睿、 吳秉諺、 黃慶宸</p>
+        </div>
+        <div class="boy">
+            <h3>房號2</h3>
+            <p>張亦祥、 曾柏勛、 陳柏宇、 吳皓庭</p>
+        </div>
+        <div class="boy">
+            <h3>房號3</h3>
+            <p>徐駿恩、 蔡政輝、 顏子嵂、 孫子閎</p>
+        </div>
+        <div class="boy">
+            <h3>房號4</h3>
+            <p>蔡韋霖、 陳奕安、 林俊廷、 林禾豐</p>
+        </div>
+        <div class="boy">
+            <h3>房號5</h3>
+            <p>吳承軒、 蔡承伯、 蔡旻辰、 張元楷</p>
+        </div>
+        <div class="boy">
+            <h3>房號6</h3>
+            <p>邱德原、 倪冠騏、 廖顯毅、 周佑叡</p>
+        </div>
+        <div class="boy">
+            <h3>房號7</h3>
+            <p>陳奕呈、 楊政遠、 邱紹紘、 陳胤沅</p>
+        </div>
+        <div class="boy">
+            <h3>房號8</h3>
+            <p>王邑玄、 陳茗程、 趙偉恆、 陳定承</p>
+        </div>
+        <div class="boy">
+            <h3>房號9</h3>
+            <p>林佾洲、 邱子洺、 邱昱勛、 王睿育</p>
+        </div>
+        <div class="girl">
+            <h3>房號1</h3>
+            <p>李佩珊、 羅彥貽、 郭宜盈、 曾妍毓</p>
+        </div>
+        <div class="girl">
+            <h3>房號2</h3>
+            <p>楊蕙甄、 楊豐璠、 黃宣瑄、 林均樺</p>
+        </div>
+        <div class="girl">
+            <h3>房號3</h3>
+            <p>李湘怡、 王加昀、 謝依玲、 陳郁婷</p>
+        </div>
+    </div>
+    <h2>參、工人聯絡方式</h2>
+
+    <p>工人緊急聯絡方式如下，若有任何問題都可以直接在 Discord 群組提出。</p>
+    <ul>
+        <li>總召 - <a href="tel:+886958023589">王朝立 0958023589</a></li>
+        <li>副召 - <a href="tel:+886965231261">劉子賢 0965231261</a></li>
+        <li>資訊長 - <a href="tel:+886928358323">毛宥鈞 0928358323</a></li>
+        <li>公關長 - <a href="tel:+886916694788">黃粲閎 0916694788</a></li>
+        <li>活動長 - <a href="tel:+886979151218">楊哲翔 0979151218</a></li>
+        <li>總務長 - <a href="tel:+886968679582">涂紫婷 0968679582</a></li>
+        <li>總務長 - <a href="tel:+886906700176">孫驊辰 0906700176</a></li>
+    </ul>
+    <h2>肆、活動注意事項</h2>
+    <ul>
+        <li>
+            所有參加人員均須經由家長同意，並同時擁有緊急連絡人電話，並附有個人資料以利辦理保險。
+        </li>
+        <li>
+            當天需攜帶個人物品：健保卡、口罩、水、個人藥品、雨具、換洗衣物等。
+        </li>
+        <li>
+            活動期間生之垃圾，一律由參加者以及工作人員於活動期間隨時保持場地乾淨。
+        </li>
+        <li>
+            活動期間遵守各安全規定,並嚴禁有損校譽之行為,如有違反將以各校校規懲處。
+        </li>
+        <li>本活動實施計畫如有未盡事宜，得隨時修正之。</li>
+        <li>
+            在東海大學內使用各項設施應需遵守相關規定，且不可有破壞設施的行為，若設施有損壞，需照價賠償。
+        </li>
+        <li>在東海大學之電腦教室嚴禁飲食 (含飲料)</li>
+    </ul>
+    <h2>伍、交通資訊參考</h2>
+    <ol>
+        <li>
+            <strong>搭乘火車：</strong>
+            在台中火車站下車，步行至台灣大道，搭乘台中客運
+            303、304、307。上車站：臺中車站(臺灣大道)；下車站：榮總/東海大學(專用道)。
+        </li>
+        <li>
+            <strong>搭乘高鐵：</strong>在台中高鐵站下車，搭乘和欣客運
+            161。上車站：高鐵臺中站(第11月台)；下車站：臺中榮總(臺灣大道)。
+        </li>
+    </ol>
+</main>
+{% endblock %}
