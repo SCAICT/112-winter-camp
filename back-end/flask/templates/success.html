@@ -510,13 +510,13 @@
     </ol>
 </main>
 <script>
+    const currentTitle = document.querySelector(".current-title");
     const check = () => {
         var currentDate = new Date();
         var startDate = new Date("2024/01/24");
         var endDate = new Date("2024/01/26 17:20");
-        const currentTitle = document.querySelector(".current-title");
         const currentMinutes = currentDate.getMinutes();
-        if (currentDate >= startDate && currentDate <= endDate) {
+        if (currentDate >= startDate && currentDate < endDate) {
             var formattedMinutes = Math.floor(currentMinutes / 10) * 10;
             var formattedDate = new Date(
                 currentDate.getFullYear(),
