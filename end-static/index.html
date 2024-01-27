@@ -440,6 +440,30 @@
                     max-width: 100%;
                 }
             }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 2rem;
+            }
+            table td {
+                border: solid 1px #fff;
+                padding: 0.5rem;
+            }
+            table thead td,
+            table tbody td[colspan="2"] {
+                background: #fff;
+                color: #000;
+                font-weight: bold;
+            }
+            table tbody td {
+                color: #fff;
+            }
+            table tbody td:nth-child(2) {
+                text-align: left;
+            }
+            table tbody td:nth-child(1) {
+                text-align: center;
+            }
         </style>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.9.18/paper-full.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.14.1/TweenMax.min.js"></script>
@@ -512,9 +536,7 @@
                     <section>
                         <div class="t2024 slideIn aos">1/24(三)~1/26(五)</div>
                         <h3 class="slideIn aos">齊聚東海大學</h3>
-                        <h4 class="slideIn aos">
-                            供伙食住宿
-                        </h4>
+                        <h4 class="slideIn aos">供伙食住宿</h4>
                     </section>
                 </div>
             </div>
@@ -549,9 +571,9 @@
                     <p>全國國中生、高中職生、大學生</p>
                     <h4>報名費用</h4>
                     <p>
-                        住宿: 4300元/人。<br>
-                        不住宿:3300元/人。<br>
-                        活動約晚上 9 點結束，建議住宿，以免夜歸不便。<br>
+                        住宿: 4300元/人。<br />
+                        不住宿:3300元/人。<br />
+                        活動約晚上 9 點結束，建議住宿，以免夜歸不便。<br />
                         報名完成可獲得專屬 100 元折扣碼，歡迎揪團一起報名!
                     </p>
                     <h4>活動注意事項</h4>
@@ -599,6 +621,205 @@
                             歧視行為，包含針對性別、性向、種族、外貌、宗教、年齡、身體狀況或個人身分的挑釁、冒犯、錯稱或差別待遇。
                         </li>
                     </ul>
+                    <h4>活動流程</h4>
+                    <section>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>時間</td>
+                                    <td>活動</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="2">2024/1/24</td>
+                                </tr>
+                                <tr>
+                                    <td class="time240930">9:00~9:30</td>
+                                    <td>報到</td>
+                                </tr>
+                                <tr>
+                                    <td class="time241000">9:30~10:00</td>
+                                    <td>開幕</td>
+                                </tr>
+                                <tr>
+                                    <td class="time241050">10:00~10:50</td>
+                                    <td>破冰</td>
+                                </tr>
+                                <tr>
+                                    <td class="time241100">10:50~11:00</td>
+                                    <td>休息</td>
+                                </tr>
+                                <tr>
+                                    <td class="time241200">11:00~12:00</td>
+                                    <td>
+                                        課程 (A:宥鈞:釣魚網站製作、B:逸凡：Linux
+                                        command & kali製作釣魚網站)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="time241300">12:00~13:00</td>
+                                    <td>午餐和休息</td>
+                                </tr>
+                                <tr>
+                                    <td class="time241400">13:00~14:00</td>
+                                    <td>
+                                        課程 (A:宥鈞:釣魚網站製作、B:逸凡：Linux
+                                        command & kali製作釣魚網站)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="time241410">14:00~14:10</td>
+                                    <td>休息</td>
+                                </tr>
+                                <tr>
+                                    <td class="time241510">14:10~15:10</td>
+                                    <td>
+                                        課程(A:朝立:資安意識宣導 &
+                                        網路安全、B:Yuan：網路維運)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="time241520">15:10~15:20</td>
+                                    <td>休息</td>
+                                </tr>
+                                <tr>
+                                    <td class="time241520">15:20~17:20</td>
+                                    <td>
+                                        課程(A:逸凡：Linux command &
+                                        kali製作釣魚網站、B:宥鈞:釣魚網站製作)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="time241820">17:20~18:20</td>
+                                    <td>晚餐和休息</td>
+                                </tr>
+                                <tr>
+                                    <td class="time241950">18:20~19:50</td>
+                                    <td>桌遊時間</td>
+                                </tr>
+                                <tr>
+                                    <td class="time242010">19:50~20:10</td>
+                                    <td>上車回飯店</td>
+                                </tr>
+                                <tr>
+                                    <td class="time250730">20:10~</td>
+                                    <td>發房卡、進房</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">2024/1/25</td>
+                                </tr>
+                                <tr>
+                                    <td class="time250830">7:30~8:30</td>
+                                    <td>早餐</td>
+                                </tr>
+                                <tr>
+                                    <td class="time250900">8:30~9:00</td>
+                                    <td>集合 (未住宿9:15校門口左邊集合)</td>
+                                </tr>
+                                <tr>
+                                    <td class="time250915">9:00~9:15</td>
+                                    <td>門口上車</td>
+                                </tr>
+                                <tr>
+                                    <td class="time251030">9:15~10:30</td>
+                                    <td>練舞時間</td>
+                                </tr>
+                                <tr>
+                                    <td class="time251230">10:30~12:30</td>
+                                    <td>
+                                        課程(A:逸凡：web security &
+                                        kali製作釣魚網站、B:宥鈞:釣魚網站製作)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="time251300">12:30~13:30</td>
+                                    <td>午餐+休息</td>
+                                </tr>
+                                <tr>
+                                    <td class="time251430">13:30~14:30</td>
+                                    <td>小遊戲</td>
+                                </tr>
+                                <tr>
+                                    <td class="time251500">14:30~15:00</td>
+                                    <td>休息</td>
+                                </tr>
+                                <tr>
+                                    <td class="time251700">15:00~17:00</td>
+                                    <td>
+                                        課程(A:宥鈞:釣魚網站製作、B:逸凡：web
+                                        security & kali製作釣魚網站)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="time251730">17:00~17:30</td>
+                                    <td>小遊戲競賽</td>
+                                </tr>
+                                <tr>
+                                    <td class="time251800">17:30~18:00</td>
+                                    <td>戶外活動(練舞)</td>
+                                </tr>
+                                <tr>
+                                    <td class="time251900">18:00~21:00</td>
+                                    <td>晚會</td>
+                                </tr>
+                                <tr>
+                                    <td class="time251920">21:00~21:20</td>
+                                    <td>上車回飯店</td>
+                                </tr>
+                                <tr>
+                                    <td class="time260710">21:20~</td>
+                                    <td>發房卡、進房</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">2024/1/26</td>
+                                </tr>
+                                <tr>
+                                    <td class="time260810">7:10~8:10</td>
+                                    <td>早餐</td>
+                                </tr>
+                                <tr>
+                                    <td class="time260845">8:10~8:45</td>
+                                    <td>集合 (未住宿9:00校門口左邊集合)</td>
+                                </tr>
+                                <tr>
+                                    <td class="time260900">8:45~9:00</td>
+                                    <td>門口上車</td>
+                                </tr>
+                                <tr>
+                                    <td class="time261000">9:00~10:00</td>
+                                    <td>
+                                        課程(A:Yuan：網路維運、B:朝立:資安意識宣導
+                                        & 網路安全)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="time261200">10:00~12:00</td>
+                                    <td>CTF time</td>
+                                </tr>
+                                <tr>
+                                    <td class="time261300">12:00~13:00</td>
+                                    <td>搭車</td>
+                                </tr>
+                                <tr>
+                                    <td class="time261630">13:00~16:30</td>
+                                    <td>烤肉</td>
+                                </tr>
+                                <tr>
+                                    <td class="time261700">16:30~17:00</td>
+                                    <td>收拾</td>
+                                </tr>
+                                <tr>
+                                    <td class="time261720">17:00~17:20</td>
+                                    <td>閉幕</td>
+                                </tr>
+                                <tr>
+                                    <td>17:20~</td>
+                                    <td>搭車賦歸</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
                 </div>
             </div>
             <footer>
