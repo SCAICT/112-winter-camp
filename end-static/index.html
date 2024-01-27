@@ -1,0 +1,895 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>知資為資知 - 2024中部電資聯合寒訓</title>
+        <meta
+            name="description"
+            content="中部高中電資社團聯合會議（SCAICT）誠摯邀請各位學生踏上一場超炫的寒假營隊之旅！我們不僅讓你在歡笑聲中度過難忘時光，更將帶給你資訊領域的絕佳學習機會，激發對科技的無限熱情，開啟個人興趣的探索之旅。"
+        />
+        <meta name="author" content="SCAICT" />
+        <meta
+            name="keywords"
+            content="中電會聯合寒訓, 中部電資社團聯合會議, 中電會, SCAICT"
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="知資為資知 - 2024中部電資聯合寒訓" />
+        <meta property="og:url" content="https://wc.scaict.org" />
+        <meta
+            property="og:site_name"
+            content="知資為資知 - 2024中部電資聯合寒訓"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/static/icon/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/static/icon/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/static/icon/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/static/icon/site.webmanifest" />
+        <link rel="shortcut icon" href="/static/icon/favicon.ico" />
+        <meta name="apple-mobile-web-app-title" content="知資為資知" />
+        <meta name="application-name" content="知資為資知" />
+        <meta name="msapplication-TileColor" content="#2d89ef" />
+        <meta
+            name="msapplication-config"
+            content="/static/icon/browserconfig.xml"
+        />
+        <meta name="theme-color" content="#69c5d6" />
+        <style>
+            :root {
+                --main-color: #69c5d6;
+            }
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            body {
+                background: #000;
+                color: #fff;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont,
+                    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+                    "Helvetica Neue", sans-serif;
+                overflow-x: hidden;
+            }
+            header {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                min-height: 100svh;
+                overflow: hidden;
+                text-align: center;
+                position: relative;
+            }
+            main {
+                max-width: 100vw;
+                overflow-x: hidden;
+            }
+            #canvas {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+            }
+            header img {
+                max-width: 600px;
+                width: 80%;
+                max-height: 40vh;
+                animation: zoom 0.5s ease-in-out;
+            }
+            nav {
+                width: 100%;
+                background-color: #00000083;
+                backdrop-filter: blur(10px);
+                height: 3rem;
+                position: fixed;
+                display: flex;
+                align-items: center;
+                padding: 3rem;
+                z-index: 10;
+            }
+            nav ul {
+                display: flex;
+                justify-content: flex-end;
+                flex: 1;
+                list-style: none;
+                gap: 2rem;
+            }
+            nav img {
+                height: 3rem;
+                margin-right: 1rem;
+            }
+            h1 {
+                font-size: 1.25rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+            nav a {
+                color: rgba(255, 255, 255, 0.736);
+                position: relative;
+                text-decoration: none;
+                font-weight: 500;
+                padding: 0 0.7em;
+            }
+            nav a:before {
+                position: absolute;
+                content: "";
+                -webkit-transition: all 0.35s ease;
+                transition: all 0.35s ease;
+                opacity: 0;
+                left: 15%;
+                right: 15%;
+                top: 0;
+                bottom: 0;
+                border-left: 3px solid #27ae60;
+                border-right: 3px solid #27ae60;
+            }
+            nav a:hover,
+            nav .current a {
+                color: #ffffff;
+            }
+            nav a:hover:before,
+            nav .current a:before {
+                opacity: 1;
+                left: 0;
+                right: 0;
+            }
+            header h1 {
+                margin-block: 2rem 1rem;
+            }
+
+            .signUp {
+                display: block;
+                color: #fff;
+                text-decoration: none;
+                padding: 1rem;
+                border: #fff solid 2px;
+                transition: transform 0.2s ease-out !important;
+                width: fit-content;
+            }
+            .slideIn.ed:hover {
+                transform: translateY(-0.25rem);
+            }
+            .signUp:active {
+                transform: translateY(-0.4rem);
+            }
+            @keyframes zoom {
+                0% {
+                    transform: scale(0);
+                }
+                100% {
+                    transform: scale(1);
+                }
+            }
+            h3 {
+                font-size: min(100px, 10vw);
+            }
+            .t2024 {
+                font-size: min(50px, 5vw);
+                font-weight: 600;
+            }
+            p {
+                font-size: 1.25rem;
+            }
+            section {
+                min-height: 100vh;
+                max-width: 1000px;
+                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding: 2rem;
+            }
+            .courses {
+                display: flex;
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+                margin-top: 2rem;
+            }
+            .courses div {
+                text-align: center;
+                padding: 1rem;
+                width: 6em;
+                height: 6em;
+                background: url(/static/target.svg) no-repeat center center;
+                font-size: max(2rem, 2vw);
+                font-weight: 600;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            #courses {
+                text-align: center;
+            }
+            .courses .diver {
+                display: none;
+            }
+            @media screen and (min-width: 1000px) {
+                .courses {
+                    gap: 0;
+                }
+                .courses div {
+                    margin: 0 1rem;
+                }
+                .courses .diver {
+                    width: 100%;
+                    height: 0px;
+                    border: none;
+                    display: block;
+                    padding: 0;
+                }
+                .center p {
+                    font-size: 1.5rem;
+                }
+            }
+            #fixedAnd {
+                position: fixed;
+                display: none;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: #000;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: opacity 0.3s ease;
+                background: url(/static/party.webp) no-repeat center center;
+                background-size: contain;
+            }
+            #fixedAnd h3 {
+                width: 100%;
+                max-width: 1000px;
+                padding: 2rem;
+                display: flex;
+            }
+            .also {
+                color: var(--main-color);
+            }
+            .more-box {
+                position: relative;
+                overflow: hidden;
+                display: block;
+            }
+            .more-box .also {
+                position: absolute;
+                top: 0;
+                left: 0;
+                transition: transform 0.3s ease;
+                display: block;
+            }
+            .more-space {
+                visibility: hidden;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            #location {
+                background: url(/static/東海.webp) no-repeat center center;
+            }
+            #location > div {
+                background: linear-gradient(#000, #00000050 20%, #00000050 90%);
+            }
+            #location section {
+                height: 140vh;
+            }
+            h4 {
+                font-size: min(30px, 3vw);
+                margin-bottom: 1rem;
+            }
+            #about {
+                background: #3a3a3a;
+                margin: 4rem;
+                margin-bottom: 0;
+                border-radius: 30px;
+                transform: translateY(-8rem);
+                padding: 4rem 2rem;
+                font-size: 1.25rem;
+            }
+            #about div {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            #about h3 {
+                font-size: 2rem;
+                text-align: center;
+                position: relative;
+                margin-block: 4rem 2rem;
+            }
+            #about h3::after {
+                content: "";
+                position: absolute;
+                bottom: -1rem;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 100px;
+                height: 3px;
+                background: var(--main-color);
+            }
+            #about h4 {
+                font-size: 1.5rem;
+                margin-top: 2rem;
+            }
+            #about p {
+                margin-bottom: 1rem;
+            }
+            ul,
+            ol {
+                margin-left: 2rem;
+            }
+            footer {
+                text-align: center;
+                margin-top: -8rem;
+                padding: 2rem;
+                line-height: 1.5;
+                background-color: #262626;
+            }
+            footer a {
+                text-decoration: none;
+                color: #fff;
+            }
+            footer a:hover {
+                text-decoration: underline;
+            }
+            .scaict-logo {
+                height: 2rem;
+                display: block;
+                margin: 0 auto;
+                margin-bottom: 1rem;
+            }
+            #biggest {
+                display: flex;
+                flex-direction: row-reverse;
+                overflow: hidden;
+            }
+            .intro {
+                max-width: 1000px;
+                width: 50%;
+                display: flex;
+                align-items: center;
+                padding: 6rem 2rem 2rem;
+            }
+            #biggest p {
+                max-width: 50vw;
+            }
+            .group-photo {
+                background: url(/static/group.webp) no-repeat center center;
+                background-size: cover;
+                height: 100vh;
+                width: 50%;
+                clip-path: polygon(20% 0%, 0% 100%, 100% 100%, 100% 0%);
+            }
+            #course > div {
+                background-color: #00000072;
+                backdrop-filter: blur(5px);
+                -webkit-backdrop-filter: blur(5px);
+                opacity: 0;
+            }
+            #course {
+                background: url(/static/course.webp) no-repeat center center;
+            }
+
+            .slideIn {
+                opacity: 0;
+                transform: translateY(1rem);
+                transition: opacity 1s, transform 1s;
+            }
+            .slideIn.ed {
+                opacity: 1;
+                transform: translateY(0rem);
+            }
+            #course.ed > div {
+                opacity: 1;
+                transition: opacity 3s;
+            }
+            .lines {
+                position: relative;
+            }
+            .lines::before {
+                content: "";
+                position: absolute;
+                top: 2rem;
+                left: 0;
+                width: 20em;
+                max-width: 40vw;
+                height: 5em;
+                z-index: -1;
+                background: url(/static/lines.svg) no-repeat;
+            }
+            @media (max-width: 600px) {
+                nav ul {
+                    gap: 10px;
+                    margin-left: 1rem;
+                }
+            }
+            @media (max-width: 400px) {
+                nav ul {
+                    gap: 5px;
+                }
+            }
+            @media (max-aspect-ratio: 1/1) {
+                #biggest {
+                    flex-direction: column-reverse;
+                }
+                .group-photo,
+                .intro {
+                    width: 100%;
+                }
+                .group-photo {
+                    clip-path: polygon(0% 20%, 0% 100%, 100% 100%, 100% 0%);
+                    height: 50vh;
+                }
+                #biggest p {
+                    max-width: 100%;
+                }
+            }
+        </style>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.9.18/paper-full.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.14.1/TweenMax.min.js"></script>
+        <link rel="preload" href="/static/party.webp" as="image" />
+        <link rel="preload" href="/static/bbq.webp" as="image" />
+        <link rel="preload" href="/static/game.webp" as="image" />
+        <link rel="preload" href="/static/lab.webp" as="image" />
+        <!-- Google tag (gtag.js) -->
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-F4MZSTYBW8"
+        ></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", "G-F4MZSTYBW8");
+        </script>
+    </head>
+    <body>
+        <nav>
+            <img src="/static/logo.svg" alt="" />
+        </nav>
+
+        <header>
+            <img src="/static/logo.svg" alt="" />
+            <h1>知資為資知 - 2024 中電會聯合寒訓</h1>
+            <h2 id="countdown">活動圓滿結束</h2>
+            <canvas resize="true" id="canvas"></canvas>
+        </header>
+        <main>
+            <div id="biggest" class="aos">
+                <div class="group-photo"></div>
+                <div class="center slideIn aos intro lines">
+                    <div>
+                        <div class="t2024">2024 中部</div>
+                        <h3>最大電資營隊</h3>
+                        <p>
+                            中部高中電資社團聯合會議（SCAICT）誠摯邀請各位學生踏上一場超炫的寒假營隊之旅！我們不僅讓你在歡笑聲中度過難忘時光，更將帶給你資訊領域的絕佳學習機會，激發對科技的無限熱情，開啟個人興趣的探索之旅。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="course" class="aos">
+                <div>
+                    <section id="courses">
+                        <h3 class="slideIn aos">
+                            <span class="also">駭</span>人聽聞的課程
+                        </h3>
+                        <div class="courses slideIn aos">
+                            <div>網路觀念</div>
+                            <div>網路維運</div>
+                            <div>駭客工具</div>
+                            <div class="diver"></div>
+                            <div>資訊安全</div>
+                            <div>釣魚網站實作</div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <section id="and"><h3 class="slideIn aos">還有...</h3></section>
+            <section id="andBox">
+                <h3><span class="also">更多精彩活動...</span></h3>
+            </section>
+            <div id="location" class="aos">
+                <div>
+                    <section>
+                        <div class="t2024 slideIn aos">1/24(三)~1/26(五)</div>
+                        <h3 class="slideIn aos">齊聚東海大學</h3>
+                        <h4 class="slideIn aos">
+                            供伙食住宿
+                        </h4>
+                    </section>
+                </div>
+            </div>
+            <div id="about">
+                <div>
+                    <h3 class="slideIn aos">活動資訊</h3>
+                    <h4>活動名稱</h4>
+                    <p>知資為資知</p>
+                    <h4>活動日期</h4>
+                    <p>1/24（三)~1/26（五)</p>
+                    <h4>活動地點</h4>
+                    <p>台中市西屯區台灣大道四段1727號</p>
+                    <h4>主辦單位</h4>
+                    <ol>
+                        <li>中部高中電資社團聯合會議</li>
+                        <li>私立東海大學 資訊工程學系</li>
+                        <li>私立東海大學 駭客社 Hackers in Tunghai</li>
+                    </ol>
+                    <h4>協辦單位</h4>
+                    <ol>
+                        <li>斗六高中資訊研究社</li>
+                        <li>文華高中電腦研習社</li>
+                        <li>台中一中電腦資訊研習社</li>
+                        <li>台中一中數位創作研習社</li>
+                        <li>台中二中電腦研習社</li>
+                        <li>台中女中電科讀書會</li>
+                        <li>台中高工資訊科</li>
+                        <li>西苑高中未來工程創客社</li>
+                        <li>臺中科技大學資訊工程科科學會(五專)</li>
+                    </ol>
+                    <h4>活動對象</h4>
+                    <p>全國國中生、高中職生、大學生</p>
+                    <h4>報名費用</h4>
+                    <p>
+                        住宿: 4300元/人。<br>
+                        不住宿:3300元/人。<br>
+                        活動約晚上 9 點結束，建議住宿，以免夜歸不便。<br>
+                        報名完成可獲得專屬 100 元折扣碼，歡迎揪團一起報名!
+                    </p>
+                    <h4>活動注意事項</h4>
+                    <ul>
+                        <li>
+                            所有參加人員均須經由家長同意，並同時擁有緊急連絡人電話，並附有個人資料以利辦理保險。
+                        </li>
+                        <li>
+                            當天需攜帶個人物品：健保卡、口罩、水、個人藥品、雨具、換洗衣物等。
+                        </li>
+                        <li>
+                            活動期間生之垃圾，一律由參加者以及工作人員於活動期間隨時保持場地乾淨。
+                        </li>
+                        <li>
+                            活動期間遵守各安全規定,並嚴禁有損校譽之行為,如有違反將以各校校規懲處。
+                        </li>
+                        <li>
+                            在東海大學內使用各項設施應需遵守相關規定，且不可有破壞設施的行為，若設施有損壞，需照價賠償。
+                        </li>
+                        <li>本活動實施計畫如有未盡事宜，得隨時修正之。</li>
+                    </ul>
+                    <h4>交通</h4>
+                    <p>
+                        <strong>搭乘火車：</strong
+                        >在台中火車站下車，步行至台灣大道，搭乘台中客運
+                        303、304、307。上車站：臺中車站(臺灣大道)；下車站：榮總/東海大學(專用道)。
+                    </p>
+                    <p>
+                        <strong>搭乘高鐵：</strong
+                        >在台中高鐵站下車，搭乘和欣客運
+                        161。上車站：高鐵臺中站(第11月台)；下車站：臺中榮總(臺灣大道)。
+                    </p>
+                    <h4>活動期間嚴禁事項</h4>
+                    <ul>
+                        <li>飲酒。</li>
+                        <li>違反法律的行為。</li>
+                        <li>干擾、攻擊活動場地網路。</li>
+                        <li>
+                            無故干擾議程或活動的正常進行，無視工作人員或與會者的制止。
+                        </li>
+                        <li>
+                            騷擾行為，包含性騷擾、造成當事人反感的綽號或肢體接觸，以及任何形式的言語或肢體霸凌。
+                        </li>
+                        <li>
+                            歧視行為，包含針對性別、性向、種族、外貌、宗教、年齡、身體狀況或個人身分的挑釁、冒犯、錯稱或差別待遇。
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <footer>
+                <img src="/static/scaict.svg" alt="" class="scaict-logo" />
+                © 2023 中部高中電資社團聯合會議 All Rights Reserved<br />
+                若有任何問題歡迎聯絡我們<br />
+                <a href="https://www.facebook.com/scaict.tw/">Facebook</a> ·
+                <a href="https://www.instagram.com/scaict.2024_wintercamp/"
+                    >Instagram</a
+                >
+                ·
+                <a href="https://scaict.org/">中電會官網</a>
+            </footer>
+        </main>
+        <div id="fixedAnd">
+            <h3>
+                還有<span class="more-box"
+                    ><span class="more-space">更多</span
+                    ><span class="also" id="also"
+                        >晚會<br />烤肉<br />桌遊<br />LAB</span
+                    ></span
+                >
+            </h3>
+        </div>
+        <script>
+            // var countdownDate = new Date("2024-01-15");
+            // var countdownTimer = setInterval(function () {
+            //     var now = new Date().getTime();
+            //     var timeRemaining = countdownDate - now;
+            //     var days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+            //     var hours = Math.floor(
+            //         (timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+            //     );
+            //     var minutes = Math.floor(
+            //         (timeRemaining % (1000 * 60 * 60)) / (1000 * 60)
+            //     );
+            //     var seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+            //     document.getElementById("countdown").innerHTML =
+            //         days + "天" + hours + "時" + minutes + "分" + seconds + "秒";
+            //     if (timeRemaining < 0) {
+            //         clearInterval(countdownTimer);
+            //         document.getElementById("countdown").display = "none";
+            //     }
+            // }, 1000);
+            function isElementInViewport(el) {
+                const rect = el.getBoundingClientRect();
+                return rect.bottom < 0 || rect.top > window.innerHeight;
+            }
+
+            function addClassToVisibleElements() {
+                var aosElements = document.querySelectorAll(".aos");
+                aosElements.forEach(function (aosElement) {
+                    if (!isElementInViewport(aosElement))
+                        aosElement.classList.add("ed");
+                    else aosElement.classList.remove("ed");
+                });
+            }
+            addClassToVisibleElements();
+            window.addEventListener("scroll", function () {
+                addClassToVisibleElements();
+                var andElement = document.getElementById("and");
+                var fixedAnd = document.getElementById("fixedAnd");
+                var also = document.getElementById("also");
+                var andRect = andElement.getBoundingClientRect();
+                var location = document.getElementById("location");
+                var about = document.getElementById("about");
+                var fixedAnd = document.getElementById("fixedAnd");
+                if (andRect.top < 0 && andRect.top > -andRect.height) {
+                    fixedAnd.style.display = "flex";
+                    document.querySelector("main").style.visibility = "hidden";
+                    fixedAnd.style.opacity = 1;
+                    var lineHeight = document
+                        .querySelector(".more-box")
+                        .getBoundingClientRect().height;
+                    if (andRect.top > -andRect.height / 4) {
+                        also.style.transform = "translateY(0)";
+                        fixedAnd.style.background =
+                            "url(/static/party.webp) no-repeat center center";
+                    } else if (andRect.top > -andRect.height / 2) {
+                        also.style.transform =
+                            "translateY(-" + lineHeight + "px)";
+                        fixedAnd.style.background =
+                            "url(/static/bbq.webp) no-repeat center center";
+                    } else if (andRect.top > (-andRect.height / 4) * 3) {
+                        also.style.transform =
+                            "translateY(-" + lineHeight * 2 + "px)";
+                        fixedAnd.style.background =
+                            "url(/static/game.webp) no-repeat center center";
+                    } else {
+                        also.style.transform =
+                            "translateY(-" + lineHeight * 3 + "px)";
+                        fixedAnd.style.background =
+                            "url(/static/lab.webp) no-repeat center center";
+                    }
+                } else {
+                    fixedAnd.style.opacity = 0;
+                    document.querySelector("main").style.visibility = "visible";
+                    setTimeout(function () {
+                        fixedAnd.style.display = "none";
+                    }, 300);
+                    if (location.getBoundingClientRect().bottom > 0) {
+                        var percent =
+                            1 -
+                            (location.getBoundingClientRect().bottom /
+                                location.getBoundingClientRect().height) *
+                                2;
+                        about.style.margin = 4 - percent * 4 + "rem";
+                        about.style.padding = percent * 4 + "rem";
+                        about.style.borderRadius = 30 - percent * 30 + "px";
+                    } else {
+                        about.style.margin = "0";
+                    }
+                }
+            });
+        </script>
+
+        <script type="text/paperscript" canvas="canvas">
+            function Hex(position, targetRadius, color) {
+                var subs = 3;
+
+                this.radius = targetRadius;
+                this.sides = randomIndex([4, 6, 8, 10, 12]);
+                this.targetHex = new Path.RegularPolygon(position, this.sides, targetRadius);
+                this.paths = [];
+
+                for (var i = 0; i < subs; i++) {
+                    var h = new Path.RegularPolygon(position, this.sides, 0);
+
+                    if (i === 0) {
+                        h.strokeColor = color;
+                    }
+                    else {
+                        h.strokeColor = new Color({
+                            hue:color.hue,
+                            saturation:color.saturation,
+                            lightness:randomRange(0.4, 0.6),
+                            alpha:1
+                        });
+                    }
+
+                    h.strokeWidth = 24;
+                    h.shadowBlur = 64;
+                    h.shadowColor = h.strokeColor;
+
+                    this.paths.push(h);
+                }
+
+                this.color = this.paths[subs - 1].strokeColor;
+
+                this.speed = 125;
+            }
+            Hex.prototype = {
+                animate:function() {
+                    var tl = new TimelineMax({
+                        onComplete:function() {
+                            this.paths.forEach(function(p) {
+                                p.remove();
+                            });
+                        },
+                        onCompleteScope:this
+                    });
+
+                    var duration = this.radius / this.speed,
+                        offset = 0,
+                        ease = Cubic.easeOut;
+
+                    this.paths.forEach(function(h) {
+                        var from, to;
+
+                        for (var i = 0; i < h.segments.length; i++) {
+                            from = h.segments[i].point;
+                            to = this.targetHex.segments[i].point;
+
+                            tl.to(from, duration, {x:to.x, y:to.y, ease:ease}, offset);
+                            tl.to(h, duration, {strokeWidth:0, ease:ease}, offset);
+                        }
+
+                        offset += 0.2;
+
+                    }, this);
+
+                    return tl;
+                }
+            };
+
+            function Line(start, angle, length, color) {
+                this.start = start;
+                this.end = new Point();
+
+                this.end.setAngle(angle);
+                this.end.setLength(length);
+                this.end += this.start;
+
+                this.path = new Path();
+                this.path.add(this.start, this.end);
+                this.color = this.path.strokeColor = color;
+                this.path.visible = false;
+                this.path.strokeWidth = 2;
+                this.path.strokeCap = 'round';
+                this.path.shadowBlur = 32;
+                this.path.shadowColor = this.color;
+
+                this.speed = 250;
+            }
+            Line.prototype = {
+                animate:function() {
+                    var tl = new TimelineMax({
+                        onStart:function() {
+                            this.path.visible = true;
+                        },
+                        onStartScope:this,
+                        onComplete:function() {
+                            this.path.remove();
+                        },
+                        onCompleteScope:this
+                    });
+
+                    var start = this.path.segments[0].point,
+                        end = this.path.segments[1].point;
+
+                    var duration = this.path.length / this.speed,
+                        ease = Cubic;
+
+                    tl.from(end, duration, {x:start.x, y:start.y, ease:ease.easeInOut});
+                    tl.to(start, duration * 0.75, {x:end.x, y:end.y, ease:ease.easeOut}, '-=0.5');
+
+                    return tl;
+                }
+            };
+
+            function createFirework() {
+                var tl = new TimelineMax();
+
+                var startPoint = new Point(view.size.width * Math.random(), view.size.height),
+                    angle = 270,
+                    length = view.size.height * 0.5,
+                    size = randomRange(64, 396),
+                    color = getRandomColor();
+
+                var trail = new Line(startPoint, angle, length, color),
+                    hex = new Hex(trail.end, size, color);
+
+                tl.add(trail.animate());
+                tl.add('trailDone');
+
+                tl.add(hex.animate(), 'trailDone');
+
+                for (var i = 0; i < hex.sides; i++) {
+
+                    var point = hex.targetHex.segments[i].point,
+                        localPoint = point - hex.targetHex.position;
+
+                    var spark = new Line(trail.end, localPoint.angle, size * 2, color);
+
+                    tl.add(spark.animate(), 'trailDone');
+                }
+
+                return tl;
+            }
+
+            ////////////
+            // UPDATE
+            ////////////
+
+            function onFrame(e) {
+                if (e.count % 60 === 0) {
+                    createFirework();
+                }
+            }
+
+            ////////////
+            // utils
+            ////////////
+
+            function getRandomColor() {
+                return new Color({
+                    hue:randomRange(0, 100),
+                    saturation:0.75,
+                    lightness:0.5
+                })
+            }
+
+            function randomIndex(arr) {
+                return arr[randomRange(0, arr.length, true)];
+            }
+
+            function randomRange(min, max, floor) {
+                var v = min + Math.random() * (max - min);
+                floor = floor || false;
+                return floor ? (v | 0) : v;
+            }
+        </script>
+    </body>
+</html>
