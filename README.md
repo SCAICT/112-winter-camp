@@ -1,5 +1,8 @@
+<center>
+  
 # 知資為資知 - 2024 中電會聯合寒訓官網
 
-<https://wc.scaict.org/>
+<img src="https://raw.githubusercontent.com/SCAICT/112-winter-camp/main/back-end/flask/static/logo.svg" width="5rem">
 
-![](back-end/flask/static/logo.svg)
+<https://wc.scaict.org/>
+</center>
