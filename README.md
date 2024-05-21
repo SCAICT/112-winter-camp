@@ -9,7 +9,7 @@
 
 ## 檔案
 
-* `backend`: 後端 Flask 應用
+* `flask`: 後端 Flask 應用
 * `end-static`: 前端靜態網站 (活動結束使用)
 * `discord.py`: 在 Discord 頻道顯示報名人數
 * `email.html`: 電子郵件模板
