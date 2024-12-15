@@ -22,8 +22,8 @@ class DataBase:
         return wrapper
 
 
-Admin = DataBase("back-end/flask/database/admin.db")
-Client = DataBase("back-end/flask/database/account.db")
+Admin = DataBase("database/admin.db")
+Client = DataBase("database/account.db")
 
 # todo
 @Client
